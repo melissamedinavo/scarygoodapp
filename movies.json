@@ -1,0 +1,566 @@
+{
+ "updated": "2026-10-08",
+ "movies": [
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Thriller"
+   ],
+   "hook": "A literary agent squares off with Patricia Highsmith in a tense psychological duel.",
+   "spooky": false,
+   "title": "A Talent for Murder",
+   "updated": "2026-10-06",
+   "id": "a-talent-for-murder"
+  },
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Comedy"
+   ],
+   "hook": "Sacha Baron Cohen revives his clueless wannabe gangster for a long-awaited big-screen comeback.",
+   "spooky": false,
+   "title": "Ali G: Who Iz I?",
+   "updated": "2026-10-05",
+   "id": "ali-g-who-iz-i"
+  },
+  {
+   "date": "2026-10-09",
+   "genres": [
+    "Western",
+    "Romance"
+   ],
+   "hook": "A wounded gunslinger is taken in by a gentle family that tests everything he believes.",
+   "spooky": false,
+   "title": "Angel and the Badman",
+   "updated": "2026-10-02",
+   "id": "angel-and-the-badman"
+  },
+  {
+   "date": "2026-10-02",
+   "genres": [
+    "Horror"
+   ],
+   "hook": "Deep in the Amazon, an ancient predator wakes up and turns on a medical mission.",
+   "spooky": true,
+   "title": "Beware Boiúna",
+   "updated": "2026-10-06",
+   "id": "beware-boiuna"
+  },
+  {
+   "date": "2026-10-30",
+   "genres": [
+    "Horror",
+    "Comedy",
+    "Holiday"
+   ],
+   "hook": "A family's holiday turns into a bizarre winter invasion.",
+   "spooky": true,
+   "title": "Christmas at the Kringles",
+   "updated": "2026-10-02",
+   "id": "christmas-at-the-kringles"
+  },
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Horror",
+    "Sci-Fi"
+   ],
+   "hook": "DC body horror: a desperate actor takes an experimental substance and becomes a shapeshifting monster.",
+   "spooky": true,
+   "title": "Clayface",
+   "updated": "2026-10-02",
+   "id": "clayface"
+  },
+  {
+   "date": "2026-11-25",
+   "genres": [
+    "Drama",
+    "Comedy"
+   ],
+   "hook": "A 1970s stuntman turned Hollywood fixer cleans up other people's scandals.",
+   "spooky": false,
+   "title": "The Further Mis-Adventures of Cliff Booth",
+   "updated": "2026-10-06",
+   "id": "cliff-booth"
+  },
+  {
+   "date": "2026-10-16",
+   "genres": [
+    "Horror"
+   ],
+   "hook": "A quarantined apartment block fills with venomous spiders, and the building manager must keep everyone alive.",
+   "spooky": true,
+   "title": "Crawlers",
+   "updated": "2026-10-05",
+   "id": "crawlers"
+  },
+  {
+   "date": "2026-10-02",
+   "genres": [
+    "Comedy",
+    "Drama"
+   ],
+   "hook": "Tom Cruise and Riz Ahmed star in Alejandro G. Iñárritu's tangled comedy of clashing personalities.",
+   "spooky": false,
+   "title": "Digger",
+   "updated": "2026-10-06",
+   "id": "digger"
+  },
+  {
+   "date": "2026-11-06",
+   "genres": [
+    "War",
+    "Drama"
+   ],
+   "hook": "Two brothers end up on opposite sides of the American Revolution.",
+   "spooky": false,
+   "title": "Drummer Boy",
+   "updated": "2026-10-06",
+   "id": "drummer-boy"
+  },
+  {
+   "date": "2026-11-13",
+   "genres": [
+    "Horror",
+    "Fantasy",
+    "Holiday"
+   ],
+   "hook": "Ti West and Johnny Depp turn Scrooge's ghostly night into a gothic Christmas nightmare.",
+   "spooky": true,
+   "title": "Ebenezer",
+   "updated": "2026-10-05",
+   "id": "ebenezer"
+  },
+  {
+   "date": "2026-10-30",
+   "genres": [
+    "Documentary",
+    "IMAX"
+   ],
+   "hook": "Elite mountaineers attempt the first ski descent of Everest's North Face.",
+   "spooky": false,
+   "title": "Everest: The Other Side",
+   "updated": "2026-10-06",
+   "id": "everest-the-other-side"
+  },
+  {
+   "date": "2026-10-09",
+   "genres": [
+    "Drama",
+    "Thriller"
+   ],
+   "hook": "A devout couple's move to a liberal Norwegian village sparks a custody fight that tears them apart.",
+   "spooky": false,
+   "title": "Fjord",
+   "updated": "2026-10-05",
+   "id": "fjord"
+  },
+  {
+   "date": "2026-11-25",
+   "genres": [
+    "Comedy"
+   ],
+   "hook": "Ben Stiller and Robert De Niro reunite for another round of family chaos.",
+   "spooky": false,
+   "title": "Focker In-Law",
+   "updated": "2026-10-06",
+   "id": "focker-in-law"
+  },
+  {
+   "date": "2026-09-25",
+   "genres": [
+    "Animation",
+    "Family"
+   ],
+   "hook": "Two friends slip through a portal to an island full of creatures from Filipino folklore.",
+   "spooky": false,
+   "title": "Forgotten Island",
+   "updated": "2026-10-06",
+   "id": "forgotten-island"
+  },
+  {
+   "date": "2026-11-06",
+   "genres": [
+    "Action",
+    "Monster"
+   ],
+   "hook": "The Shikishima family's fight against Godzilla continues in postwar Japan.",
+   "spooky": true,
+   "title": "Godzilla Minus Zero",
+   "updated": "2026-10-02",
+   "id": "godzilla-minus-zero"
+  },
+  {
+   "date": "2026-09-25",
+   "genres": [
+    "Action",
+    "Survival"
+   ],
+   "hook": "Brad Pitt plays a Special Forces vet fighting to survive the Alaskan wild with his combat dog.",
+   "spooky": false,
+   "title": "Heart of the Beast",
+   "updated": "2026-10-06",
+   "id": "heart-of-the-beast"
+  },
+  {
+   "date": "2026-11-25",
+   "genres": [
+    "Drama",
+    "Biography"
+   ],
+   "hook": "Milton Hershey builds a chocolate empire and a lasting charitable legacy.",
+   "spooky": false,
+   "title": "Hershey",
+   "updated": "2026-10-06",
+   "id": "hershey"
+  },
+  {
+   "date": "2026-11-25",
+   "genres": [
+    "Animation",
+    "Family"
+   ],
+   "hook": "A teenage girl discovers her magic in a realm of witches.",
+   "spooky": true,
+   "title": "Hexed",
+   "updated": "2026-10-06",
+   "id": "hexed"
+  },
+  {
+   "date": "2026-11-13",
+   "genres": [
+    "Action",
+    "Thriller"
+   ],
+   "hook": "Social media-savvy robbers stay one step ahead of an FBI agent and a software engineer.",
+   "spooky": false,
+   "title": "How to Rob a Bank",
+   "updated": "2026-10-02",
+   "id": "how-to-rob-a-bank"
+  },
+  {
+   "date": "2026-11-20",
+   "genres": [
+    "Action",
+    "Sci-Fi"
+   ],
+   "hook": "A young Haymitch Abernathy fights through the 50th Hunger Games.",
+   "spooky": false,
+   "title": "The Hunger Games: Sunrise on the Reaping",
+   "updated": "2026-10-06",
+   "id": "hunger-games-sunrise"
+  },
+  {
+   "date": "2026-11-20",
+   "genres": [
+    "Drama",
+    "Biography"
+   ],
+   "hook": "How Sylvester Stallone fought through rejection to play Rocky Balboa himself.",
+   "spooky": false,
+   "title": "I Play Rocky",
+   "updated": "2026-10-05",
+   "id": "i-play-rocky"
+  },
+  {
+   "date": "2026-11-06",
+   "genres": [
+    "Drama",
+    "Biography"
+   ],
+   "hook": "Jimmy Stewart goes from Oscar winner to WWII combat pilot.",
+   "spooky": false,
+   "title": "Jimmy",
+   "updated": "2026-10-06",
+   "id": "jimmy"
+  },
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Sci-Fi",
+    "Drama"
+   ],
+   "hook": "Jenna Ortega plays an android companion devoted to a fragile girl in Taika Waititi's take on Ishiguro.",
+   "spooky": false,
+   "title": "Klara and the Sun",
+   "updated": "2026-10-05",
+   "id": "klara-and-the-sun"
+  },
+  {
+   "date": "2026-10-30",
+   "genres": [
+    "Crime",
+    "Drama"
+   ],
+   "hook": "An aging pickpocket has to return a stolen USB stick before a crime family catches up with him.",
+   "spooky": false,
+   "title": "The Only Living Pickpocket in New York",
+   "updated": "2026-10-06",
+   "id": "only-living-pickpocket"
+  },
+  {
+   "date": "2026-10-09",
+   "genres": [
+    "Horror"
+   ],
+   "hook": "Jessica Chastain faces something that has started wearing the face of a loving mother.",
+   "spooky": true,
+   "title": "Other Mommy",
+   "updated": "2026-10-02",
+   "id": "other-mommy"
+  },
+  {
+   "date": "2026-09-11",
+   "genres": [
+    "Fantasy",
+    "Romance"
+   ],
+   "hook": "Sandra Bullock and Nicole Kidman's Owens sisters face a curse aimed at the whole family.",
+   "spooky": true,
+   "title": "Practical Magic 2",
+   "updated": "2026-10-06",
+   "id": "practical-magic-2"
+  },
+  {
+   "date": "2026-09-25",
+   "genres": [
+    "Drama",
+    "Thriller"
+   ],
+   "hook": "Robert Pattinson plays a TV journalist whose undercover sting show changes television.",
+   "spooky": false,
+   "title": "Primetime",
+   "updated": "2026-10-06",
+   "id": "primetime"
+  },
+  {
+   "date": "2026-11-06",
+   "genres": [
+    "Epic",
+    "Drama"
+   ],
+   "hook": "The epic of Prince Rama's exile and his battle to rescue Sita from the demon king Ravana.",
+   "spooky": false,
+   "title": "Ramayana",
+   "updated": "2026-10-02",
+   "id": "ramayana"
+  },
+  {
+   "date": "2026-09-18",
+   "genres": [
+    "Horror",
+    "Action"
+   ],
+   "hook": "Zach Cregger's reboot follows a medical courier through one chaotic night of the outbreak.",
+   "spooky": true,
+   "title": "Resident Evil",
+   "updated": "2026-10-06",
+   "id": "resident-evil"
+  },
+  {
+   "date": "2026-10-16",
+   "genres": [
+    "Romance",
+    "Period"
+   ],
+   "hook": "Daisy Edgar-Jones in a fresh take on Austen's Dashwood sisters and their tangled hearts.",
+   "spooky": false,
+   "title": "Sense and Sensibility",
+   "updated": "2026-10-02",
+   "id": "sense-and-sensibility"
+  },
+  {
+   "date": "2026-07-31",
+   "genres": [
+    "Action",
+    "Superhero"
+   ],
+   "hook": "Peter Parker starts over in a world that no longer remembers who he is.",
+   "spooky": false,
+   "title": "Spider-Man: Brand New Day",
+   "until": "2026-10-18",
+   "updated": "2026-10-06",
+   "id": "spider-man-brand-new-day"
+  },
+  {
+   "date": "2026-10-30",
+   "genres": [
+    "Horror",
+    "Slasher"
+   ],
+   "hook": "A dancer hunting her sister's killer races to protect her club friends from a masked murderer.",
+   "spooky": true,
+   "title": "Stiletto",
+   "updated": "2026-10-05",
+   "id": "stiletto"
+  },
+  {
+   "date": "2026-10-16",
+   "genres": [
+    "Action"
+   ],
+   "hook": "The video game comes to life as the world's best fighters collide in a global tournament.",
+   "spooky": false,
+   "title": "Street Fighter",
+   "updated": "2026-10-02",
+   "id": "street-fighter"
+  },
+  {
+   "date": "2026-11-06",
+   "genres": [
+    "Animation",
+    "Comedy"
+   ],
+   "hook": "Bill Hader voices Dr. Seuss's chaos-loving Cat in a new animated adventure.",
+   "spooky": false,
+   "title": "The Cat in the Hat",
+   "updated": "2026-10-02",
+   "id": "the-cat-in-the-hat"
+  },
+  {
+   "date": "2026-10-30",
+   "genres": [
+    "Action",
+    "Thriller"
+   ],
+   "hook": "Liam Neeson plays a framed war hero leading police on a televised cross-country car chase.",
+   "spooky": false,
+   "title": "The Mongoose",
+   "updated": "2026-10-05",
+   "id": "the-mongoose"
+  },
+  {
+   "date": "2026-07-17",
+   "genres": [
+    "Epic",
+    "Adventure"
+   ],
+   "hook": "Christopher Nolan's IMAX telling of Odysseus's long, monster-filled voyage home.",
+   "spooky": false,
+   "title": "The Odyssey",
+   "until": "2026-10-18",
+   "updated": "2026-10-06",
+   "id": "the-odyssey"
+  },
+  {
+   "date": "2026-10-09",
+   "genres": [
+    "Drama",
+    "Thriller"
+   ],
+   "hook": "Aaron Sorkin returns to Facebook as a whistleblower and a reporter take on Zuckerberg's empire.",
+   "spooky": false,
+   "title": "The Social Reckoning",
+   "updated": "2026-10-05",
+   "id": "the-social-reckoning"
+  },
+  {
+   "date": "2026-10-09",
+   "genres": [
+    "Animation",
+    "Family"
+   ],
+   "hook": "A band of oddball creatures sets out to find hidden relics.",
+   "spooky": false,
+   "title": "Treasure Trekkers",
+   "updated": "2026-10-02",
+   "id": "treasure-trekkers"
+  },
+  {
+   "date": "2026-10-02",
+   "genres": [
+    "Thriller",
+    "Mystery"
+   ],
+   "hook": "A struggling writer hired to finish a famous author's book series uncovers a manuscript of chilling confessions.",
+   "spooky": true,
+   "title": "Verity",
+   "updated": "2026-10-06",
+   "id": "verity"
+  },
+  {
+   "date": "2026-11-13",
+   "genres": [
+    "Thriller",
+    "Gothic"
+   ],
+   "hook": "An 1858 governess hides something far darker than the house she's been hired to serve.",
+   "spooky": true,
+   "title": "Victorian Psycho",
+   "updated": "2026-10-02",
+   "id": "victorian-psycho"
+  },
+  {
+   "date": "2026-10-16",
+   "genres": [
+    "Thriller",
+    "Survival"
+   ],
+   "hook": "A diver swallowed by a sperm whale has one hour of air to find a way out.",
+   "spooky": true,
+   "title": "Whalefall",
+   "updated": "2026-10-02",
+   "id": "whalefall"
+  },
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Fantasy",
+    "Romance",
+    "Comedy"
+   ],
+   "hook": "An outcast fisherwoman orders a husband woven from wicker, and their odd romance scandalizes the village.",
+   "spooky": false,
+   "title": "Wicker",
+   "updated": "2026-10-05",
+   "id": "wicker"
+  },
+  {
+   "date": "2026-11-06",
+   "genres": [
+    "Comedy",
+    "Thriller"
+   ],
+   "hook": "Martin McDonagh's darkly funny CIA caper with John Malkovich, Sam Rockwell and Steve Buscemi.",
+   "spooky": false,
+   "title": "Wild Horse Nine",
+   "updated": "2026-10-05",
+   "id": "wild-horse-nine"
+  },
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Animation",
+    "Fantasy"
+   ],
+   "hook": "LAIKA stop-motion: a girl heads into an enchanted forest to rescue her kidnapped baby brother.",
+   "spooky": false,
+   "title": "Wildwood",
+   "updated": "2026-10-02",
+   "id": "wildwood"
+  },
+  {
+   "date": "2026-10-23",
+   "genres": [
+    "Documentary"
+   ],
+   "hook": "Elizabeth Holmes lets a film crew follow her in the 34 days before prison.",
+   "spooky": false,
+   "title": "You Can See Everything",
+   "updated": "2026-10-06",
+   "id": "you-can-see-everything"
+  },
+  {
+   "date": "2026-10-16",
+   "genres": [
+    "Crime",
+    "Thriller"
+   ],
+   "hook": "Mahershala Ali leads a family pulled between loyalty and a dangerous criminal world.",
+   "spooky": false,
+   "title": "Your Mother Your Mother Your Mother",
+   "updated": "2026-10-05",
+   "id": "your-mother-x3"
+  }
+ ]
+}
