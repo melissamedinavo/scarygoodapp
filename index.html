@@ -1230,28 +1230,6 @@ li.calm {
   color: var(--muted);
   font-size: .85rem;
 }
-.sp-switch {
-  display: inline-flex;
-  background: var(--chip);
-  border-radius: 999px;
-  padding: 3px;
-  gap: 2px;
-}
-.sp-switch button {
-  font: inherit;
-  font-size: .78rem;
-  border: 0;
-  background: none;
-  color: var(--muted);
-  padding: 5px 12px;
-  border-radius: 999px;
-  cursor: pointer;
-}
-.sp-switch button[aria-pressed=true] {
-  background: var(--surface);
-  color: var(--ink);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, .18);
-}
 .sp-capture {
   background: var(--surface);
   border: 1px solid var(--line);
@@ -1443,6 +1421,24 @@ li.calm {
   color: var(--accent);
   border-color: var(--line);
 }
+.sp-bar .sp-btn.sp-shuffle {
+  gap: 8px;
+  padding: 8px 18px;
+  font-size: .86rem;
+  font-weight: 600;
+  color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, var(--surface));
+  border: 1px solid color-mix(in srgb, var(--accent) 45%, var(--line));
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--accent) 25%, transparent), 0 2px 8px rgba(0, 0, 0, .06);
+}
+.sp-bar .sp-btn.sp-shuffle:hover {
+  background: color-mix(in srgb, var(--accent) 18%, var(--surface));
+  border-color: var(--accent);
+}
+.sp-bar .sp-shuffle .sh-ic {
+  width: 16px;
+  height: 16px;
+}
 .tile-shuffle {
   position: absolute;
   top: 10px;
@@ -1463,63 +1459,13 @@ li.calm {
     transform: rotate(180deg);
   }
 }
-.sp-chips {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px;
-}
-.sp-chip {
-  font: inherit;
-  font-size: .78rem;
-  cursor: pointer;
-  border-radius: 999px;
-  border: 1px solid var(--line);
-  background: var(--surface);
-  color: var(--ink);
-  padding: 4px 12px;
-}
-.sp-chip[aria-pressed=true] {
-  background: var(--ink);
-  color: var(--bg);
-  border-color: var(--ink);
-}
-.sp-chip .n {
-  font-family: var(--mono);
-  font-size: .68rem;
-  opacity: .7;
-  margin-left: 4px;
-}
-.sp-chip.add {
-  border-style: dashed;
-  color: var(--muted);
-}
-.sp-newboard {
-  display: inline-flex;
-  gap: 6px;
-}
-.sp-newboard input {
-  font: inherit;
-  font-size: .8rem;
-  color: var(--ink);
-  background: var(--surface);
-  border: 1px solid var(--line);
-  border-radius: 999px;
-  padding: 4px 12px;
-  width: 160px;
-  max-width: 100%;
-}
 .sp-lanes {
   display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
+  grid-template-columns: repeat(3, minmax(0, 1fr));
   gap: 14px;
   align-items: start;
 }
-@media (max-width: 1000px) {
-  .sp-lanes {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-@media (max-width: 560px) {
+@media (max-width: 760px) {
   .sp-lanes {
     grid-template-columns: minmax(0, 1fr);
   }
@@ -1554,30 +1500,6 @@ li.calm {
   border-radius: 12px;
   padding: 14px;
   text-align: center;
-}
-.sp-wall {
-  display: grid;
-  grid-template-columns: repeat(var(--spn,4), minmax(0, 1fr));
-  gap: 14px;
-  align-items: start;
-}
-.sp-col {
-  display: grid;
-  gap: 14px;
-  align-content: start;
-  min-height: 80px;
-  border-radius: 12px;
-}
-.sp-wall .sp-card {
-  cursor: grab;
-}
-.sp-wall .sp-card .sp-edit,
-.sp-wall .sp-card .sp-bmenu {
-  cursor: auto;
-}
-.sp-wall.dragging .sp-col {
-  outline: 1px dashed var(--line);
-  outline-offset: 4px;
 }
 .sp-card {
   break-inside: avoid;
@@ -1625,13 +1547,6 @@ li.calm {
 }
 .sp-card .when {
   font-family: var(--mono);
-}
-.sp-card .bchip {
-  font-size: .68rem;
-  border-radius: 999px;
-  background: var(--chip);
-  padding: 1px 8px;
-  color: var(--ink);
 }
 .sp-card.k-note {
   border-color: transparent;
@@ -1761,20 +1676,6 @@ li.calm {
   padding: 0 8px;
   font-size: .72rem;
   font-weight: 600;
-}
-.sp-bmenu {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 4px 10px;
-  font-size: .76rem;
-  padding-top: 4px;
-  border-top: 1px dashed var(--line);
-}
-.sp-bmenu label {
-  display: flex;
-  align-items: center;
-  gap: 4px;
-  cursor: pointer;
 }
 .sp-edit {
   display: grid;
@@ -4985,6 +4886,914 @@ body.wheeling .wrap {
     display: none;
   }
 }
+.aud,
+.pay {
+  display: grid;
+  gap: 12px;
+  min-width: 0;
+}
+.aud[hidden],
+.pay[hidden] {
+  display: none;
+}
+.trk-add {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 12px;
+  display: grid;
+  gap: 8px;
+}
+.trk-add-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr) auto auto;
+  gap: 8px;
+  align-items: center;
+}
+.trk-add input,
+.trk-fields input,
+.trk-fields select,
+.trk-fields textarea,
+.trk-ed input,
+.trk-ed select,
+.trk-ed textarea {
+  font: inherit;
+  font-size: .88rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 7px 10px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+.trk-fields textarea,
+.trk-ed textarea {
+  resize: vertical;
+  min-height: 2.6em;
+}
+.trk-due {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .76rem;
+  color: var(--muted);
+}
+.trk-due input {
+  width: auto;
+}
+@media (max-width: 640px) {
+  .trk-add-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .trk-add-row > input {
+    grid-column: 1/-1;
+  }
+}
+.trk-more > summary,
+.trk-arch > summary,
+.aud-mx > summary {
+  cursor: pointer;
+  font-size: .76rem;
+  color: var(--muted);
+  width: max-content;
+  max-width: 100%;
+}
+.trk-more > summary:hover,
+.trk-arch > summary:hover,
+.aud-mx > summary:hover {
+  color: var(--ink);
+}
+.trk-fields {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 8px 10px;
+  padding-top: 8px;
+}
+.trk-fields label,
+.trk-ed label {
+  display: grid;
+  gap: 3px;
+  font-size: .7rem;
+  color: var(--muted);
+  letter-spacing: .02em;
+}
+.trk-fields label.wide,
+.trk-ed label.wide {
+  grid-column: 1/-1;
+}
+.trk-fields label.tick,
+.trk-ed label.tick {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: .8rem;
+  color: var(--ink);
+}
+.trk-fields label.tick input,
+.trk-ed label.tick input {
+  width: auto;
+  accent-color: var(--accent);
+}
+.trk-msg {
+  font-size: .76rem;
+  color: var(--muted);
+  min-height: 1em;
+}
+.trk-msg:empty {
+  display: none;
+}
+.trk-note {
+  margin: 6px 0 0;
+  font-size: .74rem;
+  color: var(--muted);
+}
+.trk-list {
+  display: grid;
+  gap: 6px;
+}
+.trk-empty {
+  font-size: .82rem;
+  color: var(--muted);
+  font-style: italic;
+  padding: 10px 2px;
+}
+.trk-row {
+  --u: var(--line);
+  position: relative;
+  display: grid;
+  grid-template-columns: 52px minmax(0, 1fr) auto auto;
+  align-items: center;
+  gap: 4px 12px;
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--u);
+  border-radius: 10px;
+  padding: 8px 10px 8px 8px;
+  box-shadow: 0 1px 1px rgba(60, 40, 15, .06);
+}
+body.theme-ink .trk-row {
+  box-shadow: inset 0 1px 0 rgba(255, 238, 205, .05), 0 1px 1px rgba(0, 0, 0, .3);
+}
+.trk-row.u-now {
+  --u: var(--warn);
+}
+.trk-row.u-near {
+  --u: var(--accent);
+}
+.trk-row.u-week {
+  --u: var(--n1);
+}
+.trk-row.u-far {
+  --u: var(--n3);
+}
+.trk-row.booked {
+  --u: var(--n2);
+}
+.trk-date {
+  display: grid;
+  justify-items: center;
+  line-height: 1;
+  color: var(--ink);
+}
+.trk-date b {
+  font-family: var(--display);
+  font-size: 1.45rem;
+  font-weight: 600;
+}
+.trk-date span {
+  font-family: var(--mono);
+  font-size: .62rem;
+  text-transform: uppercase;
+  letter-spacing: .12em;
+  color: var(--muted);
+  margin-top: 3px;
+}
+.trk-date.none b {
+  font-size: 1rem;
+  color: var(--muted);
+}
+.trk-main {
+  min-width: 0;
+  display: grid;
+  gap: 2px;
+}
+.trk-t {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 2px 10px;
+  font-size: .98rem;
+  font-weight: 600;
+  color: var(--ink);
+  overflow-wrap: anywhere;
+}
+.trk-t a {
+  color: inherit;
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 55%, transparent);
+  text-underline-offset: 3px;
+}
+.trk-t a:hover {
+  color: var(--accent);
+}
+.trk-left {
+  font-family: var(--mono);
+  font-size: .68rem;
+  font-weight: 500;
+  color: var(--u);
+  letter-spacing: .04em;
+  white-space: nowrap;
+}
+.trk-row.u-far .trk-left,
+.trk-row.u-none .trk-left {
+  color: var(--muted);
+}
+.trk-sub {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2px 12px;
+  font-size: .76rem;
+  color: var(--muted);
+  overflow-wrap: anywhere;
+}
+.trk-sub a {
+  color: inherit;
+}
+.trk-sub i {
+  font-style: normal;
+  color: var(--ink);
+  opacity: .8;
+}
+.trk-checks {
+  display: flex;
+  gap: 6px;
+}
+.trk-ck {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  font-size: .76rem;
+  font-weight: 600;
+  color: var(--muted);
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  padding: 4px 11px 4px 9px;
+  cursor: pointer;
+  user-select: none;
+  white-space: nowrap;
+  transition: background .2s ease, color .2s ease, border-color .2s ease;
+}
+.trk-ck input {
+  position: absolute;
+  opacity: 0;
+  inset: 0;
+  margin: 0;
+  cursor: pointer;
+}
+.trk-ck .bx {
+  width: 13px;
+  height: 13px;
+  border: 1.5px solid currentColor;
+  border-radius: 4px;
+  display: grid;
+  place-items: center;
+  font-size: .62rem;
+  line-height: 1;
+}
+.trk-ck:has(input:focus-visible) {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+}
+.trk-ck:hover {
+  color: var(--ink);
+  border-color: var(--muted);
+}
+.trk-ck.sub:has(input:checked) {
+  color: var(--blue-ink);
+  border-color: color-mix(in srgb, var(--blue-ink) 50%, var(--line));
+  background: color-mix(in srgb, var(--blue-ink) 11%, transparent);
+}
+.trk-ck.bk:has(input:checked) {
+  color: var(--accent-ink);
+  border-color: var(--accent);
+  background: var(--accent);
+}
+.trk-ck:has(input:checked) .bx {
+  border-color: transparent;
+}
+.trk-ck:has(input:checked) .bx::before {
+  content: "✓";
+}
+.trk-ck.bk:has(input:checked) .bx::before {
+  content: "★";
+}
+.trk-acts {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+}
+.trk-ib {
+  font: inherit;
+  font-size: .8rem;
+  line-height: 1;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  border-radius: 8px;
+  padding: 6px 7px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.trk-ib:hover {
+  color: var(--ink);
+  background: var(--chip);
+}
+.trk-ib svg {
+  display: block;
+  width: 15px;
+  height: 15px;
+}
+.trk-ib.off {
+  opacity: .45;
+}
+.trk-ib.danger {
+  color: var(--warn);
+  font-weight: 600;
+  font-size: .74rem;
+}
+@media (max-width: 640px) {
+  .trk-row {
+    grid-template-columns: 44px minmax(0, 1fr) auto;
+  }
+  .trk-checks {
+    grid-column: 2/-1;
+    grid-row: 2;
+  }
+  .trk-acts {
+    grid-column: 3;
+    grid-row: 1;
+  }
+}
+.trk-row.past {
+  opacity: .82;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+.trk-row.past .trk-date b {
+  font-size: 1.15rem;
+}
+.trk-ed {
+  grid-column: 1/-1;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 190px), 1fr));
+  gap: 8px 10px;
+  padding: 6px 2px 2px;
+}
+.trk-ed .btns {
+  grid-column: 1/-1;
+  display: flex;
+  gap: 8px;
+  justify-content: flex-end;
+}
+.trk-foot {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-start;
+  gap: 4px 18px;
+  padding-top: 2px;
+}
+.trk-arch {
+  flex: 1 1 100%;
+}
+.trk-arch[open] > .trk-list {
+  margin-top: 8px;
+}
+.trk-arch > summary .n,
+.aud-mx > summary .n {
+  font-family: var(--mono);
+  font-size: .68rem;
+  opacity: .8;
+}
+.trk-link {
+  font: inherit;
+  font-size: .74rem;
+  color: var(--muted);
+  background: none;
+  border: 0;
+  padding: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.trk-link:hover {
+  color: var(--ink);
+}
+.aud-mx {
+  border-top: 1px dashed var(--line);
+  padding-top: 8px;
+}
+.ui-hide-audm .aud-mx {
+  display: none;
+}
+.mx-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 26px;
+  padding-top: 10px;
+}
+.mx {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  color: var(--muted);
+  font-size: .72rem;
+  line-height: 1.25;
+}
+.mx b {
+  display: block;
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+}
+.mx svg {
+  width: 38px;
+  height: 38px;
+  flex: none;
+  transform: rotate(-90deg);
+}
+.mx .trk-bg {
+  stroke: var(--chip);
+}
+.mx .trk-fg {
+  stroke: var(--blue-ink);
+  transition: stroke-dashoffset .6s ease;
+}
+.mx.bk .trk-fg {
+  stroke: var(--accent);
+}
+.aud-ring {
+  left: auto;
+  right: 16px;
+}
+.pay-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 18px;
+}
+.pay-sum {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 18px;
+  font-size: .78rem;
+  color: var(--muted);
+  margin-left: auto;
+}
+.pay-sum b {
+  font-family: var(--display);
+  font-size: 1rem;
+  color: var(--ink);
+  margin-left: 4px;
+}
+.pay-me {
+  background: var(--surface);
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  padding: 8px 12px;
+}
+.pay-me[open] {
+  padding-bottom: 12px;
+}
+.trk-row.pay-row {
+  grid-template-columns: minmax(0, 1fr) auto auto auto;
+  padding-left: 12px;
+  cursor: pointer;
+}
+.trk-row.pay-row.st-todo {
+  --u: var(--n1);
+}
+.trk-row.pay-row.st-sent {
+  --u: var(--blue-ink);
+}
+.trk-row.pay-row.st-paid {
+  --u: var(--n2);
+}
+.trk-row.pay-row.open {
+  cursor: default;
+}
+.pay-amt {
+  font-family: var(--display);
+  font-size: 1.08rem;
+  font-weight: 600;
+  color: var(--ink);
+  white-space: nowrap;
+}
+.pay-st {
+  font: inherit;
+  font-size: .74rem;
+  font-weight: 600;
+  border-radius: 999px;
+  padding: 4px 8px;
+  border: 1px solid var(--u);
+  color: var(--ink);
+  background: color-mix(in srgb, var(--u) 14%, transparent);
+  cursor: pointer;
+  width: auto;
+}
+@media (max-width: 640px) {
+  .pay-sum {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+  .trk-row.pay-row {
+    grid-template-columns: minmax(0, 1fr) auto;
+  }
+  .trk-row.pay-row .pay-st {
+    grid-column: 1;
+    justify-self: start;
+  }
+}
+.pay-ed {
+  grid-column: 1/-1;
+  display: grid;
+  gap: 14px;
+  padding: 10px 0 4px;
+  border-top: 1px dashed var(--line);
+  margin-top: 6px;
+  cursor: auto;
+}
+.pay-grp {
+  display: grid;
+  gap: 6px;
+}
+.pay-grp > h4 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .66rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+.pay-grp .trk-ed {
+  padding: 0;
+}
+.pay-lines {
+  display: grid;
+  gap: 6px;
+}
+.pay-line {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1.1fr) minmax(0, .6fr) minmax(0, .9fr) minmax(0, .8fr) minmax(0, .9fr) auto auto;
+  gap: 6px;
+  align-items: end;
+}
+.pay-line.adj {
+  grid-template-columns: minmax(0, 3fr) minmax(0, 1fr) auto;
+}
+.pay-line label {
+  display: grid;
+  gap: 3px;
+  font-size: .66rem;
+  color: var(--muted);
+}
+.pay-line input,
+.pay-line select {
+  height: 34px;
+  font: inherit;
+  font-size: .85rem;
+  color: var(--ink);
+  background: var(--bg);
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  padding: 6px 8px;
+  min-width: 0;
+  width: 100%;
+  box-sizing: border-box;
+}
+@media (max-width: 720px) {
+  .pay-line {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(0, 1fr) auto;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed var(--line);
+  }
+  .pay-line > label:first-child {
+    grid-column: 1/-1;
+  }
+}
+.pay-narrow {
+  max-width: 440px;
+}
+.pay-add-line {
+  justify-self: start;
+}
+.pay-tot {
+  display: grid;
+  justify-content: end;
+  gap: 2px;
+  font-size: .82rem;
+  color: var(--muted);
+  text-align: right;
+}
+.pay-tot div {
+  display: flex;
+  gap: 18px;
+  justify-content: space-between;
+}
+.pay-tot .grand {
+  font-family: var(--display);
+  font-size: 1.15rem;
+  font-weight: 600;
+  color: var(--ink);
+  border-top: 1px solid var(--line);
+  padding-top: 4px;
+  margin-top: 2px;
+}
+.pay-ed .btns {
+  display: flex;
+  gap: 8px;
+  justify-content: space-between;
+  align-items: center;
+}
+.mx-note {
+  margin: 10px 0 0;
+  font-size: .72rem;
+  color: var(--muted);
+  max-width: 520px;
+  line-height: 1.45;
+}
+.foot-links {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-top: 10px;
+  font-size: .74rem;
+  color: var(--muted);
+}
+.info-pop {
+  position: fixed;
+  inset: 0;
+  z-index: 70;
+  display: grid;
+  place-items: center;
+  padding: 24px 16px;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  backdrop-filter: blur(4px);
+}
+.info-pop[hidden] {
+  display: none;
+}
+.info-in {
+  position: relative;
+  width: min(620px, 100%);
+  max-height: min(80vh, 760px);
+  overflow: auto;
+  box-sizing: border-box;
+  background: var(--surface);
+  color: var(--ink);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 26px 28px 22px;
+  box-shadow: 0 18px 50px rgba(0, 0, 0, .25);
+  font-size: .92rem;
+  line-height: 1.55;
+}
+.info-in [hidden] {
+  display: none;
+}
+.info-x {
+  position: absolute;
+  top: 10px;
+  right: 12px;
+  font: inherit;
+  font-size: 1.4rem;
+  line-height: 1;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+.info-x:hover {
+  color: var(--ink);
+  background: var(--chip);
+}
+.info-h {
+  font-family: var(--display);
+  font-style: italic;
+  font-size: 1.6rem;
+  font-weight: 400;
+  margin: 0 0 12px;
+  color: var(--ink);
+  text-transform: none;
+  letter-spacing: 0;
+}
+.info-sub {
+  margin: -4px 0 14px;
+  color: var(--muted);
+  font-size: .82rem;
+}
+.info-in details {
+  border-top: 1px dashed var(--line);
+  padding: 10px 0;
+}
+.info-in summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.info-in details p {
+  margin: 8px 0 0;
+}
+.info-in h3 {
+  font-family: var(--mono);
+  font-size: .72rem;
+  font-weight: 500;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin: 18px 0 6px;
+  padding-top: 12px;
+  border-top: 1px dashed var(--line);
+}
+.info-in ul {
+  display: block;
+  margin: 0;
+  padding-left: 18px;
+  list-style: disc;
+}
+body .info-in li,
+body.paperish .info-in li {
+  display: list-item;
+  background: none;
+  border: 0;
+  box-shadow: none;
+  padding: 3px 0;
+  border-radius: 0;
+}
+body.theme-ink .info-in li {
+  background-image: none;
+  box-shadow: none;
+}
+.pay-look {
+  grid-column: 1/-1;
+  display: grid;
+  gap: 4px;
+  padding-top: 10px;
+  margin-top: 4px;
+  border-top: 1px dashed var(--line);
+}
+.pay-look h4 {
+  margin: 0;
+  font-family: var(--mono);
+  font-size: .66rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: .14em;
+  color: var(--accent);
+}
+.pay-look .trk-link {
+  justify-self: start;
+  margin-top: 4px;
+}
+.trk-fields input[type=color] {
+  height: 36px;
+  padding: 3px;
+  cursor: pointer;
+}
+.trk-ib.pay-pdf {
+  font-family: var(--mono);
+  font-size: .68rem;
+  letter-spacing: .06em;
+  border: 1px solid var(--line);
+  padding: 5px 8px;
+}
+.ring-stack {
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 62;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 10px;
+  pointer-events: none;
+  max-width: min(420px, calc(100vw - 32px));
+}
+.ring-stack .rm-ring {
+  position: static;
+  pointer-events: auto;
+  max-width: 100%;
+}
+.rm-ring .rn {
+  font-size: .85rem;
+  color: var(--muted);
+  line-height: 1.4;
+}
+.pay-flag {
+  font-family: var(--mono);
+  font-size: .66rem;
+  font-weight: 600;
+  letter-spacing: .04em;
+  border-radius: 999px;
+  padding: 1px 8px;
+  border: 1px solid currentColor;
+}
+.pay-flag.f45 {
+  color: var(--n1);
+}
+body.theme-paper .pay-flag.f45 {
+  color: #8a6a1c;
+}
+.pay-flag.f60 {
+  color: var(--accent);
+}
+.pay-flag.f90 {
+  color: var(--accent-ink);
+  background: var(--warn);
+  border-color: var(--warn);
+}
+.pay-via {
+  font-family: var(--mono);
+  font-size: .62rem;
+  font-weight: 500;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  color: var(--blue-ink);
+}
+.trk-row.pay-row.via-agent.st-todo {
+  --u: var(--blue-ink);
+}
+.pay-intro {
+  margin: 0;
+  font-size: .86rem;
+  color: var(--muted);
+  max-width: 720px;
+  line-height: 1.5;
+}
+.pay-tot .pay-off {
+  color: var(--warn);
+  font-weight: 600;
+}
+.pay-tot .pay-ok {
+  color: var(--n2);
+}
+.pay-via.pay-un {
+  color: var(--muted);
+  margin-left: -4px;
+}
+.un-ck {
+  display: flex !important;
+  align-items: center;
+  gap: 5px;
+  height: 34px;
+  font-size: .78rem !important;
+  color: var(--ink) !important;
+  cursor: pointer;
+  white-space: nowrap;
+}
+.un-ck input {
+  width: auto !important;
+  height: auto !important;
+  accent-color: var(--accent);
+}
+.pay-add-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 8px;
+}
+.pay-preset span {
+  font-weight: 400;
+  color: var(--muted);
+  margin-left: 4px;
+}
+.aud-name {
+  font-size: 1.06rem;
+}
+.aud-link {
+  justify-self: start;
+  max-width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: .86rem;
+  font-weight: 600;
+  color: var(--accent);
+  text-decoration: underline;
+  text-decoration-color: color-mix(in srgb, var(--accent) 40%, transparent);
+  text-underline-offset: 3px;
+}
+.aud-link:hover {
+  text-decoration-color: var(--accent);
+}
+.trk-sub.aud-meta {
+  font-size: .72rem;
+  opacity: .85;
+}
 .export{display:flex;flex-wrap:wrap;align-items:center;gap:8px;margin-top:28px;padding-top:14px;border-top:1px solid var(--line);font-size:.8rem;color:var(--muted)}
 .export .nag{flex-basis:100%;color:var(--warn,var(--accent))}
 .export .nag:empty{display:none}
@@ -5077,6 +5886,7 @@ body.wheeling .wrap {
 <button type="button" class="focus-pill" id="focus-pill" hidden></button>
 <canvas id="party" hidden aria-hidden="true"></canvas>
 <div class="rm-ring" id="rm-ring" hidden role="alert"></div>
+<div class="ring-stack"><div class="rm-ring aud-ring" id="aud-ring" hidden role="alert"></div><div class="rm-ring pay-ring" id="pay-ring" hidden role="alert"></div></div>
 <div class="cheer" id="cheer" role="status">Same Day cleared!</div>
 <div class="ew" id="ew" hidden role="dialog" aria-modal="true" aria-labelledby="ew-title">
   <div class="ew-in">
@@ -5104,10 +5914,10 @@ body.wheeling .wrap {
     </div>
     <div class="when"><span class="today" id="today"></span><span class="clock" id="clock" hidden></span><button type="button" class="next-rem" id="next-rem" hidden title="Show reminders"></button></div>
   </header>
-  <nav class="nav-pill" aria-label="Areas"><button type="button" class="nav-b" id="focus-open">Focus timer</button><button type="button" class="nav-b" id="ew-open">Emotions<span class="ew-wl"> wheel</span></button><button type="button" class="nav-b" id="todo-toggle" aria-expanded="true" aria-controls="todo">To-do</button><button type="button" class="nav-b" id="tools-toggle" aria-expanded="true" aria-controls="panel">Tools</button><button type="button" class="nav-b" id="col-toggle" aria-expanded="false" aria-controls="scratch">Collection</button><button type="button" class="nav-b settings-btn" id="settings-btn" aria-expanded="false" aria-controls="settings" title="Settings"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 6.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zm7.2 4.3-.1-1.8 1.7-1.4-1.7-3-2.1.7a6.8 6.8 0 0 0-1.6-.9L13 2.3H9.6l-.4 2.2c-.6.2-1.1.5-1.6.9l-2.1-.7-1.7 3 1.7 1.4a6.6 6.6 0 0 0 0 1.8l-1.7 1.4 1.7 3 2.1-.7c.5.4 1 .7 1.6.9l.4 2.2H13l.4-2.2c.6-.2 1.1-.5 1.6-.9l2.1.7 1.7-3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>Settings</span></button></nav>
+  <nav class="nav-pill" aria-label="Areas"><button type="button" class="nav-b" id="focus-open">Focus timer</button><button type="button" class="nav-b" id="ew-open">Emotions<span class="ew-wl"> wheel</span></button><button type="button" class="nav-b" id="todo-toggle" aria-expanded="true" aria-controls="todo">To-do</button><button type="button" class="nav-b" id="tools-toggle" aria-expanded="true" aria-controls="panel">Tools</button><button type="button" class="nav-b" id="col-toggle" aria-expanded="false" aria-controls="scratch">Collection</button><button type="button" class="nav-b" id="aud-toggle" aria-expanded="false" aria-controls="aud">Auditions</button><button type="button" class="nav-b" id="pay-toggle" aria-expanded="false" aria-controls="pay">Payments</button><button type="button" class="nav-b settings-btn" id="settings-btn" aria-expanded="false" aria-controls="settings" title="Settings"><svg viewBox="0 0 20 20" aria-hidden="true"><path d="M10 6.6a3.4 3.4 0 1 0 0 6.8 3.4 3.4 0 0 0 0-6.8zm7.2 4.3-.1-1.8 1.7-1.4-1.7-3-2.1.7a6.8 6.8 0 0 0-1.6-.9L13 2.3H9.6l-.4 2.2c-.6.2-1.1.5-1.6.9l-2.1-.7-1.7 3 1.7 1.4a6.6 6.6 0 0 0 0 1.8l-1.7 1.4 1.7 3 2.1-.7c.5.4 1 .7 1.6.9l.4 2.2H13l.4-2.2c.6-.2 1.1-.5 1.6-.9l2.1.7 1.7-3z" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg><span>Settings</span></button></nav>
   <div class="hint-intro hint">
     <p>Hints are on to help you find your way around. <button type="button" class="hint-x" id="hint-x">Turn off hints</button> <span class="hint-also">(you can bring them back in Settings, under Page)</span></p>
-    <p>Focus timer runs work-and-break rounds. Emotions wheel helps you put a name to a feeling. To-do, Tools and Collection show or hide those areas. Settings is where you change the look and choose what shows. Tap the title or the line under it to make them your own.</p>
+    <p>Focus timer runs work-and-break rounds. Emotions wheel helps you put a name to a feeling. To-do, Tools, Collection, Auditions and Payments show or hide those areas. Settings is where you change the look and choose what shows. Tap the title or the line under it to make them your own.</p>
   </div>
   <div class="settings" id="settings" hidden>
     <section class="set-sec"><h3>Theme</h3>
@@ -5142,6 +5952,12 @@ body.wheeling .wrap {
     </section>
     <section class="set-sec"><h3>Collection</h3>
       <div class="tm-list ui-opts" data-ui="good,ahead"></div>
+    </section>
+    <section class="set-sec"><h3>Auditions</h3>
+      <div class="tm-list ui-opts" data-ui="audm,audr"></div>
+    </section>
+    <section class="set-sec"><h3>Payments</h3>
+      <div class="tm-list ui-opts" data-ui="payr"></div>
     </section>
     <button type="button" class="sec-manage-btn set-done" id="settings-done">Done</button>
   </div>
@@ -5256,12 +6072,8 @@ body.wheeling .wrap {
     <h2 class="todo-h" id="col-h">Collection</h2>
     <div class="sp-top">
       <p class="sp-sub">Toss in notes, links, pictures and sounds. Sort later, or never.</p>
-      <div class="sp-switch" role="group" aria-label="Collection layout">
-        <button type="button" id="sp-lay-a" aria-pressed="true">Sorted for you</button>
-        <button type="button" id="sp-lay-b" aria-pressed="false">My collection</button>
-      </div>
     </div>
-    <p class="hint hint-tuck">Sorted for you groups things by type. My collection lets you make your own boards.</p>
+    <p class="hint hint-tuck">Things you add are sorted by type for you.</p>
     <div class="sp-capture">
       <div class="sp-cap-row">
         <textarea id="sp-text" rows="1" placeholder="Save a link, an idea, jot a note, or pin some inspiration or sounds you love"></textarea>
@@ -5271,7 +6083,6 @@ body.wheeling .wrap {
         </div>
       </div>
       <div class="sp-cap-foot">
-        <span id="sp-board-wrap" hidden>Add to <select id="sp-board" aria-label="Board"></select></span>
         <span class="sp-hint">You can also paste a picture, or drop files here.</span>
         <span id="sp-msg" aria-live="polite"></span>
       </div>
@@ -5292,7 +6103,7 @@ body.wheeling .wrap {
         <details><summary>Past entries</summary><ul class="sp-past"></ul></details>
       </div>
     </div>
-    <div class="sp-bar"><div class="sp-chips" id="sp-chips"></div><button type="button" class="sp-btn sp-shuffle" id="sp-shuffle" title="Show one random thing you saved, or a past good thing"><svg class="sh-ic sh-arrows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg><span>Shuffle</span></button></div>
+    <div class="sp-bar"><button type="button" class="sp-btn sp-shuffle" id="sp-shuffle" title="Show one random thing you saved, or a past good thing"><svg class="sh-ic sh-arrows" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M16 3h5v5M4 20 21 3M21 16v5h-5M15 15l6 6M4 4l5 5"/></svg><span>Shuffle</span></button></div>
     <p class="hint hint-tuck">Shuffle pulls up something random you saved.</p>
     <div id="sp-wall"></div>
     <div class="sp-drop" id="sp-drop" hidden>Drop to add</div>
@@ -5301,6 +6112,45 @@ body.wheeling .wrap {
     <div class="sp-spot-in"><div class="sp-spot-cap" id="sp-spot-cap"></div><div id="sp-spot-card"></div>
       <div class="sp-spot-btns"><button type="button" class="sp-btn ghost" id="sp-spot-close">Close</button><button type="button" class="sp-btn primary" id="sp-spot-next">Another</button></div></div>
   </div>
+  <section class="aud" id="aud" hidden aria-labelledby="aud-h">
+    <h2 class="todo-h" id="aud-h">Auditions</h2>
+    <p class="hint hint-tuck">Add a project, its link and when it's due. A reminder pops up 1 week, 3 days and 1 day before the due date. Check Submitted once it's in and it moves to the Submitted archive at the bottom, where you can still check Booked if you get it. Anything past its due date moves to the archive too.</p>
+    <div class="trk-add" id="aud-add">
+      <div class="trk-add-row aud-add-row">
+        <input id="aud-p" maxlength="140" placeholder="Project" aria-label="Project">
+        <input id="aud-l" maxlength="600" placeholder="Link (optional)" aria-label="Link to the project">
+        <label class="trk-due"><span>Due</span><input id="aud-d" type="date" aria-label="Due date"></label>
+        <button type="button" class="sp-btn primary" id="aud-go">Add</button>
+      </div>
+      <details class="trk-more" id="aud-more"><summary>More details (optional)</summary><div class="trk-fields" id="aud-more-f"></div></details>
+      <span class="trk-msg" id="aud-msg" aria-live="polite"></span>
+    </div>
+    <div class="trk-list" id="aud-list" role="list"></div>
+    <div class="trk-foot">
+      <details class="trk-arch" id="aud-arch-sub"><summary>Submitted archive <span class="n"></span></summary><div class="trk-list" role="list"></div></details>
+      <details class="trk-arch" id="aud-arch-all"><summary>All archived auditions <span class="n"></span></summary><div class="trk-list" role="list"></div></details>
+      <button type="button" class="trk-link" id="aud-csv">Export (.csv)</button><span class="trk-msg" id="aud-csv-msg" aria-live="polite"></span>
+    </div>
+    <details class="aud-mx" id="aud-mx" open><summary>Audition metrics</summary><div class="mx-row" id="aud-mx-row"></div><p class="mx-note">Do not tie your worth to your booking rate. This is meant to be helpful, and you can toggle it off in Settings. You are more than your booking rate. 🖤</p></details>
+  </section>
+  <section class="pay" id="pay" hidden aria-labelledby="pay-h">
+    <h2 class="todo-h" id="pay-h">Payments</h2>
+    <p class="pay-intro">Make invoices here and save them straight to PDF. No spreadsheets or Canva needed, unless you want to get fancy. If your agent handles billing, it checks the math on what your agents, managers and taxes took, tracks how long it takes to get paid, and lets you know when something is really, really overdue. Booked auditions show up here on their own.</p>
+    <div class="pay-top">
+      <button type="button" class="sp-btn primary" id="pay-new">New payment</button>
+      <span class="trk-msg" id="pay-top-msg" aria-live="polite"></span>
+      <div class="pay-sum" id="pay-sum"></div>
+    </div>
+    <details class="trk-more pay-me" id="pay-me"><summary>Your details for invoices</summary>
+      <p class="trk-note">Saved once and used on every invoice.</p>
+      <div class="trk-fields" id="pay-me-f"></div>
+    </details>
+    <div class="trk-list" id="pay-list" role="list"></div>
+    <div class="trk-foot">
+      <details class="trk-arch" id="pay-arch"><summary>Paid <span class="n"></span></summary><div class="trk-list" role="list"></div></details>
+      <button type="button" class="trk-link" id="pay-csv">Export (.csv)</button><span class="trk-msg" id="pay-msg" aria-live="polite"></span>
+    </div>
+  </section>
   <section class="todo" id="todo" aria-labelledby="todo-h">
   <h2 class="todo-h" id="todo-h">To-do list</h2>
   <p class="hint hint-tuck">Sections (like Home or Work) hold cards, and cards hold tasks. Pick a section and a card, type a task, and tap Add. Due dates are optional.</p>
@@ -5336,8 +6186,57 @@ body.wheeling .wrap {
   <div class="hint hint-tuck"><p>Board groups tasks by section. Chronological lists them by date.</p><p>The top row gathers what needs you now: pinned cards, today, and this week. Tap a card's pin to keep it up top. Anything past its due date moves to Things I've Been Putting Off. Drag cards to reorder them.</p></div>
   <div id="list"><div class="empty">Loading your list…</div></div>
   </section>
-  <div class="export" id="export"><span>Everything is saved only in this browser.</span><button type="button" id="ex-json">Back up</button><button type="button" id="ex-restore">Restore a backup</button><button type="button" id="ex-csv">Spreadsheet (.csv)</button><input type="file" id="ex-file" accept=".json,application/json" hidden><span class="note" id="ex-note"></span><span class="nag" id="ex-nag"></span></div>
+  <div class="export" id="export"><span>Backup your data. Everything is saved only in this browser.</span><button type="button" id="ex-json">Back up</button><button type="button" id="ex-restore">Restore a backup</button><button type="button" id="ex-csv">Spreadsheet (.csv)</button><input type="file" id="ex-file" accept=".json,application/json" hidden><span class="note" id="ex-note"></span><span class="nag" id="ex-nag"></span></div>
   <div class="ios-tip" id="ios-tip" hidden><span>On iPhone or iPad, tap Share, then <b>Add to Home Screen</b>. Safari can erase data for websites you haven't opened in a week; home screen apps are kept safe.</span><button type="button" id="ios-tip-x">Got it</button></div>
+  <div class="foot-links"><button type="button" class="trk-link" data-info="faq">FAQ</button><span aria-hidden="true">·</span><button type="button" class="trk-link" data-info="log">Changelog</button></div>
+  <div class="info-pop" id="info-pop" hidden role="dialog" aria-modal="true" aria-labelledby="info-h">
+    <div class="info-in">
+      <button type="button" class="info-x" id="info-x" aria-label="Close">×</button>
+      <div class="info-faq" data-panel="faq">
+        <h2 class="info-h" id="info-h">FAQ</h2>
+        <details open><summary>Why did you make this?</summary><p>Answer coming soon.</p></details>
+        <details><summary>How did you make this?</summary><p>Slowly, and with a lot of love. It's been a labor of love over the past year, and the emotions wheel took the better part of that time. Every feeling went through more drafts than I'd like to admit.</p><p>Under the hood it's one HTML file. No framework, no server, no account. In the web app, everything you add stays in your browser: text in localStorage, pictures and sounds in IndexedDB. A service worker keeps it running offline, and GitHub Pages hosts it for free.</p></details>
+        <details><summary>Is this vibe-coded?</summary><p>No. Before I became a voice actor, I worked in web design, and later in data science. I know my way around HTML, CSS, JavaScript and everything else that went into this, so every piece of it was built on purpose. I just finally had a reason to make something for fun.</p></details>
+        <details><summary>How often does this get updated?</summary><p>Whenever I need something it doesn't do yet, or someone I love asks nicely. There's no schedule. When a new version is out, refresh the page (or close and reopen the app from your home screen). Sometimes it takes two refreshes to catch up. The changelog says what's new.</p></details>
+        <details><summary>Does this info transfer between my phone and computer?</summary><p>Not on its own. Everything lives in the browser you're using, so your phone and your computer each keep their own copy. No account, no cloud, nobody's server holding your stuff.</p><p>To move it, tap Back up on one device, send yourself the file however you like, then tap Restore a backup on the other. Fair warning: restoring swaps in what's in the file, so do it before you start adding things on the new device.</p></details>
+        <details><summary>Does this connect to Google Calendar or iCal?</summary><p>No. The calendar here is a little month view for checking dates, and reminders and due dates stay inside the app. Connecting to Google or Apple would mean accounts and sending your data somewhere else, and keeping everything on your device was the whole point.</p></details>
+        <details><summary>How do I keep my stuff safe?</summary><p>Tap Back up at the bottom of the page. It saves one file with everything in it, pictures and sounds included. If you get a new phone or clear your browser, Restore a backup brings it all back.</p><p>Your stuff only lives on this device, so back up now and then. If you've never backed up, or it's been more than two weeks, a note shows up next to the backup buttons.</p></details>
+      </div>
+      <div class="info-log" data-panel="log">
+        <h2 class="info-h">Changelog</h2>
+        <p class="info-sub">Newest first. Version numbers are the web app's. If something broke, it was probably the thing right above it.</p>
+        <h3>v5 · November 2026</h3>
+        <ul>
+          <li><b>Auditions.</b> A tracker for everything you submit. Project, link, due date, done. The optional stuff (roles, pay, who's running it) hides behind a fold, so adding one takes about ten seconds. Reminders pop up a week, three days and one day out. Once the due date passes, the line files itself into an archive, so your list only shows what you can still do something about.</li>
+          <li><b>Booked it?</b> Check the box. You get a little paper party, and the job drops straight into Payments with the details already filled in.</li>
+          <li><b>Payments.</b> One line per job: client, billing address, work billed by the hour, minute, session, day, spot or flat fee, adjustments, tax, and whether it's been invoiced and paid.</li>
+          <li><b>Union or non-union.</b> Check Union on any line of a job, so a paycheck that mixes both gets split correctly, and Payments keeps a running total of each for the year. Auditions can be tagged too.</li>
+          <li><b>When your agent bills.</b> Switch a job to agent billing and track recording sessions, advertised pay against what you actually got, your agent's and manager's cuts, taxes, whether the deposit matches the math, usage and exclusivity, and how many days it took to get paid. There's a running tab of what you've paid your agents and managers this year. If a job's still unpaid at 45 days you get a nudge, and it gets flagged again at 60 and 90.</li>
+          <li><b>Invoices.</b> Six designs, from classic to typewriter, each with a dressed-up version. Pick your colors and fonts (including two that are easier on dyslexic eyes), then tap PDF on any job. Your payment links stay clickable in the file.</li>
+          <li><b>Audition metrics.</b> How many you entered, how many you submitted, and your booking rate (bookings out of submitted, so the ones you passed on don't count against you). Collapsible, and you can turn them off in Settings.</li>
+          <li><b>Collection got simpler.</b> Custom boards are gone, since the to-do list already does that job better. Sounds live with pictures now, and Shuffle is big enough to actually find.</li>
+          <li>Backup buttons got a clearer label. Also, hi, you found the FAQ and the changelog.</li>
+        </ul>
+        <h3>v4</h3>
+        <ul>
+          <li><b>Emotions wheel, round two.</b> Every definition now comes from a real dictionary (WordNet 3.0, from Princeton). Each feeling shows how it can look in the body and sound in the voice, what's going on under the surface, and how it differs from its close neighbors, like disappointed, let down and discouraged. There's a search box, and tapping the center backs you out.</li>
+          <li><b>Two themes.</b> Classic and Classic Night. The others were cute, and I got tired of maintaining them.</li>
+          <li>The top menu is a sliding pill now. Turn on two areas that sit next to each other and their highlights merge into one shape. Small thing. Made me happy.</li>
+          <li>Tap the title or the line under it to rename them.</li>
+          <li>Minimal mode clears the page down to your to-do list.</li>
+          <li>Settings are sorted by area. Creative nudges are now called Inspiration.</li>
+          <li>New sounds. Softer, rounder, and less likely to make you jump mid-focus session.</li>
+        </ul>
+        <h3>v3</h3>
+        <ul>
+          <li><b>Emotions wheel.</b> 80 feelings in 8 families. Save one to your Collection to come back to it.</li>
+          <li><b>Hints.</b> Little notes that explain each area, on by default. Turn them off once you've got it.</li>
+          <li>The paper look: ruled lines, a margin, ink colors. No moving parts.</li>
+          <li>You can hide the to-do list, and the Scratchpad is now called Collection.</li>
+        </ul>
+      </div>
+    </div>
+  </div>
 </div>
 
 <script src="sortable.min.js"></script>
@@ -5627,7 +6526,12 @@ const Party = (() => {
     cheer.classList.add("big");
     paperBig();
   }
-  return { big, add, accent, second };
+  function shout(text) {
+    say(text, 3e3);
+    cheer.classList.add("big");
+    paperBig();
+  }
+  return { big, shout, add, accent, second };
 })();
 let justChecked = false;
 let lastSameDay = null, prevSections = null, prevCards = null;
@@ -7574,8 +8478,8 @@ const PageName = (() => {
   };
 })();
 const UI = (() => {
-  const NAMES = { hints: "Hints that explain each area", stats: "Task counts", clock: "Clock", good: "One good thing today", ahead: "Something I'm looking forward to", fx: "Celebration effects" };
-  let P = { hints: true, stats: true, clock: true, good: true, ahead: true, fx: true, minimal: false };
+  const NAMES = { hints: "Hints that explain each area", stats: "Task counts", clock: "Clock", good: "One good thing today", ahead: "Something I'm looking forward to", fx: "Celebration effects", audm: "Audition metrics", audr: "Due-date reminders", payr: "Late payment reminders (45, 60 and 90 days)" };
+  let P = { hints: true, stats: true, clock: true, good: true, ahead: true, fx: true, audm: true, audr: true, payr: true, minimal: false };
   try {
     const v = JSON.parse(localStorage.getItem("ui-prefs") || "null");
     if (v) Object.assign(P, v);
@@ -7591,6 +8495,7 @@ const UI = (() => {
     h.toggle("ui-hide-good", !on("good"));
     h.toggle("ui-hide-ahead", !on("ahead"));
     h.toggle("ui-no-fx", !on("fx"));
+    h.toggle("ui-hide-audm", !on("audm"));
     h.toggle("ui-minimal", !!P.minimal);
     renderSet();
   }
@@ -7636,7 +8541,7 @@ const UI = (() => {
     save();
   };
   apply();
-  return { on };
+  return { on, get: (k) => !!P[k] };
 })();
 const SKINS = ["paper", "ink"], SKIN_MOVED = { nocturne: "ink", thicket: "ink", verdigris: "ink", bramble: "ink", autumn: "ink", reel: "ink", "reel-min": "ink", halloween: "ink", "halloween-min": "ink", witching: "ink", "witching-min": "ink", pumpkin: "ink", "pumpkin-min": "ink" };
 function applySkin(k) {
@@ -8589,6 +9494,24 @@ function exportCSV() {
   });
   return "\uFEFF" + rows.map((r) => r.map(csvCell).join(",")).join("\r\n");
 }
+let backupDB = null;
+async function fullBackup(clean) {
+  const out = { exported: (new Date()).toISOString(), tasks: clean };
+  if (!backupDB) return out;
+  const once = (name) => new Promise((res) => {
+    let done = false, u = null;
+    const fin = (v) => {
+      if (done) return;
+      done = true;
+      res(v);
+      if (typeof u === "function") u();
+    };
+    u = backupDB.collection(name).onSnapshot((s) => fin(s.docs.map((d) => ({ id: d.id, ...d.data() }))), () => fin([]));
+    setTimeout(() => fin([]), 8e3);
+  });
+  for (const n of ["sections", "scratch", "journal", "nudges", "auditions", "payments", "prefs"]) out[n] = await once(n);
+  return out;
+}
 async function doExport(kind) {
   const dl = await host.use("downloads"), note = $("#ex-note");
   if (!dl) {
@@ -8881,16 +9804,11 @@ try {
 }
 addEventListener("load", enableToolsDrag);
 const SP = (() => {
-  let items = [], boards = [], journal = [], scol = null, bcol = null, jcol = null, assets = null;
-  let layout = "a", filt = "all", editing2 = null, menuFor = null, armedDel = null, addingBoard = false, lastSpot = null, editColor = null;
-  try {
-    layout = localStorage.getItem("sp-layout") || "a";
-    filt = localStorage.getItem("sp-filter") || "all";
-  } catch (e) {
-  }
+  let items = [], journal = [], scol = null, jcol = null, assets = null;
+  let editing2 = null, armedDel = null, lastSpot = null, editColor = null;
   const IMG = /\.(jpe?g|png|gif|webp|avif|svg)(\?.*)?$/i, AUD = /\.(mp3|wav|m4a|ogg|oga|aac|flac|opus)(\?.*)?$/i;
   const kindOf = (t) => /^https?:\/\/\S+$/i.test(t) ? IMG.test(t) ? "image" : AUD.test(t) ? "audio" : "link" : "note";
-  const LANES = [["image", "Pictures"], ["note", "Notes"], ["link", "Links"], ["audio", "Sounds"]];
+  const LANES = [["image", "Pictures and sounds"], ["note", "Notes"], ["link", "Links"]];
   const fmtD = (iso2) => {
     const [y, m, d] = iso2.slice(0, 10).split("-").map(Number);
     return new Date(y, m - 1, d).toLocaleDateString(void 0, { month: "short", day: "numeric" });
@@ -8911,16 +9829,6 @@ const SP = (() => {
     return r;
   }
   const save = (it) => scol && scol.doc(it.id).set(clean(it)).catch(err);
-  function newCol() {
-    const c = placeCols(items, 4).map((x) => x.length);
-    return c.indexOf(Math.min(...c));
-  }
-  function chosenBoards() {
-    if (layout !== "b") return [];
-    const v = $("#sp-board").value;
-    if (v && v !== "unsorted") return [v];
-    return [];
-  }
   async function addText() {
     const text = $("#sp-text").value.trim();
     if (!text || !scol) {
@@ -8929,7 +9837,7 @@ const SP = (() => {
     }
     const lines = text.split(/\n+/).map((s) => s.trim()).filter(Boolean), urls = lines.every((l) => /^https?:\/\/\S+$/i.test(l)), entries = urls ? lines : [text];
     for (const t of entries) {
-      const k = kindOf(t), it = { kind: k, created: (new Date()).toISOString(), boards: chosenBoards(), col: newCol() };
+      const k = kindOf(t), it = { kind: k, created: (new Date()).toISOString() };
       if (k === "note") {
         it.text = t;
         it.color = 1 + Math.floor(Math.random() * 4);
@@ -8995,7 +9903,7 @@ const SP = (() => {
       say(`Uploading ${f.name}…`);
       try {
         const r = await assets.upload(blob, { type });
-        await scol.add(clean({ kind, asset: r.id, label: f.name.replace(/\.[^.]+$/, ""), size: r.sizeBytes, created: (new Date()).toISOString(), boards: chosenBoards(), col: newCol() }));
+        await scol.add(clean({ kind, asset: r.id, label: f.name.replace(/\.[^.]+$/, ""), size: r.sizeBytes, created: (new Date()).toISOString() }));
         n++;
       } catch (e) {
         say(e && e.code === "too_large" ? `${f.name} is too big (20 MB max).` : e && e.code === "quota_or_state" ? "Your collection's storage is full. Delete a few uploads to make room." : `Couldn't upload ${f.name}. Try again in a moment.`, true);
@@ -9067,149 +9975,24 @@ const SP = (() => {
         body = `<div class="dom">${esc(d)}</div>${it.label ? `<div class="lbl">${esc(it.label)}</div>` : ""}<a class="open" href="${esc(it.url)}" target="_blank" rel="noopener">Open link ↗</a>`;
       } else body = it.label ? `<div class="lbl">${esc(it.label)}</div>` : "";
     }
-    const bn = (it.boards || []).map((id) => boards.find((b) => b.id === id)).filter(Boolean);
-    const acts = spot ? "" : `<span class="sp-acts"><button type="button" class="sp-ib ${it.pinned ? "on" : ""}" data-sa="pin" title="${it.pinned ? "Unpin" : "Pin to the top"}" aria-label="${it.pinned ? "Unpin" : "Pin"}">${it.pinned ? "★" : "☆"}</button>${layout === "b" ? `<button type="button" class="sp-ib" data-sa="boards" title="Choose boards" aria-label="Choose boards">▦</button>` : ""}<button type="button" class="sp-ib" data-sa="edit" title="Edit" aria-label="Edit">✎</button><button type="button" class="sp-ib ${armedDel === it.id ? "danger" : ""}" data-sa="del" title="${armedDel === it.id ? "Tap again to delete" : "Delete"}" aria-label="Delete">${armedDel === it.id ? "Delete?" : "✕"}</button></span>`;
-    const meta = `<div class="meta"><span class="when">${fmtD(it.created)}</span>${layout === "b" ? bn.map((b) => `<span class="bchip">${esc(b.name)}</span>`).join("") : ""}${acts}</div>`;
-    const menu = menuFor === it.id && !spot ? `<div class="sp-bmenu">${boards.map((b) => `<label><input type="checkbox" data-spb="${b.id}" ${(it.boards || []).includes(b.id) ? "checked" : ""}>${esc(b.name)}</label>`).join("") || "<span>No boards yet.</span>"}</div>` : "";
-    return `<article class="sp-card k-${k}${k === "note" ? " c" + (it.color || 1) : ""}${it.pinned ? " pinned" : ""}" data-spid="${it.id}">${media}<div class="b">${body}${meta}${menu}</div></article>`;
+    const acts = spot ? "" : `<span class="sp-acts"><button type="button" class="sp-ib ${it.pinned ? "on" : ""}" data-sa="pin" title="${it.pinned ? "Unpin" : "Pin to the top"}" aria-label="${it.pinned ? "Unpin" : "Pin"}">${it.pinned ? "★" : "☆"}</button><button type="button" class="sp-ib" data-sa="edit" title="Edit" aria-label="Edit">✎</button><button type="button" class="sp-ib ${armedDel === it.id ? "danger" : ""}" data-sa="del" title="${armedDel === it.id ? "Tap again to delete" : "Delete"}" aria-label="Delete">${armedDel === it.id ? "Delete?" : "✕"}</button></span>`;
+    const meta = `<div class="meta"><span class="when">${fmtD(it.created)}</span>${acts}</div>`;
+    return `<article class="sp-card k-${k}${k === "note" ? " c" + (it.color || 1) : ""}${it.pinned ? " pinned" : ""}" data-spid="${it.id}">${media}<div class="b">${body}${meta}</div></article>`;
   }
   const sorted = (l) => l.slice().sort((a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (b.created || "").localeCompare(a.created || ""));
-  let wallSorts = [], wallDragging = false, lastN = 0;
-  const nCols = () => {
-    const w = $("#scratch").clientWidth || innerWidth;
-    return w >= 900 ? 4 : w >= 520 ? 2 : 1;
-  };
-  const colOf = (it, n) => (it.col ?? 0) % n;
-  const byPlace = (a, b) => (b.pinned ? 1 : 0) - (a.pinned ? 1 : 0) || (a.order == null ? 0 : 1) - (b.order == null ? 0 : 1) || (a.order == null ? (b.created || "").localeCompare(a.created || "") : a.order - b.order || (a.col ?? 0) - (b.col ?? 0));
-  function placeCols(list, n) {
-    const cols = Array.from({ length: n }, () => []);
-    let k = 0;
-    list.slice().sort((a, b) => (b.created || "").localeCompare(a.created || "")).forEach((it) => {
-      if (it.col == null) {
-        cols[k % n].push(it);
-        k++;
-      } else cols[colOf(it, n)].push(it);
-    });
-    return cols.map((c) => c.sort(byPlace));
-  }
-  function enableWallDrag() {
-    wallSorts.forEach((x) => {
-      try {
-        x.destroy();
-      } catch (e) {
-      }
-    });
-    wallSorts = [];
-    if (typeof Sortable === "undefined") return;
-    const wall = $("#sp-wall"), o = {
-      group: "spwall",
-      animation: 160,
-      forceFallback: true,
-      fallbackOnBody: true,
-      fallbackTolerance: 4,
-      delayOnTouchOnly: true,
-      delay: 220,
-      touchStartThreshold: 6,
-      draggable: ".sp-card",
-      ghostClass: "drag-ghost",
-      chosenClass: "drag-chosen",
-      filter: "input,button,select,a,textarea,audio,label,.sp-edit,.sp-bmenu",
-      preventOnFilter: false,
-      onStart: () => {
-        wallDragging = true;
-        wall.classList.add("dragging");
-      },
-      onEnd: () => {
-        wall.classList.remove("dragging");
-        saveWall();
-        wallDragging = false;
-        render2();
-      }
-    };
-    wall.querySelectorAll(".sp-col").forEach((c) => wallSorts.push(Sortable.create(c, o)));
-  }
-  function saveWall() {
-    const wall = $("#sp-wall"), n = +getComputedStyle(wall).getPropertyValue("--spn") || nCols(), changed = new Set(), beforeAll = placeCols(items, n);
-    wall.querySelectorAll(".sp-col").forEach((colEl) => {
-      const ci = +colEl.dataset.col, shown = [...colEl.querySelectorAll(".sp-card")].map((c) => items.find((i) => i.id === c.dataset.spid)).filter(Boolean);
-      const shownIds = new Set(shown.map((i) => i.id));
-      const before = beforeAll[ci], seq = [];
-      let q = shown.slice();
-      before.forEach((it) => {
-        if (shownIds.has(it.id) || isShown(it)) {
-          if (q.length) seq.push(q.shift());
-        } else seq.push(it);
-      });
-      seq.push(...q);
-      seq.forEach((it, idx) => {
-        const col2 = n === 4 ? ci : it.col != null && it.col % n === ci ? it.col : ci;
-        if (it.col !== col2 || it.order !== idx) {
-          it.col = col2;
-          it.order = idx;
-          changed.add(it);
-        }
-      });
-    });
-    changed.forEach(save);
-  }
-  const isShown = (i) => filt === "all" ? true : filt === "unsorted" ? !(i.boards || []).length : (i.boards || []).includes(filt);
-  addEventListener("resize", () => {
-    if (layout === "b" && !$("#scratch").hidden && nCols() !== lastN) {
-      lastN = nCols();
-      render2();
-    }
-  });
   function render2() {
-    if ($("#scratch").hidden || wallDragging) return;
-    lastN = nCols();
+    if ($("#scratch").hidden) return;
     if (editing2 && document.activeElement && document.activeElement.closest && document.activeElement.closest(".sp-edit")) return;
-    $("#sp-lay-a").setAttribute("aria-pressed", layout === "a");
-    $("#sp-lay-b").setAttribute("aria-pressed", layout === "b");
-    $("#sp-board-wrap").hidden = layout !== "b";
     $("#sp-upload").hidden = !assets;
-    const sel = $("#sp-board"), cur = sel.value || (filt !== "all" && filt !== "unsorted" ? filt : "unsorted");
-    sel.innerHTML = '<option value="unsorted">Unsorted</option>' + boards.map((b) => `<option value="${b.id}">${esc(b.name)}</option>`).join("");
-    sel.value = boards.some((b) => b.id === cur) ? cur : "unsorted";
-    const chips = $("#sp-chips");
-    if (layout === "b") {
-      const cnt = (f) => items.filter(f).length;
-      chips.innerHTML = `<button type="button" class="sp-chip" data-spf="all" aria-pressed="${filt === "all"}">All<span class="n">${items.length}</span></button><button type="button" class="sp-chip" data-spf="unsorted" aria-pressed="${filt === "unsorted"}">Unsorted<span class="n">${cnt((i) => !(i.boards || []).length)}</span></button>` + boards.map((b) => `<button type="button" class="sp-chip" data-spf="${b.id}" aria-pressed="${filt === b.id}">${esc(b.name)}<span class="n">${cnt((i) => (i.boards || []).includes(b.id))}</span></button>`).join("") + (addingBoard ? `<span class="sp-newboard"><input id="sp-nb" placeholder="Board name" maxlength="40" aria-label="New board name"><button type="button" class="sp-chip" id="sp-nb-save">Add</button></span>` : `<button type="button" class="sp-chip add" id="sp-nb-open">+ New board</button>`);
-    } else chips.innerHTML = "";
     const wall = $("#sp-wall");
-    if (layout === "a") {
-      wall.className = "sp-lanes";
-      wall.innerHTML = LANES.map(([k, name]) => {
-        const l = sorted(items.filter((i) => i.kind === k || k === "note" && i.kind === "feeling")), empty = { image: "Upload or paste a picture.", note: "Type anything and press Enter.", link: "Paste any web address.", audio: "Upload a voice memo (.m4a)." }[k];
-        return `<section class="sp-lane" aria-label="${name}"><h3>${name}<span class="n">${l.length}</span></h3>${l.map((i) => card(i)).join("") || `<div class="sp-empty">${empty}</div>`}</section>`;
-      }).join("");
-    } else {
-      wall.className = "sp-wall";
-      const l = items.filter((i) => filt === "all" ? true : filt === "unsorted" ? !(i.boards || []).length : (i.boards || []).includes(filt));
-      if (!l.length) {
-        wall.style.removeProperty("--spn");
-        wall.innerHTML = `<div class="sp-empty" style="grid-column:1/-1">Nothing here yet. Pick a board in "Add to" when you add something, or use ▦ on any card.</div>`;
-      } else {
-        const n = nCols();
-        wall.style.setProperty("--spn", n);
-        const cols = placeCols(l, n);
-        wall.innerHTML = cols.map((c, ci) => `<div class="sp-col" data-col="${ci}">${c.map((i) => card(i)).join("")}</div>`).join("");
-        enableWallDrag();
-      }
-    }
+    wall.className = "sp-lanes";
+    wall.innerHTML = LANES.map(([k, name]) => {
+      const l = sorted(items.filter((i) => i.kind === k || k === "note" && i.kind === "feeling" || k === "image" && i.kind === "audio")), empty = { image: "Upload or paste a picture, or a voice memo (.m4a).", note: "Type anything and press Enter.", link: "Paste any web address." }[k];
+      return `<section class="sp-lane" aria-label="${name}"><h3>${name}<span class="n">${l.length}</span></h3>${l.map((i) => card(i)).join("") || `<div class="sp-empty">${empty}</div>`}</section>`;
+    }).join("");
     wall.querySelectorAll("img[data-spimg]").forEach((img) => img.addEventListener("error", () => {
       img.outerHTML = `<div class="broken">${img.src.startsWith("blob:") ? "This picture is missing." : "Pictures from other websites can't show here. Save the picture and upload it instead."}</div>`;
     }, { once: true }));
-    const nb = $("#sp-nb");
-    if (nb) {
-      nb.focus();
-      nb.onkeydown = (e) => {
-        if (e.key === "Enter") $("#sp-nb-save").click();
-        if (e.key === "Escape") {
-          addingBoard = false;
-          render2();
-        }
-      };
-    }
     const ed = $("#sp-ed-text") || $("#sp-ed-label");
     if (ed && !ed.dataset.f) {
       ed.dataset.f = 1;
@@ -9219,31 +10002,6 @@ const SP = (() => {
   }
   const scratch = $("#scratch");
   scratch.addEventListener("click", async (e) => {
-    const ch = e.target.closest("[data-spf]");
-    if (ch) {
-      filt = ch.dataset.spf;
-      try {
-        localStorage.setItem("sp-filter", filt);
-      } catch (x) {
-      }
-      render2();
-      return;
-    }
-    if (e.target.id === "sp-nb-open") {
-      addingBoard = true;
-      render2();
-      return;
-    }
-    if (e.target.id === "sp-nb-save") {
-      const name = $("#sp-nb").value.trim();
-      addingBoard = false;
-      if (name && bcol) {
-        const r = await bcol.add({ name, created: todayISO() }).catch(err);
-        if (r && r.id) filt = r.id;
-      }
-      render2();
-      return;
-    }
     const jd = e.target.closest("[data-jdel]");
     if (jd) {
       jcol && jcol.doc(jd.dataset.jdel).delete().catch(err);
@@ -9267,11 +10025,9 @@ const SP = (() => {
       it.pinned = !it.pinned;
       save(it);
     }
-    if (a === "boards") menuFor = menuFor === it.id ? null : it.id;
     if (a === "edit") {
       editing2 = it.id;
       editColor = null;
-      menuFor = null;
     }
     if (a === "cancel") {
       editing2 = null;
@@ -9294,16 +10050,6 @@ const SP = (() => {
         });
       } else armedDel = it.id;
     }
-    render2();
-  });
-  scratch.addEventListener("change", (e) => {
-    const cb = e.target.closest("[data-spb]");
-    if (!cb) return;
-    const it = items.find((i) => i.id === cb.closest(".sp-card").dataset.spid);
-    const s = new Set(it.boards || []);
-    cb.checked ? s.add(cb.dataset.spb) : s.delete(cb.dataset.spb);
-    it.boards = [...s];
-    save(it);
     render2();
   });
   scratch.addEventListener("keydown", (e) => {
@@ -9329,24 +10075,6 @@ const SP = (() => {
   $("#sp-file").onchange = (e) => {
     addFiles([...e.target.files]);
     e.target.value = "";
-  };
-  $("#sp-lay-a").onclick = () => {
-    layout = "a";
-    try {
-      localStorage.setItem("sp-layout", "a");
-    } catch (x) {
-    }
-    editing2 = menuFor = armedDel = null;
-    render2();
-  };
-  $("#sp-lay-b").onclick = () => {
-    layout = "b";
-    try {
-      localStorage.setItem("sp-layout", "b");
-    } catch (x) {
-    }
-    editing2 = menuFor = armedDel = null;
-    render2();
   };
   document.addEventListener("paste", (e) => {
     if (scratch.hidden) return;
@@ -9458,7 +10186,7 @@ const SP = (() => {
     async addFeeling(feel, note) {
       if (!scol) return false;
       try {
-        await scol.add(clean({ kind: "feeling", feel, label: note || "", created: (new Date()).toISOString(), boards: [], col: newCol() }));
+        await scol.add(clean({ kind: "feeling", feel, label: note || "", created: (new Date()).toISOString() }));
         return true;
       } catch (e) {
         return false;
@@ -9467,15 +10195,9 @@ const SP = (() => {
     connect(db, a) {
       assets = a;
       scol = db.collection("scratch");
-      bcol = db.collection("scratchBoards");
       jcol = db.collection("journal");
       scol.onSnapshot((s) => {
         items = s.docs.map((d) => ({ id: d.id, ...d.data() }));
-        render2();
-      }, () => {
-      });
-      bcol.onSnapshot((s) => {
-        boards = s.docs.map((d) => ({ id: d.id, ...d.data() })).sort((x, y) => (x.created || "").localeCompare(y.created || "") || x.name.localeCompare(y.name));
         render2();
       }, () => {
       });
@@ -9487,6 +10209,1082 @@ const SP = (() => {
       render2();
     }
   };
+})();
+const Trk = (() => {
+  const dd = (a, b) => Math.round((Date.parse(b + "T12:00:00") - Date.parse(a + "T12:00:00")) / 864e5);
+  const dayParts = (iso2) => {
+    const [y, m, d] = iso2.split("-").map(Number), dt = new Date(y, m - 1, d);
+    return { d, mon: dt.toLocaleDateString(void 0, { month: "short" }), long: dt.toLocaleDateString(void 0, { weekday: "short", month: "short", day: "numeric", year: y === (new Date()).getFullYear() ? void 0 : "numeric" }) };
+  };
+  const href = (u) => {
+    u = String(u || "").trim();
+    if (!u) return "";
+    if (/^https?:\/\//i.test(u)) return u;
+    if (/^[\w-]+(\.[\w-]+)+/.test(u)) return "https://" + u;
+    return "";
+  };
+  const clean = (o) => {
+    const r = {};
+    Object.entries(o).forEach(([k, v]) => {
+      if (v !== void 0 && v !== null && v !== "" && k !== "id") r[k] = v;
+    });
+    return r;
+  };
+  const csvCell = (v) => {
+    v = v == null ? "" : String(v);
+    return /[",\n]/.test(v) ? '"' + v.replace(/"/g, '""') + '"' : v;
+  };
+  async function saveCSV(name, rows, msgEl) {
+    const dl = await host.use("downloads").catch(() => null);
+    const say = (t) => {
+      if (!msgEl) return;
+      msgEl.textContent = t;
+      clearTimeout(say.t);
+      say.t = setTimeout(() => msgEl.textContent = "", 4e3);
+    };
+    if (!dl) {
+      say("Downloads aren't available here.");
+      return;
+    }
+    try {
+      await dl.save({ filename: `${name}-${todayISO()}.csv`, data: "﻿" + rows.map((r) => r.map(csvCell).join(",")).join("\r\n") });
+      say("Saved.");
+    } catch (e) {
+      say(e && e.code === "declined" ? "" : "Couldn't save that file. Try again in a moment.");
+    }
+  }
+  const field = (k, label, v, o = {}) => {
+    const id = (o.pre || "f") + "-" + k, cls = o.wide ? ' class="wide"' : "";
+    if (o.type === "select") return `<label${cls}>${label}<select id="${id}" data-k="${k}">${o.opts.map(([val, t]) => `<option value="${val}"${String(v ?? "") === val ? " selected" : ""}>${t}</option>`).join("")}</select></label>`;
+    if (o.type === "area") return `<label${cls}>${label}<textarea id="${id}" data-k="${k}" rows="${o.rows || 2}"${o.ph ? ` placeholder="${esc(o.ph)}"` : ""}>${esc(v ?? "")}</textarea></label>`;
+    if (o.type === "tick") return `<label class="tick${o.wide ? " wide" : ""}"><input type="checkbox" id="${id}" data-k="${k}"${v ? " checked" : ""}>${label}</label>`;
+    return `<label${cls}>${label}<input id="${id}" data-k="${k}" type="${o.type || "text"}"${o.list ? ` list="${o.list}"` : ""}${o.step ? ` step="${o.step}" inputmode="decimal"` : ""} value="${esc(v ?? "")}"${o.ph ? ` placeholder="${esc(o.ph)}"` : ""}${o.max ? ` maxlength="${o.max}"` : ""}></label>`;
+  };
+  const read = (box) => {
+    const o = {};
+    box.querySelectorAll("[data-k]").forEach((el) => o[el.dataset.k] = el.type === "checkbox" ? el.checked : el.value.trim());
+    return o;
+  };
+  return { dd, dayParts, href, clean, saveCSV, field, read };
+})();
+const Pay = (() => {
+  let list = [], pcol = null, meDoc = null, me = {}, openId = null, armed = null, saveT = 0, pending = null;
+  const CUR = ["USD", "CAD", "EUR", "GBP", "AUD", "JPY"];
+  const UNITS = [["hr", "Hours"], ["min", "Minutes"], ["session", "Sessions"], ["day", "Days"], ["spot", "Spots"], ["flat", "Flat fee"]];
+  const ST = [["todo", "Not invoiced"], ["sent", "Invoiced"], ["paid", "Paid"]];
+  const ME = [["name", "Your name"], ["title", "Title line", "Like: Voice actor and singer"], ["street", "Street"], ["city", "City, state, zip"], ["phone", "Phone"], ["email", "Email"], ["web", "Website"]];
+  const num = (v) => {
+    const n = parseFloat(String(v ?? "").replace(/[^\d.\-]/g, ""));
+    return isFinite(n) ? n : 0;
+  };
+  const money = (n, cur) => {
+    try {
+      return new Intl.NumberFormat(void 0, { style: "currency", currency: cur || "USD", minimumFractionDigits: Number.isInteger(n) ? 0 : 2, maximumFractionDigits: 2 }).format(n);
+    } catch (e) {
+      return "$" + n.toFixed(2);
+    }
+  };
+  const lineTotal = (it) => {
+    if (it.total !== "" && it.total != null && isFinite(parseFloat(it.total))) return num(it.total);
+    if (it.unit === "flat") return num(it.rate);
+    if (it.unit === "min") return num(it.qty) / 60 * num(it.rate);
+    return num(it.qty) * num(it.rate);
+  };
+  const sums = (p) => {
+    const sub = (p.items || []).reduce((s, it) => s + lineTotal(it), 0), adj = (p.adj || []).reduce((s, a) => s + num(a.amt), 0), tax = (sub + adj) * num(p.tax) / 100;
+    return { sub, adj, tax, total: sub + adj + tax };
+  };
+  const save = (p) => pcol && pcol.doc(p.id).set(Trk.clean(p)).catch(err);
+  const AST = [["todo", "Waiting on payment"], ["paid", "Paid"]];
+  const PRESET_DEF = "SAG-AFTRA game scale + 10: 1248.50\nSAG-AFTRA game scale: 1135";
+  const presets = () => String(me.presets ?? PRESET_DEF).split("\n").map((l) => {
+    const i = l.lastIndexOf(":");
+    return i > 0 ? { label: l.slice(0, i).trim(), rate: num(l.slice(i + 1)) } : null;
+  }).filter((x) => x && x.label && x.rate);
+  const presetBtns = () => presets().map((x, i) => `<button type="button" class="sp-btn ghost pay-add-line pay-preset" data-pa="preset" data-i="${i}" title="Add a session at this rate">+ ${esc(x.label)} <span>${money(x.rate)}</span></button>`).join("");
+  const UNION = [["", "Not set"], ["union", "Union"], ["nonunion", "Non-union"]];
+  const grossAmt = (p) => isAg(p) ? ag(p).gross : sums(p).total;
+  const unionSplit = (p) => {
+    const its = p.items || [], legacy = p.union === "union" && !its.some((i) => i.un), tot = its.reduce((s, i) => s + lineTotal(i), 0), g = grossAmt(p);
+    const u = its.reduce((s, i) => s + (i.un || legacy ? lineTotal(i) : 0), 0);
+    if (!tot) return legacy ? { u: g, n: 0 } : { u: 0, n: g };
+    return { u: g * u / tot, n: g - g * u / tot };
+  };
+  const unionLabel = (p) => {
+    const s = unionSplit(p);
+    return s.u > 0.005 && s.n > 0.005 ? "Union + non-union" : s.u > 0.005 ? "Union" : "";
+  };
+  const isAg = (p) => p.via === "agent";
+  const filled = (v) => String(v ?? "").trim() !== "";
+  const lastDate = (p) => (p.items || []).map((i) => i.date).filter(Boolean).sort().pop() || "";
+  const baseDate = (p) => isAg(p) ? p.finished || lastDate(p) : p.status === "sent" || p.status === "paid" ? p.issued || "" : "";
+  const grossOf = (p) => filled(p.gross) ? num(p.gross) : sums(p).sub;
+  const trim = (n, d) => String(+n.toFixed(d));
+  function syncCuts(p, t) {
+    const g = grossOf(p), k = t && t.dataset ? t.dataset.k : "";
+    [["agPct", "agAmt", "agBy"], ["mgPct", "mgAmt", "mgBy"], ["whPct", "wh", "whBy"]].forEach(([pk, ak, by]) => {
+      if (k === pk) p[by] = "pct";
+      if (k === ak) p[by] = "amt";
+      const mode = p[by] || (filled(p[ak]) ? "amt" : "pct");
+      if (mode === "pct") p[ak] = filled(p[pk]) && g ? trim(g * num(p[pk]) / 100, 2) : filled(p[pk]) ? p[ak] || "" : "";
+      else p[pk] = filled(p[ak]) && g ? trim(num(p[ak]) / g * 100, 1) : filled(p[ak]) ? p[pk] || "" : "";
+      [pk, ak].forEach((x) => {
+        const el = document.getElementById("pe-" + x);
+        if (el && el !== t) el.value = p[x] ?? "";
+      });
+    });
+  }
+  const ag = (p) => {
+    const gross = grossOf(p), cut = (pct, amt, by) => by !== "pct" && filled(amt) ? num(amt) : gross * num(pct) / 100;
+    const agent = cut(p.agPct, p.agAmt, p.agBy), mgr = cut(p.mgPct, p.mgAmt, p.mgBy), tax = cut(p.whPct, p.wh, p.whBy), net = gross - agent - mgr - tax, got = filled(p.netGot) ? num(p.netGot) : null;
+    return { gross, agent, mgr, tax, net, got, recv: got ?? net };
+  };
+  const amtOf = (p) => isAg(p) ? ag(p).recv : sums(p).total;
+  const age = (p) => {
+    const b = baseDate(p);
+    return b ? Trk.dd(b, todayISO()) : null;
+  };
+  const daysToPay = (p) => p.status === "paid" && p.paidOn && baseDate(p) ? Math.max(0, Trk.dd(baseDate(p), p.paidOn)) : null;
+  const lateLevel = (p) => {
+    if (p.status === "paid") return 0;
+    const a = age(p);
+    return a == null ? 0 : a >= 90 ? 90 : a >= 60 ? 60 : a >= 45 ? 45 : 0;
+  };
+  const flagHTML = (p) => {
+    const l = lateLevel(p);
+    return l ? `<span class="pay-flag f${l}">${l === 45 ? "45+ days, check in" : l + "+ days overdue"}</span>` : "";
+  };
+  function nextNum() {
+    const nums = list.map((p) => parseInt(p.num, 10)).filter(isFinite);
+    const n = nums.length ? Math.max(...nums) + 1 : 1;
+    return String(n).padStart(4, "0");
+  }
+  const clients = () => {
+    const m = new Map();
+    list.slice().sort((a, b) => (a.created || "").localeCompare(b.created || "")).forEach((p) => {
+      if (p.cName) m.set(p.cName.toLowerCase(), p);
+    });
+    return [...m.values()];
+  };
+  function row(p) {
+    const s = sums(p), open = openId === p.id, sub = [], A = isAg(p), stl = A ? AST : ST;
+    let st = p.status || "todo";
+    if (A && st === "sent") st = "todo";
+    if (A) {
+      if (p.agency) sub.push(`<span>${esc(p.agency)}</span>`);
+      if (p.adv) sub.push(`<span>Advertised <i>${esc(p.adv)}</i></span>`);
+      const a = ag(p);
+      if (a.gross) sub.push(`<span>Gross <i>${money(a.gross, p.cur)}</i></span>`);
+      const dp = daysToPay(p);
+      if (dp != null) sub.push(`<span>Paid in ${dp} day${dp === 1 ? "" : "s"}</span>`);
+      else if (age(p) != null && !lateLevel(p)) sub.push(`<span>${age(p)} days since the work wrapped</span>`);
+    } else if (p.cName || p.cCo) sub.push(`<span>${esc([p.cName, p.cCo].filter(Boolean).join(", "))}</span>`);
+    if (p.num && !A) sub.push(`<span>#${esc(p.num)}</span>`);
+    if (st === "paid" && p.paidOn) sub.push(`<span>Paid ${esc(Trk.dayParts(p.paidOn).long)}</span>`);
+    else if (st === "sent" && p.dueBy) sub.push(`<span>Due ${esc(Trk.dayParts(p.dueBy).long)}</span>`);
+    else if (st === "sent" && p.issued) sub.push(`<span>Invoiced ${esc(Trk.dayParts(p.issued).long)}</span>`);
+    if (p.from) sub.push(`<span><i>From an audition</i></span>`);
+    const fl = flagHTML(p);
+    if (fl) sub.unshift(fl);
+    if (A) {
+      const a2 = ag(p);
+      if (a2.got != null && Math.abs(a2.got - a2.net) > 0.005) sub.unshift(`<span class="pay-flag f60">Deposit ${a2.got < a2.net ? "short" : "over"} by ${money(Math.abs(a2.got - a2.net), p.cur)}</span>`);
+    }
+    const acts = `<span class="trk-acts">${A ? "" : `<button type="button" class="trk-ib pay-pdf" data-pa="pdf" title="Save the invoice as a PDF" aria-label="Save the invoice as a PDF">PDF</button>`}<button type="button" class="trk-ib" data-pa="edit" aria-expanded="${open}" title="${open ? "Close" : "Open details"}" aria-label="${open ? "Close details" : "Open details"}">${open ? "Close" : "✎"}</button><button type="button" class="trk-ib ${armed === p.id ? "danger" : ""}" data-pa="del" title="${armed === p.id ? "Tap again to delete" : "Delete"}" aria-label="Delete">${armed === p.id ? "Delete?" : "✕"}</button></span>`;
+    return `<div class="trk-row pay-row st-${st}${A ? " via-agent" : ""}${open ? " open" : ""}" role="listitem" data-pid="${p.id}"><div class="trk-main"><div class="trk-t">${esc(p.project || "Untitled job")}${A ? '<span class="pay-via">Agent billed</span>' : ""}${unionLabel(p) ? `<span class="pay-via pay-un">${unionLabel(p)}</span>` : ""}</div>${sub.length ? `<div class="trk-sub">${sub.join("")}</div>` : ""}</div><span class="pay-amt"${A ? ' title="What you take home"' : ""}>${money(amtOf(p), p.cur)}</span><select class="pay-st" data-pst aria-label="Payment status">${stl.map(([v, t]) => `<option value="${v}"${v === st ? " selected" : ""}>${t}</option>`).join("")}</select>${acts}${open ? editor(p) : ""}</div>`;
+  }
+  function lineHTML(it, i) {
+    return `<div class="pay-line" data-li="${i}"><label>Work or role<input data-lk="role" value="${esc(it.role || "")}" placeholder="Like: Lead VO"></label><label>Date<input data-lk="date" type="date" value="${esc(it.date || "")}"></label><label>Qty<input data-lk="qty" inputmode="decimal" value="${esc(it.qty ?? "")}"></label><label>Unit<select data-lk="unit">${UNITS.map(([v, t]) => `<option value="${v}"${(it.unit || "hr") === v ? " selected" : ""}>${t}</option>`).join("")}</select></label><label>Rate<input data-lk="rate" inputmode="decimal" value="${esc(it.rate ?? "")}"></label><label>Total<input data-lk="total" inputmode="decimal" value="${esc(it.total ?? "")}" placeholder="${lineTotal({ ...it, total: "" }).toFixed(2)}"></label><label class="un-ck"><input type="checkbox" data-lk="un"${it.un ? " checked" : ""}>Union</label><button type="button" class="trk-ib" data-pa="rmline" aria-label="Remove this line" title="Remove">✕</button></div>`;
+  }
+  function adjHTML(a, i) {
+    return `<div class="pay-line adj" data-ai="${i}"><label>Adjustment<input data-ak2="label" value="${esc(a.label || "")}" placeholder="Like: Rush fee or Deposit paid"></label><label>Amount<input data-ak2="amt" inputmode="decimal" value="${esc(a.amt ?? "")}" placeholder="50 or -50"></label><button type="button" class="trk-ib" data-pa="rmadj" aria-label="Remove this adjustment" title="Remove">✕</button></div>`;
+  }
+  function agTotalsHTML(p) {
+    const a = ag(p), m = (v) => money(v, p.cur), pct = (v) => num(v) ? ` (${trim(num(v), 1)}%)` : "";
+    const dp = daysToPay(p), ag2 = age(p);
+    return `${p.adv ? `<div><span>Advertised</span><span>${esc(p.adv)}</span></div>` : ""}<div><span>Gross pay</span><span>${m(a.gross)}</span></div>${a.agent ? `<div><span>Agent${pct(p.agPct, p.agAmt)}</span><span>−${m(a.agent)}</span></div>` : ""}${a.mgr ? `<div><span>Manager${pct(p.mgPct, p.mgAmt)}</span><span>−${m(a.mgr)}</span></div>` : ""}${a.tax ? `<div><span>Taxes${pct(p.whPct)}</span><span>−${m(a.tax)}</span></div>` : ""}<div class="grand"><span>You take home</span><span>${m(a.net)}</span></div>${a.got != null ? Math.abs(a.got - a.net) > 0.005 ? `<div><span>Actually deposited</span><span>${m(a.got)}</span></div><div class="pay-off"><span>Doesn't add up</span><span>${a.got < a.net ? "Short" : "Over"} by ${m(Math.abs(a.got - a.net))}</span></div>` : `<div class="pay-ok"><span>Deposit matches</span><span>✓</span></div>` : ""}${dp != null ? `<div><span>Paid</span><span>${dp} day${dp === 1 ? "" : "s"} after the work wrapped</span></div>` : ag2 != null ? `<div><span>Waiting</span><span>${ag2} day${ag2 === 1 ? "" : "s"} since the work wrapped</span></div>` : ""}`;
+  }
+  function totalsHTML(p) {
+    if (isAg(p)) return agTotalsHTML(p);
+    const s = sums(p);
+    return `<div><span>Subtotal</span><span>${money(s.sub, p.cur)}</span></div>${s.adj ? `<div><span>Adjustments</span><span>${money(s.adj, p.cur)}</span></div>` : ""}${s.tax ? `<div><span>Tax</span><span>${money(s.tax, p.cur)}</span></div>` : ""}<div class="grand"><span>Total</span><span>${money(s.total, p.cur)}</span></div>`;
+  }
+  function editor(p) {
+    const f = (k, l, o = {}) => Trk.field(k, l, p[k], { pre: "pe", ...o });
+    const via = `<div class="pay-grp"><h4>Who bills</h4><div class="trk-ed pay-narrow">${Trk.field("via", "Billing", p.via || "me", { pre: "pe", type: "select", opts: [["me", "I invoice the client"], ["agent", "My agent or agency bills"]] })}</div></div>`;
+    if (isAg(p)) syncCuts(p);
+    if (isAg(p)) return `<div class="pay-ed" id="pay-ed">${via}
+      <div class="pay-grp"><h4>Job</h4><div class="trk-ed">${f("project", "Project")}${f("agency", "Agency", { list: "pay-agencies" })}${f("ref", "Episode or reference")}${f("adv", "Advertised pay", { ph: "Like: $300 per session" })}${f("cur", "Currency", { type: "select", opts: CUR.map((c) => [c, c]) })}${f("desc", "Notes", { type: "area", wide: true })}</div></div>
+      <div class="pay-grp"><h4>Recording sessions</h4><div class="pay-lines" id="pay-lines">${(p.items || []).map(lineHTML).join("")}</div><div class="pay-add-row"><button type="button" class="sp-btn ghost pay-add-line" data-pa="addline">+ Add a session</button>${presetBtns()}</div></div>
+      <div class="pay-grp"><h4>Pay and cuts</h4><p class="trk-note">Fill in the percent or the dollar amount for each cut, and the other one fills itself in. Add what actually hit your account and it checks the math.</p><div class="trk-ed">${f("gross", "Gross pay", { step: "any", ph: sums(p).sub ? sums(p).sub.toFixed(2) + " from sessions" : "Total booked" })}${f("agPct", "Agent %", { step: "any", ph: "Like: 10 or 20" })}${f("agAmt", "Agent took ($)", { step: "any" })}${f("mgPct", "Manager %", { step: "any", ph: "Like: 10" })}${f("mgAmt", "Manager took ($)", { step: "any" })}${f("whPct", "Tax %", { step: "any", ph: "If any" })}${f("wh", "Total tax deducted ($)", { step: "any", ph: "0" })}${f("netGot", "What actually hit your account", { step: "any", ph: "Optional" })}</div></div>
+      <div class="pay-grp"><h4>Terms</h4><div class="trk-ed">${f("payTerms", "Payment terms", { ph: "Like: Net 30" })}${f("usage", "Usage and length", { ph: "Like: Online, 1 year" })}${f("excl", "Exclusivity", { type: "select", opts: [["", "Not sure"], ["yes", "Yes"], ["no", "No"]] })}${f("exclLen", "Exclusivity length", { ph: "Like: 6 months" })}</div></div>
+      <div class="pay-grp"><h4>Status</h4><div class="trk-ed">${f("status", "Status", { type: "select", opts: AST })}${f("finished", "Work wrapped", { type: "date" })}${f("paidOn", "Paid on", { type: "date" })}</div><p class="trk-note">Leave Work wrapped blank to count from your last session date.</p></div>
+      <div class="pay-tot" id="pay-tot">${agTotalsHTML(p)}</div>
+      <div class="btns"><span class="trk-msg" id="pay-ed-msg" aria-live="polite"></span><button type="button" class="sp-btn primary" data-pa="done">Done</button></div>
+    </div>`;
+    return `<div class="pay-ed" id="pay-ed">${via}
+      <div class="pay-grp"><h4>Invoice</h4><div class="trk-ed">${f("project", "Project")}${f("ref", "Episode or reference")}${f("num", "Invoice number")}${f("cur", "Currency", { type: "select", opts: CUR.map((c) => [c, c]) })}${f("issued", "Issued", { type: "date" })}${f("dueBy", "Payment due", { type: "date" })}${f("adv", "Advertised pay", { ph: "Optional" })}${f("desc", "Description", { type: "area", wide: true })}</div></div>
+      <div class="pay-grp"><h4>Client</h4><div class="trk-ed">${f("cName", "Contact name", { list: "pay-clients" })}${f("cCo", "Company")}${f("cEmail", "Email", { type: "email" })}${f("cAddr", "Billing address", { type: "area", wide: true })}</div></div>
+      <div class="pay-grp"><h4>Work</h4><div class="pay-lines" id="pay-lines">${(p.items || []).map(lineHTML).join("")}</div><div class="pay-add-row"><button type="button" class="sp-btn ghost pay-add-line" data-pa="addline">+ Add a line</button>${presetBtns()}</div></div>
+      <div class="pay-grp"><h4>Adjustments and tax</h4><div class="pay-lines" id="pay-adjs">${(p.adj || []).map(adjHTML).join("")}</div><div class="trk-ed pay-narrow">${f("tax", "Tax %", { step: "any", ph: "0" })}</div><button type="button" class="sp-btn ghost pay-add-line" data-pa="addadj">+ Add an adjustment</button></div>
+      <div class="pay-grp"><h4>Status</h4><div class="trk-ed pay-narrow">${f("status", "Status", { type: "select", opts: ST })}${f("paidOn", "Paid on", { type: "date" })}</div></div>
+      <div class="pay-tot" id="pay-tot">${totalsHTML(p)}</div>
+      <div class="btns"><span class="trk-msg" id="pay-ed-msg" aria-live="polite"></span><span style="display:flex;gap:8px"><button type="button" class="sp-btn ghost" data-pa="pdf">Save PDF</button><button type="button" class="sp-btn primary" data-pa="done">Done</button></span></div>
+    </div>`;
+  }
+  function render(force) {
+    const box = $("#pay-list");
+    if (!box || $("#pay").hidden) return;
+    if (!force && document.activeElement && document.activeElement.closest && document.activeElement.closest("#pay-ed")) return;
+    const live = list.filter((p) => (p.status || "todo") !== "paid" || p.id === openId).sort((a, b) => (a.status === "sent" ? 0 : 1) - (b.status === "sent" ? 0 : 1) || (b.created || "").localeCompare(a.created || ""));
+    const paid = list.filter((p) => p.status === "paid" && p.id !== openId).sort((a, b) => (b.paidOn || b.created || "").localeCompare(a.paidOn || a.created || ""));
+    box.innerHTML = live.map(row).join("") || '<div class="trk-empty">Nothing waiting on payment. Tap New payment, or check Booked on an audition.</div>';
+    const arch = $("#pay-arch");
+    arch.querySelector(".n").textContent = paid.length ? `(${paid.length})` : "(0)";
+    arch.querySelector(".trk-list").innerHTML = paid.map(row).join("") || '<div class="trk-empty">Nothing paid yet.</div>';
+    renderSum();
+    let dl = $("#pay-clients");
+    if (!dl) {
+      dl = document.createElement("datalist");
+      dl.id = "pay-clients";
+      document.body.append(dl);
+    }
+    dl.innerHTML = clients().map((c) => `<option value="${esc(c.cName)}"></option>`).join("");
+    let da = $("#pay-agencies");
+    if (!da) {
+      da = document.createElement("datalist");
+      da.id = "pay-agencies";
+      document.body.append(da);
+    }
+    da.innerHTML = [...new Set(list.map((x) => x.agency).filter(Boolean))].map((x) => `<option value="${esc(x)}"></option>`).join("");
+  }
+  function renderSum() {
+    const owed = {}, got = {}, toAg = {}, toMg = {}, wh = {}, allAg = {}, allMg = {}, un = {}, non = {}, allUn = {}, allNon = {}, days = [], yr = String((new Date()).getFullYear());
+    const add2 = (o, c, v) => o[c] = (o[c] || 0) + v;
+    list.forEach((p) => {
+      const t = amtOf(p), c = p.cur || "USD", thisYr = (p.paidOn || p.created || "").startsWith(yr);
+      if (p.status === "paid") {
+        if (thisYr) add2(got, c, t);
+      } else add2(owed, c, t);
+      {
+        const s2 = unionSplit(p), inYr = (p.paidOn || baseDate(p) || p.created || "").startsWith(yr);
+        add2(allUn, c, s2.u);
+        add2(allNon, c, s2.n);
+        if (inYr) {
+          add2(un, c, s2.u);
+          add2(non, c, s2.n);
+        }
+      }
+      if (isAg(p)) {
+        const a = ag(p);
+        add2(allAg, c, a.agent);
+        add2(allMg, c, a.mgr);
+        if (thisYr) {
+          add2(toAg, c, a.agent);
+          add2(toMg, c, a.mgr);
+          add2(wh, c, a.tax);
+        }
+        const d = daysToPay(p);
+        if (d != null) days.push(d);
+      }
+    });
+    const any = (o) => Object.values(o).some((v) => v);
+    const fmt = (o) => Object.entries(o).filter(([, v]) => v).map(([c, v]) => money(v, c)).join(" + ") || money(0, "USD");
+    $("#pay-sum").innerHTML = `<span>Owed to you<b>${fmt(owed)}</b></span><span>Paid in ${yr}<b>${fmt(got)}</b></span>${any(allUn) ? `<span title="Gross pay from union jobs this year, paid or not. All time: ${fmt(allUn)}">Union in ${yr}<b>${fmt(un)}</b></span>` : ""}${any(allUn) && any(allNon) ? `<span title="Gross pay from non-union jobs this year, paid or not. All time: ${fmt(allNon)}">Non-union in ${yr}<b>${fmt(non)}</b></span>` : ""}${any(allAg) ? `<span title="All time: ${fmt(allAg)}">Agents in ${yr}<b>${fmt(toAg)}</b></span>` : ""}${any(allMg) ? `<span title="All time: ${fmt(allMg)}">Managers in ${yr}<b>${fmt(toMg)}</b></span>` : ""}${any(wh) ? `<span>Withheld in ${yr}<b>${fmt(wh)}</b></span>` : ""}${days.length ? `<span>Avg. days to get paid<b>${Math.round(days.reduce((x, y) => x + y, 0) / days.length)}</b></span>` : ""}`;
+  }
+  const cur = () => list.find((p) => p.id === openId);
+  function collect() {
+    const p = cur(), ed = $("#pay-ed");
+    if (!p || !ed) return null;
+    ed.querySelectorAll("[data-k]").forEach((el) => p[el.dataset.k] = el.value.trim());
+    p.items = [...ed.querySelectorAll("#pay-lines .pay-line")].map((ln) => {
+      const o = {};
+      ln.querySelectorAll("[data-lk]").forEach((el) => o[el.dataset.lk] = el.type === "checkbox" ? el.checked : el.value.trim());
+      return o;
+    });
+    p.adj = [...ed.querySelectorAll("#pay-adjs .pay-line")].map((ln) => {
+      const o = {};
+      ln.querySelectorAll("[data-ak2]").forEach((el) => o[el.dataset.ak2] = el.value.trim());
+      return o;
+    });
+    return p;
+  }
+  function queueSave(t) {
+    const p = collect();
+    if (!p) return;
+    if (isAg(p)) syncCuts(p, t);
+    $("#pay-tot").innerHTML = totalsHTML(p);
+    $("#pay-ed").querySelectorAll("#pay-lines .pay-line").forEach((ln, i) => {
+      const t = ln.querySelector('[data-lk="total"]');
+      if (t) t.placeholder = lineTotal({ ...p.items[i], total: "" }).toFixed(2);
+    });
+    const r = $(`.pay-row[data-pid="${p.id}"]`);
+    if (r) {
+      r.querySelector(".pay-amt").textContent = money(amtOf(p), p.cur);
+      r.querySelector(".trk-main .trk-t").textContent = p.project || "Untitled job";
+    }
+    renderSum();
+    pending = p;
+    clearTimeout(saveT);
+    saveT = setTimeout(flush, 500);
+  }
+  function closeEd() {
+    const p = collect();
+    clearTimeout(saveT);
+    pending = null;
+    if (p) save(p);
+    openId = null;
+  }
+  function flush() {
+    clearTimeout(saveT);
+    if (pending) save(pending);
+    pending = null;
+  }
+  function setStatus(p, st) {
+    p.status = st;
+    if (st === "sent" && !p.issued) p.issued = todayISO();
+    if (st === "paid" && !p.paidOn) p.paidOn = todayISO();
+    save(p);
+  }
+  function make(extra) {
+    const t = todayISO();
+    return { num: nextNum(), cur: "USD", issued: "", dueBy: "", items: [{ role: "", date: t, qty: 1, unit: "hr", rate: "" }], adj: [], status: "todo", created: (new Date()).toISOString(), ...extra };
+  }
+  async function add(extra) {
+    if (!pcol) return null;
+    const r = await pcol.add(Trk.clean(make(extra))).catch(err);
+    return r && r.id;
+  }
+  function fromAudition(a) {
+    const rt = String(a.rate || ""), unit = /hour|hr/i.test(rt) ? "hr" : /day/i.test(rt) ? "day" : /session/i.test(rt) ? "session" : /spot/i.test(rt) ? "spot" : "flat";
+    const cur2 = /£/.test(rt) ? "GBP" : /€/.test(rt) ? "EUR" : /CA\$|CAD/i.test(rt) ? "CAD" : /AU\$|AUD/i.test(rt) ? "AUD" : /¥|JPY/.test(rt) ? "JPY" : "USD";
+    const known = a.owner && clients().find((c) => c.cName.toLowerCase() === a.owner.toLowerCase());
+    return add({ from: a.id, project: a.project, adv: rt, cur: cur2, cName: a.owner || "", cEmail: a.email || (known && known.cEmail) || "", cCo: known && known.cCo || "", cAddr: known && known.cAddr || "", desc: a.roles ? "Role: " + a.roles : "", items: [{ role: a.roles || a.project || "", date: "", qty: 1, unit, rate: rt ? String(num(rt) || "") : "", un: a.union === "union" }] });
+  }
+  const IF = { "Bodoni Moda": "'Bodoni Moda', serif", "Fraunces": "Fraunces, serif", "Libre Caslon": "'Libre Caslon Text', serif", "Source Serif": "'Source Serif 4', serif", "Special Elite": "'Special Elite', monospace", "IBM Plex Mono": "'IBM Plex Mono', monospace", "Space Grotesk": "'Space Grotesk', sans-serif", "DM Sans": "'DM Sans', sans-serif", "Atkinson Hyperlegible": "'Atkinson Hyperlegible', sans-serif", "Lexend": "Lexend, sans-serif" };
+  const LOOKS = [["folio", "Folio (classic)"], ["folioDeco", "Folio, dressed up"], ["sidebar", "Sidebar (modern)"], ["sidebarDeco", "Sidebar, dressed up"], ["slip", "Slip (typewriter)"], ["slipDeco", "Slip, dressed up"]];
+  const LOOK_DEF = { folio: { c1: "#1f3a68", fh: "Libre Caslon", fb: "Source Serif" }, folioDeco: { c1: "#2c4a3e", fh: "Bodoni Moda", fb: "Source Serif" }, sidebar: { c1: "#14504c", fh: "Space Grotesk", fb: "DM Sans" }, sidebarDeco: { c1: "#3e2541", c2: "#efcfc8", fh: "Fraunces", fb: "DM Sans" }, slip: { c1: "#2b4c7e", fh: "IBM Plex Mono", fb: "IBM Plex Mono" }, slipDeco: { c1: "#9b3b2c", c2: "#cfd8cc", fh: "Special Elite", fb: "IBM Plex Mono" } };
+  const C2NAME = { sidebarDeco: "Arch and total color", slipDeco: "Background color" };
+  const look = () => {
+    const k = LOOK_DEF[me.look] ? me.look : "folio", d = LOOK_DEF[k];
+    return { k, c1: me.c1 || d.c1, c2: me.c2 || d.c2 || "", H: IF[me.fh] || IF[d.fh], B: IF[me.fb] || IF[d.fb] };
+  };
+  const nl = (s) => esc(s || "").replace(/\n/g, "<br>");
+  const w = (c, h) => c ? h : "";
+  const dt = (iso2, o) => {
+    if (!iso2) return "";
+    const [y, m, d] = iso2.split("-").map(Number);
+    return new Date(y, m - 1, d).toLocaleDateString(void 0, o);
+  };
+  const dLong = (s) => dt(s, { month: "long", day: "numeric", year: "numeric" });
+  const dShort = (s) => dt(s, { month: "short", day: "numeric" });
+  const dMid = (s) => dt(s, { month: "short", day: "numeric", year: "numeric" });
+  const plural = (q, one, many) => q + " " + (q === 1 ? one : many);
+  const durText = (it) => {
+    const q = num(it.qty);
+    return it.unit === "flat" ? "Flat" : it.unit === "min" ? q + " min" : it.unit === "session" ? plural(q, "session", "sessions") : it.unit === "day" ? plural(q, "day", "days") : it.unit === "spot" ? plural(q, "spot", "spots") : plural(q, "hr", "hrs");
+  };
+  const rateText = (it, cur2) => !String(it.rate ?? "").trim() ? "" : it.unit === "flat" ? money(num(it.rate), cur2) : money(num(it.rate), cur2) + "/" + ({ min: "hr", session: "session", day: "day", spot: "spot" }[it.unit] || "hr");
+  function payHref(label, h) {
+    h = h.trim();
+    const l = label.toLowerCase();
+    if (/^https?:\/\//i.test(h)) return h;
+    if (/^[^@\s]+@[^@\s]+\.[a-z]{2,}$/i.test(h)) return "mailto:" + h;
+    if (/venmo/.test(l) && /^@?[\w-]+$/.test(h)) return "https://venmo.com/u/" + h.replace(/^@/, "");
+    if (/cash ?app/.test(l) && /^[$@]?[\w-]+$/.test(h)) return "https://cash.app/$" + h.replace(/^[$@]/, "");
+    if (/^[\w-]+(\.[\w-]+)+(\/\S*)?$/.test(h)) return "https://" + h;
+    return "";
+  }
+  function invData(p) {
+    const cur2 = p.cur || "USD", s = sums(p), m = (n) => money(n, cur2);
+    const pays = String(me.pay || "").split("\n").map((x) => x.trim()).filter(Boolean).map((x) => {
+      const i = x.indexOf(":");
+      const label = i > 0 ? x.slice(0, i).trim() : "", handle = i > 0 ? x.slice(i + 1).trim() : x;
+      return { label, handle, url: payHref(label, handle) };
+    });
+    const link = (u, t) => u ? `<a href="${esc(u)}" style="color:inherit">${esc(t)}</a>` : esc(t);
+    const web = String(me.web || "").trim(), webUrl = web ? /^https?:/i.test(web) ? web : "https://" + web.replace(/^\/+/, "") : "";
+    const contact = [[me.street, me.city].filter(Boolean).map(esc).join(", "), esc(me.phone || ""), me.email ? link("mailto:" + me.email, me.email) : "", web ? link(webUrl, web.replace(/^https?:\/\//i, "")) : ""].filter(Boolean);
+    const tots = [["Subtotal", m(s.sub)]].concat((p.adj || []).filter((a) => String(a.amt ?? "").trim() !== "").map((a) => [a.label || "Adjustment", m(num(a.amt))]));
+    if (num(p.tax)) tots.push([`Tax (${num(p.tax)}%)`, m(s.tax)]);
+    const initials = String(me.name || "").split(/\s+/).filter(Boolean).map((x) => x[0]).slice(0, 2).join("").toUpperCase();
+    return {
+      cur: cur2, total: m(s.total), tots, pays, contact, initials, name: me.name || "", title: me.title || "", street: me.street || "", city: me.city || "", phone: me.phone || "", email: me.email || "", web, webUrl, terms: me.terms || "",
+      num: p.num || "", issued: p.issued || "", due: p.dueBy || "", project: p.project || "", ref: p.ref || "", desc: p.desc || "", cName: p.cName || "", cCo: p.cCo || "", cAddr: p.cAddr || "", cEmail: p.cEmail || "",
+      rows: (p.items || []).filter((it) => it.role || num(it.rate) || num(it.total)).map((it) => ({ role: it.role || "", date: it.date || "", time: durText(it), rate: rateText(it, cur2), amt: m(lineTotal(it)) })),
+      link
+    };
+  }
+  const TPL = {
+    folio(D, L) {
+      const A = L.c1, G = "grid-template-columns:minmax(0,3fr) minmax(0,1.2fr) minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.1fr);gap:12px";
+      return `<div style="width:816px;min-height:1056px;box-sizing:border-box;padding:60px 76px 52px;background:#fdfdfb;color:#1c2230;font-family:${L.B};font-size:13.5px;line-height:1.55;display:flex;flex-direction:column;gap:26px">
+<div style="display:flex;flex-direction:column;align-items:center;gap:6px;text-align:center"><div style="font-family:${L.H};font-size:28px;letter-spacing:.22em;text-transform:uppercase;color:${A}">${esc(D.name)}</div>${w(D.title, `<div style="font-style:italic;color:#4a5162">${esc(D.title)}</div>`)}<div style="font-size:12px;color:#4a5162">${D.contact.join(" · ")}</div></div>
+<div><div style="height:1px;background:${A}"></div><div style="height:1px;background:${A};margin-top:3px"></div></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:24px"><div style="display:flex;flex-direction:column;gap:2px"><div style="font-family:${L.H};font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#4a5162">Billed to</div>${w(D.cName, `<div style="font-weight:600;margin-top:4px">${esc(D.cName)}</div>`)}${w(D.cCo, `<div>${esc(D.cCo)}</div>`)}${w(D.cAddr, `<div>${nl(D.cAddr)}</div>`)}${w(D.cEmail, `<div>${D.link("mailto:" + D.cEmail, D.cEmail)}</div>`)}</div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;gap:2px;text-align:right"><div style="font-family:${L.H};font-size:34px;font-style:italic;line-height:1;color:${A}">Invoice</div>${w(D.num, `<div style="margin-top:8px">No. ${esc(D.num)}</div>`)}${w(D.issued, `<div><span style="color:#4a5162">Issued</span> ${dLong(D.issued)}</div>`)}${w(D.due, `<div><span style="color:#4a5162">Due</span> ${dLong(D.due)}</div>`)}</div></div>
+${w(D.project || D.ref || D.desc, `<div style="display:flex;flex-direction:column;gap:2px"><div style="font-family:${L.H};font-size:17px">${esc([D.project, D.ref].filter(Boolean).join(", "))}</div>${w(D.desc, `<div style="font-style:italic;color:#4a5162">${nl(D.desc)}</div>`)}</div>`)}
+<div style="display:flex;flex-direction:column;border-top:1px solid #1c2230"><div style="display:grid;${G};padding:8px 0;border-bottom:1px solid #1c2230;font-family:${L.H};font-size:11.5px;letter-spacing:.12em;text-transform:uppercase;color:#4a5162"><span>Description</span><span>Date</span><span style="text-align:right">Time</span><span style="text-align:right">Rate</span><span style="text-align:right">Amount</span></div>
+${D.rows.map((r) => `<div style="display:grid;${G};padding:11px 0;border-bottom:1px dotted #9aa1ae"><span>${esc(r.role)}</span><span style="font-style:italic">${dShort(r.date)}</span><span style="text-align:right">${r.time}</span><span style="text-align:right">${esc(r.rate)}</span><span style="text-align:right">${r.amt}</span></div>`).join("")}</div>
+<div style="display:flex;justify-content:flex-end"><div style="width:300px;display:flex;flex-direction:column;gap:5px">${D.tots.map(([l, v]) => `<div style="display:flex;justify-content:space-between;gap:12px"><span>${esc(l)}</span><span>${v}</span></div>`).join("")}<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:6px;padding:10px 0;border-top:3px double ${A};border-bottom:3px double ${A}"><span style="font-family:${L.H};font-size:12px;letter-spacing:.16em;text-transform:uppercase">Amount due</span><span style="font-family:${L.H};font-size:24px;color:${A}">${D.total}</span></div></div></div>
+<div style="flex-grow:1"></div>
+<div style="display:flex;flex-direction:column;align-items:center;gap:8px;text-align:center">${w(D.pays.length, `<div style="font-family:${L.H};font-size:12px;letter-spacing:.16em;text-transform:uppercase;color:#4a5162">Ways to pay</div><div style="display:flex;flex-wrap:wrap;justify-content:center;gap:6px 26px">${D.pays.map((x) => `<span>${esc(x.label)} ${D.link(x.url, x.handle)}</span>`).join("")}</div>`)}${w(D.terms, `<div style="font-style:italic;color:#4a5162;max-width:480px">${nl(D.terms)}</div>`)}</div></div>`;
+    },
+    folioDeco(D, L) {
+      const A = L.c1, G = "grid-template-columns:minmax(0,3fr) minmax(0,1.1fr) minmax(0,1fr) minmax(0,1.2fr) minmax(0,1.1fr);gap:12px", lab = `font-size:10.5px;letter-spacing:.22em;text-transform:uppercase;color:${A}`;
+      const leaf = (flip) => `<svg width="70" height="12" viewBox="0 0 70 12"><path d="${flip ? "M70 6H18M14 6c-3-4-7-4-10 0c3 4 7 4 10 0z" : "M0 6h52M56 6c3-4 7-4 10 0c-3 4-7 4-10 0z"}" fill="none" stroke="${A}" stroke-width="1"/></svg>`;
+      return `<div style="width:816px;min-height:1056px;box-sizing:border-box;padding:28px;background:#f4efe9;font-family:${L.B};color:#23302b;display:flex;flex-direction:column"><div style="flex-grow:1;box-sizing:border-box;border:1px solid ${A};padding:6px;display:flex;flex-direction:column"><div style="flex-grow:1;box-sizing:border-box;border:1px solid ${A};background:#fbf8f4;padding:34px 48px 30px;display:flex;flex-direction:column;gap:20px;font-size:13px;line-height:1.55">
+<div style="display:flex;flex-direction:column;align-items:center;gap:10px;text-align:center">${w(D.initials, `<div style="width:78px;height:92px;box-sizing:border-box;border:1px solid ${A};border-radius:39px 39px 4px 4px;display:flex;align-items:center;justify-content:center;font-family:${L.H};font-style:italic;font-size:30px;color:${A};background:#f1ebe2">${esc(D.initials)}</div>`)}<div style="font-family:${L.H};font-size:30px;letter-spacing:.08em;line-height:1.1">${esc(D.name)}</div>${w(D.title, `<div style="display:flex;align-items:center;gap:12px;color:${A}">${leaf(0)}<span style="font-size:11px;letter-spacing:.24em;text-transform:uppercase">${esc(D.title)}</span>${leaf(1)}</div>`)}</div>
+<div style="display:grid;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);gap:20px;align-items:end;padding-top:4px"><div style="display:flex;flex-direction:column;gap:1px"><div style="${lab}">Billed to</div>${w(D.cName, `<div style="font-weight:600;margin-top:4px">${esc(D.cName)}</div>`)}${w(D.cCo, `<div>${esc(D.cCo)}</div>`)}${w(D.cAddr, `<div>${nl(D.cAddr)}</div>`)}${w(D.cEmail, `<div>${D.link("mailto:" + D.cEmail, D.cEmail)}</div>`)}</div><div style="font-family:${L.H};font-style:italic;font-size:46px;line-height:1;color:${A};padding:0 6px">Invoice</div><div style="display:flex;flex-direction:column;gap:1px;align-items:flex-end;text-align:right">${w(D.num, `<div style="${lab}">No. ${esc(D.num)}</div>`)}${w(D.issued, `<div style="margin-top:4px">Issued ${dLong(D.issued)}</div>`)}${w(D.due, `<div style="font-weight:600">Due ${dLong(D.due)}</div>`)}</div></div>
+<div style="display:flex;align-items:center;gap:14px;color:${A}"><div style="flex-grow:1;height:1px;background:${A}"></div><span style="font-size:9px">◆</span><div style="flex-grow:1;height:1px;background:${A}"></div></div>
+${w(D.project || D.ref || D.desc, `<div style="display:flex;flex-direction:column;align-items:center;text-align:center;gap:2px"><div style="font-family:${L.H};font-size:19px">${esc(D.project)}</div>${w(D.ref || D.desc, `<div style="font-style:italic;color:#4c5752">${[esc(D.ref), nl(D.desc)].filter(Boolean).join(" · ")}</div>`)}</div>`)}
+<div style="display:flex;flex-direction:column"><div style="display:grid;${G};padding:9px 14px;background:${A};color:#fbf8f4;font-size:10.5px;letter-spacing:.18em;text-transform:uppercase"><span>Description</span><span>Date</span><span style="text-align:right">Time</span><span style="text-align:right">Rate</span><span style="text-align:right">Amount</span></div>
+${D.rows.map((r, i) => `<div style="display:grid;${G};padding:11px 14px;border-bottom:1px solid #ddd3c6;${i % 2 ? "background:#f4efe7;" : ""}"><span>${esc(r.role)}</span><span style="font-style:italic">${dShort(r.date)}</span><span style="text-align:right">${r.time}</span><span style="text-align:right">${esc(r.rate)}</span><span style="text-align:right">${r.amt}</span></div>`).join("")}</div>
+<div style="display:flex;justify-content:flex-end"><div style="width:300px;display:flex;flex-direction:column;gap:4px;padding-right:14px">${D.tots.map(([l, v]) => `<div style="display:flex;justify-content:space-between;gap:12px"><span>${esc(l)}</span><span>${v}</span></div>`).join("")}<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding:10px 16px;margin-right:-14px;border-radius:999px;background:${A};color:#fbf8f4"><span style="font-size:10.5px;letter-spacing:.2em;text-transform:uppercase">Amount due</span><span style="font-family:${L.H};font-size:24px">${D.total}</span></div></div></div>
+<div style="flex-grow:1"></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px;padding-top:16px;border-top:1px solid #ddd3c6"><div style="display:flex;flex-direction:column;gap:3px">${w(D.pays.length, `<div style="${lab}">Ways to pay</div>${D.pays.map((x) => `<div>${esc(x.label)}${x.label ? " · " : ""}${D.link(x.url, x.handle)}</div>`).join("")}`)}</div><div style="display:flex;flex-direction:column;gap:3px">${w(D.terms, `<div style="${lab}">Terms</div><div style="font-style:italic">${nl(D.terms)}</div>`)}</div></div>
+<div style="display:flex;justify-content:center;flex-wrap:wrap;gap:4px 16px;font-size:11px;color:#4c5752">${D.contact.map((c) => `<span>${c}</span>`).join("")}</div>
+</div></div></div>`;
+    },
+    sidebar(D, L) {
+      const A = L.c1, G = "grid-template-columns:minmax(0,2.6fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr);gap:10px", sl = "font-size:11px;letter-spacing:.12em;text-transform:uppercase;opacity:.75", ml = "font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:#565d66";
+      return `<div style="width:816px;min-height:1056px;box-sizing:border-box;background:#fff;color:#15191d;font-family:${L.B};font-size:13px;line-height:1.5;display:flex">
+<div style="width:248px;flex:none;box-sizing:border-box;padding:56px 32px 48px;background:${A};color:#f4f7f6;display:flex;flex-direction:column;gap:28px"><div style="display:flex;flex-direction:column;gap:4px"><div style="font-family:${L.H};font-size:24px;font-weight:700;line-height:1.15">${esc(D.name)}</div>${w(D.title, `<div style="opacity:.85">${esc(D.title)}</div>`)}</div>
+<div style="display:flex;flex-direction:column;gap:2px;opacity:.92">${w(D.street, `<div>${esc(D.street)}</div>`)}${w(D.city, `<div>${esc(D.city)}</div>`)}${w(D.phone, `<div>${esc(D.phone)}</div>`)}${w(D.email, `<div>${D.link("mailto:" + D.email, D.email)}</div>`)}${w(D.web, `<div>${D.link(D.webUrl, D.web.replace(/^https?:\/\//i, ""))}</div>`)}</div>
+<div style="height:1px;background:rgba(255,255,255,.25)"></div>
+<div style="display:flex;flex-direction:column;gap:10px">${w(D.num, `<div style="display:flex;flex-direction:column"><span style="${sl}">Invoice</span><span style="font-family:${L.H};font-size:18px;font-weight:500">#${esc(D.num)}</span></div>`)}${w(D.issued, `<div style="display:flex;flex-direction:column"><span style="${sl}">Issued</span><span>${dMid(D.issued)}</span></div>`)}${w(D.due, `<div style="display:flex;flex-direction:column"><span style="${sl}">Due</span><span>${dMid(D.due)}</span></div>`)}</div>
+<div style="flex-grow:1"></div>
+${w(D.pays.length, `<div style="display:flex;flex-direction:column;gap:6px"><div style="${sl}">Pay with</div>${D.pays.map((x) => `<div style="padding:8px 12px;border:1px solid rgba(255,255,255,.35);border-radius:8px">${esc(x.label)}${x.label ? " · " : ""}${D.link(x.url, x.handle)}</div>`).join("")}</div>`)}</div>
+<div style="flex-grow:1;min-width:0;box-sizing:border-box;padding:56px 52px 48px;display:flex;flex-direction:column;gap:28px"><div style="font-family:${L.H};font-size:44px;font-weight:700;letter-spacing:-.03em;line-height:1;color:${A}">Invoice</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px"><div style="display:flex;flex-direction:column;gap:2px"><div style="${ml}">Bill to</div>${w(D.cName, `<div style="font-weight:600">${esc(D.cName)}</div>`)}${w(D.cCo, `<div>${esc(D.cCo)}</div>`)}${w(D.cAddr, `<div>${nl(D.cAddr)}</div>`)}${w(D.cEmail, `<div style="color:${A}">${D.link("mailto:" + D.cEmail, D.cEmail)}</div>`)}</div><div style="display:flex;flex-direction:column;gap:2px">${w(D.project || D.ref || D.desc, `<div style="${ml}">Project</div>${w(D.project, `<div style="font-weight:600">${esc(D.project)}</div>`)}${w(D.ref, `<div>${esc(D.ref)}</div>`)}${w(D.desc, `<div style="color:#3a4047">${nl(D.desc)}</div>`)}`)}</div></div>
+<div style="display:flex;flex-direction:column"><div style="display:grid;${G};padding:10px 12px;border-radius:8px;background:#f0f3f3;font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:#3a4047"><span>Work</span><span style="text-align:right">Time</span><span style="text-align:right">Rate</span><span style="text-align:right">Amount</span></div>
+${D.rows.map((r) => `<div style="display:grid;${G};padding:12px;border-bottom:1px solid #e6e9ea"><span><span style="font-weight:600">${esc(r.role)}</span>${w(r.date, `<br><span style="color:#565d66">${dShort(r.date)}</span>`)}</span><span style="text-align:right">${r.time}</span><span style="text-align:right">${esc(r.rate)}</span><span style="text-align:right">${r.amt}</span></div>`).join("")}</div>
+<div style="display:flex;justify-content:flex-end"><div style="width:270px;display:flex;flex-direction:column;gap:5px">${D.tots.map(([l, v]) => `<div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#3a4047">${esc(l)}</span><span>${v}</span></div>`).join("")}<div style="display:flex;justify-content:space-between;align-items:center;margin-top:8px;padding:12px 14px;border-radius:10px;background:${A};color:#fff"><span style="font-size:11px;letter-spacing:.12em;text-transform:uppercase">Total due</span><span style="font-family:${L.H};font-size:24px;font-weight:700">${D.total}</span></div></div></div>
+<div style="flex-grow:1"></div>${w(D.terms, `<div style="color:#3a4047;border-top:1px solid #e6e9ea;padding-top:14px">${nl(D.terms)}</div>`)}</div></div>`;
+    },
+    sidebarDeco(D, L) {
+      const A = L.c1, B2 = L.c2 || "#efcfc8", soft = mix(B2, "#ffffff", 0.6), G = "grid-template-columns:minmax(0,2.6fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr);gap:10px", sl = "font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;opacity:.75", ml = `font-size:10.5px;letter-spacing:.16em;text-transform:uppercase;color:${A}`;
+      const star = (s, sw) => `<svg width="${s}" height="${s}" viewBox="0 0 34 34" style="flex:none"><path d="M17 3c2 7 7 12 14 14c-7 2-12 7-14 14c-2-7-7-12-14-14c7-2 12-7 14-14z" fill="none" stroke="${A}" stroke-width="${sw}"/></svg>`;
+      return `<div style="width:816px;min-height:1056px;box-sizing:border-box;background:#fdfaf8;color:#241a26;font-family:${L.B};font-size:13px;line-height:1.5;display:flex">
+<div style="width:256px;flex:none;box-sizing:border-box;padding:34px 26px 36px;background-color:${A};background-image:repeating-linear-gradient(135deg,rgba(255,255,255,.06) 0 1px,transparent 1px 12px);color:#f7eef0;display:flex;flex-direction:column;gap:24px">
+<div style="height:210px;box-sizing:border-box;border-radius:102px 102px 10px 10px;background:${B2};color:${A};display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;text-align:center;padding:20px 14px 14px">${w(D.initials, `<div style="font-family:${L.H};font-style:italic;font-size:46px;line-height:1">${esc(D.initials)}</div><div style="width:40px;height:1px;background:${A};margin:8px 0"></div>`)}<div style="font-family:${L.H};font-size:19px;line-height:1.15">${esc(D.name)}</div>${w(D.title, `<div style="font-size:11px;letter-spacing:.14em;text-transform:uppercase">${esc(D.title)}</div>`)}</div>
+<div style="display:flex;flex-direction:column;gap:2px;opacity:.92">${w(D.street, `<div>${esc(D.street)}</div>`)}${w(D.city, `<div>${esc(D.city)}</div>`)}${w(D.phone, `<div>${esc(D.phone)}</div>`)}${w(D.email, `<div>${D.link("mailto:" + D.email, D.email)}</div>`)}${w(D.web, `<div>${D.link(D.webUrl, D.web.replace(/^https?:\/\//i, ""))}</div>`)}</div>
+<div style="display:flex;flex-direction:column;gap:10px;padding:14px 0;border-top:1px solid rgba(255,255,255,.22);border-bottom:1px solid rgba(255,255,255,.22)">${w(D.num, `<div style="display:flex;justify-content:space-between;align-items:baseline"><span style="${sl}">Invoice</span><span style="font-family:${L.H};font-size:17px">No. ${esc(D.num)}</span></div>`)}${w(D.issued, `<div style="display:flex;justify-content:space-between"><span style="${sl}">Issued</span><span>${dMid(D.issued)}</span></div>`)}${w(D.due, `<div style="display:flex;justify-content:space-between"><span style="${sl}">Due</span><span>${dMid(D.due)}</span></div>`)}</div>
+<div style="flex-grow:1"></div>
+${w(D.pays.length, `<div style="display:flex;flex-direction:column;gap:7px"><div style="font-family:${L.H};font-style:italic;font-size:17px">Ways to pay</div>${D.pays.map((x) => `<div style="display:flex;justify-content:space-between;gap:8px;padding:8px 14px;border-radius:999px;background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.28)"><span>${esc(x.label)}</span><span>${D.link(x.url, x.handle)}</span></div>`).join("")}</div>`)}</div>
+<div style="flex-grow:1;min-width:0;box-sizing:border-box;padding:44px 48px 40px;display:flex;flex-direction:column;gap:26px"><div style="display:flex;align-items:center;gap:16px"><div style="font-family:${L.H};font-style:italic;font-size:58px;line-height:1;color:${A}">Invoice</div><div style="flex-grow:1;height:1px;background:${A};opacity:.35"></div>${star(34, 1.2)}</div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:16px"><div style="display:flex;flex-direction:column;gap:2px;padding:16px 18px;border-radius:14px;background:${soft}"><div style="${ml}">Bill to</div>${w(D.cName, `<div style="font-weight:600;margin-top:2px">${esc(D.cName)}</div>`)}${w(D.cCo, `<div>${esc(D.cCo)}</div>`)}${w(D.cAddr, `<div>${nl(D.cAddr)}</div>`)}${w(D.cEmail, `<div>${D.link("mailto:" + D.cEmail, D.cEmail)}</div>`)}</div><div style="display:flex;flex-direction:column;gap:2px;padding:16px 18px;border-radius:14px;background:${soft}"><div style="${ml}">Project</div>${w(D.project, `<div style="font-weight:600;margin-top:2px">${esc(D.project)}</div>`)}${w(D.ref, `<div>${esc(D.ref)}</div>`)}${w(D.desc, `<div style="color:#4f4352">${nl(D.desc)}</div>`)}</div></div>
+<div style="display:flex;flex-direction:column"><div style="display:grid;${G};padding:0 4px 8px;border-bottom:1.5px solid ${A};font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:${A}"><span>Work</span><span style="text-align:right">Time</span><span style="text-align:right">Rate</span><span style="text-align:right">Amount</span></div>
+${D.rows.map((r) => `<div style="display:grid;${G};padding:12px 4px;border-bottom:1px solid #ecdfe2"><span><span style="font-weight:600">${esc(r.role)}</span>${w(r.date, `<br><span style="color:#6a5c6d">${dShort(r.date)}</span>`)}</span><span style="text-align:right">${r.time}</span><span style="text-align:right">${esc(r.rate)}</span><span style="text-align:right">${r.amt}</span></div>`).join("")}</div>
+<div style="display:flex;justify-content:flex-end"><div style="width:280px;display:flex;flex-direction:column;gap:5px">${D.tots.map(([l, v]) => `<div style="display:flex;justify-content:space-between;gap:12px"><span style="color:#4f4352">${esc(l)}</span><span>${v}</span></div>`).join("")}<div style="display:flex;justify-content:space-between;align-items:center;margin-top:10px;padding:14px 20px;border-radius:999px;background:${B2};color:${A}"><span style="font-size:10.5px;letter-spacing:.16em;text-transform:uppercase">Total due</span><span style="font-family:${L.H};font-size:26px">${D.total}</span></div></div></div>
+<div style="flex-grow:1"></div>${w(D.terms, `<div style="display:flex;align-items:center;gap:12px;color:#4f4352">${star(16, 2)}<span style="font-family:${L.H};font-style:italic;font-size:15px">${nl(D.terms)}</span></div>`)}</div></div>`;
+    },
+    slip(D, L) {
+      const A = L.c1, G = "grid-template-columns:minmax(0,2.8fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr);gap:10px", dash = "border-top:1.5px dashed #202326";
+      return `<div style="width:816px;min-height:1056px;box-sizing:border-box;padding:56px 64px 48px;background:#f6f6f3;color:#202326;font-family:${L.B};font-size:12.5px;line-height:1.6;display:flex;flex-direction:column;gap:22px">
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px"><div style="display:flex;flex-direction:column"><div style="font-family:${L.H};font-size:20px;font-weight:600;letter-spacing:.04em">${esc(D.name.toUpperCase())}</div>${w(D.title, `<div>${esc(D.title)}</div>`)}${w(D.street || D.city, `<div>${esc([D.street, D.city].filter(Boolean).join(", "))}</div>`)}<div>${[esc(D.phone), D.email ? D.link("mailto:" + D.email, D.email) : ""].filter(Boolean).join(" · ")}</div></div>
+<div style="display:flex;flex-direction:column;align-items:flex-end;text-align:right"><div style="font-family:${L.H};font-size:20px;font-weight:600;letter-spacing:.3em;color:${A}">INVOICE</div>${w(D.num, `<div>No. ${esc(D.num)}</div>`)}${w(D.issued, `<div>Issued ${esc(D.issued)}</div>`)}${w(D.due, `<div>Due ${esc(D.due)}</div>`)}</div></div>
+<div style="${dash}"></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px"><div style="display:flex;flex-direction:column"><div style="color:${A}">BILL TO</div>${w(D.cName, `<div>${esc(D.cName)}</div>`)}${w(D.cCo, `<div>${esc(D.cCo)}</div>`)}${w(D.cAddr, `<div>${nl(D.cAddr)}</div>`)}${w(D.cEmail, `<div>${D.link("mailto:" + D.cEmail, D.cEmail)}</div>`)}</div><div style="display:flex;flex-direction:column">${w(D.project || D.ref || D.desc, `<div style="color:${A}">PROJECT</div>${w(D.project, `<div>${esc(D.project)}</div>`)}${w(D.ref, `<div>Ref: ${esc(D.ref)}</div>`)}${w(D.desc, `<div>${nl(D.desc)}</div>`)}`)}</div></div>
+<div style="${dash}"></div>
+<div style="display:flex;flex-direction:column;gap:2px"><div style="display:grid;${G};color:${A};padding-bottom:6px"><span>ITEM</span><span>DATE</span><span style="text-align:right">QTY</span><span style="text-align:right">RATE</span><span style="text-align:right">AMOUNT</span></div>
+${D.rows.map((r) => `<div style="display:grid;${G};padding:6px 0"><span>${esc(r.role)}</span><span>${esc(r.date.slice(5))}</span><span style="text-align:right">${r.time}</span><span style="text-align:right">${esc(r.rate)}</span><span style="text-align:right">${r.amt}</span></div>`).join("")}</div>
+<div style="display:flex;justify-content:flex-end"><div style="width:280px;display:flex;flex-direction:column"><div style="${dash};margin-bottom:6px"></div>${D.tots.map(([l, v]) => `<div style="display:flex;justify-content:space-between;gap:12px"><span>${esc(l.toUpperCase())}</span><span>${v}</span></div>`).join("")}<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding:8px 10px;border:1.5px solid ${A};color:${A}"><span>TOTAL ${esc(D.cur)}</span><span style="font-family:${L.H};font-size:20px;font-weight:600">${D.total}</span></div></div></div>
+<div style="flex-grow:1"></div><div style="${dash}"></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px"><div style="display:flex;flex-direction:column">${w(D.pays.length, `<div style="color:${A}">PAY WITH</div>${D.pays.map((x) => `<div style="display:flex;gap:6px"><span>${esc(x.label)}</span><span style="flex-grow:1;border-bottom:1px dotted #9a9a94;margin-bottom:6px"></span><span>${D.link(x.url, x.handle)}</span></div>`).join("")}`)}</div><div style="display:flex;flex-direction:column">${w(D.terms, `<div style="color:${A}">TERMS</div><div>${nl(D.terms)}</div>`)}${w(D.web, `<div>${D.link(D.webUrl, D.web.replace(/^https?:\/\//i, ""))}</div>`)}</div></div></div>`;
+    },
+    slipDeco(D, L) {
+      const A = L.c1, GR = L.c2 || "#cfd8cc", G = "grid-template-columns:minmax(0,2.8fr) minmax(0,1fr) minmax(0,1fr) minmax(0,1.1fr) minmax(0,1.1fr);gap:10px", lab = `color:${A};letter-spacing:.12em`;
+      const dueParts = D.due ? dt(D.due, { month: "short", day: "numeric" }).toUpperCase() : "";
+      return `<div style="width:816px;min-height:1056px;box-sizing:border-box;padding:40px 54px;background:${GR};font-family:${L.B};color:#23262a;display:flex;flex-direction:column"><div style="position:relative;flex-grow:1;box-sizing:border-box;background:#fffdf8;border-radius:6px;padding:40px 46px 34px;display:flex;flex-direction:column;gap:18px;font-size:12.5px;line-height:1.6">
+<div style="position:absolute;left:-13px;top:318px;width:26px;height:26px;border-radius:50%;background:${GR}"></div><div style="position:absolute;right:-13px;top:318px;width:26px;height:26px;border-radius:50%;background:${GR}"></div>
+<div style="display:flex;justify-content:space-between;align-items:flex-start;gap:20px"><div style="display:flex;flex-direction:column"><div style="font-family:${L.H};font-size:26px;letter-spacing:.04em;line-height:1.2">${esc(D.name)}</div>${w(D.title, `<div>${esc(D.title)}</div>`)}${w(D.street || D.city, `<div>${esc([D.street, D.city].filter(Boolean).join(", "))}</div>`)}<div>${[esc(D.phone), D.email ? D.link("mailto:" + D.email, D.email) : ""].filter(Boolean).join(" · ")}</div></div>
+<div style="display:flex;flex-direction:column;align-items:center;padding:10px 16px;border:2px solid ${A};border-radius:4px;color:${A};transform:rotate(-4deg);margin-top:6px"><div style="font-family:${L.H};font-size:22px;letter-spacing:.22em;line-height:1.1">INVOICE</div>${w(D.num, `<div style="font-size:11px;letter-spacing:.16em">NO. ${esc(D.num)}</div>`)}</div></div>
+<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:18px"><div style="display:flex;flex-direction:column"><div style="${lab}">BILL TO</div>${w(D.cName, `<div>${esc(D.cName)}</div>`)}${w(D.cCo, `<div>${esc(D.cCo)}</div>`)}${w(D.cAddr, `<div>${nl(D.cAddr)}</div>`)}${w(D.cEmail, `<div>${D.link("mailto:" + D.cEmail, D.cEmail)}</div>`)}</div><div style="display:flex;flex-direction:column">${w(D.project || D.ref || D.desc, `<div style="${lab}">PROJECT</div>${w(D.project, `<div>${esc(D.project)}</div>`)}${w(D.ref, `<div>Ref: ${esc(D.ref)}</div>`)}${w(D.desc, `<div>${nl(D.desc)}</div>`)}`)}</div><div style="display:flex;flex-direction:column">${w(D.issued, `<div style="${lab}">ISSUED</div><div>${esc(D.issued)}</div>`)}${w(D.due, `<div style="${lab};margin-top:4px">DUE</div><div>${esc(D.due)}</div>`)}</div></div>
+<div style="border-top:2px dashed ${GR};margin:6px -46px 0"></div>
+<div style="display:flex;flex-direction:column"><div style="display:grid;${G};${lab};padding-bottom:6px"><span>ITEM</span><span>DATE</span><span style="text-align:right">QTY</span><span style="text-align:right">RATE</span><span style="text-align:right">AMOUNT</span></div>
+${D.rows.map((r) => `<div style="display:grid;${G};padding:7px 0;border-bottom:1px dotted #b9b4a8"><span>${esc(r.role)}</span><span>${esc(r.date.slice(5))}</span><span style="text-align:right">${r.time}</span><span style="text-align:right">${esc(r.rate)}</span><span style="text-align:right">${r.amt}</span></div>`).join("")}</div>
+<div style="display:flex;justify-content:space-between;align-items:flex-end;gap:20px"><div>${w(dueParts, `<div style="display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;border:2px solid ${A};border-radius:50%;color:${A};transform:rotate(6deg);width:124px;height:84px;box-sizing:border-box;margin-left:8px"><div style="font-family:${L.H};font-size:13px;letter-spacing:.14em">DUE BY</div><div style="font-family:${L.H};font-size:17px">${esc(dueParts)}</div></div>`)}</div>
+<div style="width:270px;display:flex;flex-direction:column">${D.tots.map(([l, v]) => `<div style="display:flex;justify-content:space-between;gap:12px"><span>${esc(l.toUpperCase())}</span><span>${v}</span></div>`).join("")}<div style="display:flex;justify-content:space-between;align-items:baseline;margin-top:8px;padding:9px 12px;background:${A};color:#fffdf8;border-radius:3px"><span>TOTAL ${esc(D.cur)}</span><span style="font-family:${L.H};font-size:21px">${D.total}</span></div></div></div>
+<div style="flex-grow:1"></div><div style="border-top:2px dashed ${GR};margin:0 -46px"></div>
+<div style="display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:22px"><div style="display:flex;flex-direction:column">${w(D.pays.length, `<div style="${lab}">PAY WITH</div>${D.pays.map((x) => `<div style="display:flex;gap:6px"><span>${esc(x.label)}</span><span style="flex-grow:1;border-bottom:1px dotted #b9b4a8;margin-bottom:6px"></span><span>${D.link(x.url, x.handle)}</span></div>`).join("")}`)}</div><div style="display:flex;flex-direction:column">${w(D.terms, `<div style="${lab}">TERMS</div><div>${nl(D.terms)}</div>`)}${w(D.web, `<div>${D.link(D.webUrl, D.web.replace(/^https?:\/\//i, ""))}</div>`)}</div></div></div></div>`;
+    }
+  };
+  function mix(a, b, t) {
+    const h = (x) => {
+      x = String(x).replace("#", "");
+      if (x.length === 3) x = x.split("").map((c) => c + c).join("");
+      return [0, 2, 4].map((i) => parseInt(x.slice(i, i + 2), 16) || 0);
+    };
+    const A = h(a), B = h(b);
+    return "#" + A.map((v, i) => Math.round(v + (B[i] - v) * t).toString(16).padStart(2, "0")).join("");
+  }
+  const loadScript = (src) => new Promise((res, rej) => {
+    if (document.querySelector(`script[src="${src}"]`)) return res();
+    const s = document.createElement("script");
+    s.src = src;
+    s.onload = res;
+    s.onerror = rej;
+    document.head.append(s);
+  });
+  async function libs() {
+    if (!document.getElementById("inv-fonts")) {
+      const l = document.createElement("link");
+      l.id = "inv-fonts";
+      l.rel = "stylesheet";
+      l.href = "https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400;0,6..96,600;1,6..96,400&family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;1,9..144,400&family=Special+Elite&family=Space+Grotesk:wght@400;500;700&family=DM+Sans:opsz,wght@9..40,400;9..40,600&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&family=Source+Serif+4:ital,opsz,wght@0,8..60,400;0,8..60,600;1,8..60,400&family=Atkinson+Hyperlegible:wght@400;700&family=Lexend:wght@300;400;600&family=IBM+Plex+Mono:wght@400;600&display=swap";
+      document.head.append(l);
+    }
+    if (!window.html2canvas) await loadScript("https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js");
+    if (!window.jspdf) await loadScript("https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js");
+  }
+  const fileSafe = (s) => String(s || "").replace(/[^\w\- ]+/g, "").trim().replace(/\s+/g, "-").slice(0, 40);
+  async function makePDF(p) {
+    const say = (t) => {
+      const m = $("#pay-top-msg");
+      m.textContent = t;
+      clearTimeout(say.t);
+      if (t) say.t = setTimeout(() => m.textContent = "", 6e3);
+    };
+    const dl = await host.use("downloads").catch(() => null);
+    if (!dl) {
+      say("Saving files isn't available here.");
+      return;
+    }
+    say("Making the PDF…");
+    let box = null;
+    try {
+      await libs();
+      const L = look();
+      box = document.createElement("div");
+      box.style.cssText = "position:fixed;left:-12000px;top:0;width:816px;pointer-events:none";
+      box.innerHTML = TPL[L.k](invData(p), L);
+      document.body.append(box);
+      const fams = ["Bodoni Moda", "Fraunces", "Special Elite", "Space Grotesk", "DM Sans", "Libre Caslon Text", "Source Serif 4", "Atkinson Hyperlegible", "Lexend", "IBM Plex Mono"];
+      await Promise.race([Promise.all(fams.flatMap((f) => [document.fonts.load(`16px "${f}"`), document.fonts.load(`italic 16px "${f}"`), document.fonts.load(`600 16px "${f}"`)])).catch(() => {}), new Promise((r) => setTimeout(r, 4e3))]);
+      await document.fonts.ready;
+      await new Promise((r) => setTimeout(r, 150));
+      const node = box.firstElementChild, H = node.offsetHeight;
+      const canvas = await html2canvas(node, { scale: 2, backgroundColor: "#ffffff", useCORS: true, logging: false, windowWidth: 816 });
+      const { jsPDF } = window.jspdf, pdf = new jsPDF({ unit: "pt", format: "letter" }), k = 612 / 816, pages = Math.max(1, Math.ceil((H - 4) / 1056));
+      const img = canvas.toDataURL("image/jpeg", 0.95);
+      for (let i = 0; i < pages; i++) {
+        if (i) pdf.addPage();
+        pdf.addImage(img, "JPEG", 0, -i * 792, 612, H * k);
+      }
+      const nb = node.getBoundingClientRect();
+      node.querySelectorAll("a[href]").forEach((a) => {
+        const r = a.getBoundingClientRect(), y = (r.top - nb.top) * k, pg = Math.floor(y / 792);
+        if (pg >= pages) return;
+        pdf.setPage(pg + 1);
+        pdf.link((r.left - nb.left) * k, y - pg * 792, r.width * k, r.height * k, { url: a.href });
+      });
+      const name = ["Invoice", fileSafe(p.num), fileSafe(p.project)].filter(Boolean).join("-") + ".pdf";
+      await dl.save({ filename: name, data: pdf.output("blob") });
+      say(`Saved ${name}.`);
+    } catch (e) {
+      say(e && e.code === "declined" ? "" : "Couldn't make the PDF. Check your connection and try again.");
+    } finally {
+      if (box) box.remove();
+    }
+  }
+  function renderMe(force) {
+    const box = $("#pay-me-f");
+    if (!box || !force && box.contains(document.activeElement)) return;
+    const L = look(), d = LOOK_DEF[L.k], fonts = [["", "Style default"]].concat(Object.keys(IF).map((f) => [f, f]));
+    box.innerHTML = ME.map(([k, l, ph]) => Trk.field(k, l, me[k], { pre: "pm", ph })).join("") + Trk.field("pay", "Ways to pay you (one per line, like Venmo: @yourname). Venmo, Cash App, web addresses and emails become clickable links in the PDF.", me.pay, { pre: "pm", type: "area", wide: true, rows: 3 }) + Trk.field("presets", "Rate shortcuts (one per line, like SAG-AFTRA game scale: 1135). Each one becomes a button that adds a session at that rate.", me.presets ?? PRESET_DEF, { pre: "pm", type: "area", wide: true, rows: 2 }) + Trk.field("terms", "Terms", me.terms, { pre: "pm", type: "area", wide: true, ph: "Like: Payment due within 30 days." }) + `<div class="pay-look"><h4>Invoice look</h4><p class="trk-note">There's no preview yet (I couldn't crack that one). Tap PDF on any job to see your design. Change something here and save the PDF again to see the update.</p><div class="trk-fields">${Trk.field("look", "Style", L.k, { pre: "pm", type: "select", opts: LOOKS })}${Trk.field("c1", "Main color", L.c1, { pre: "pm", type: "color" })}${d.c2 ? Trk.field("c2", C2NAME[L.k], L.c2, { pre: "pm", type: "color" }) : ""}${Trk.field("fh", "Heading font", me.fh || "", { pre: "pm", type: "select", opts: fonts })}${Trk.field("fb", "Body font", me.fb || "", { pre: "pm", type: "select", opts: fonts })}</div><button type="button" class="trk-link" id="pm-reset">Reset colors and fonts to this style's defaults</button></div>`;
+  }
+  let meT = 0;
+  $("#pay-me-f").addEventListener("input", () => {
+    me = { ...me, ...Trk.read($("#pay-me-f")) };
+    clearTimeout(meT);
+    meT = setTimeout(() => meDoc && meDoc.set(Trk.clean(me)).catch(err), 600);
+  });
+  const saveMe = () => {
+    clearTimeout(meT);
+    meDoc && meDoc.set(Trk.clean(me)).catch(err);
+  };
+  $("#pay-me-f").addEventListener("change", (e) => {
+    if (e.target.dataset.k !== "look") return;
+    me = { ...me, look: e.target.value, c1: "", c2: "" };
+    saveMe();
+    renderMe(true);
+    $("#pm-look").focus();
+  });
+  $("#pay-me-f").addEventListener("click", (e) => {
+    if (e.target.id !== "pm-reset") return;
+    me = { ...me, c1: "", c2: "", fh: "", fb: "" };
+    saveMe();
+    renderMe(true);
+  });
+  const sec = $("#pay");
+  sec.addEventListener("input", (e) => {
+    if (e.target.closest("#pay-ed")) queueSave(e.target);
+  });
+  sec.addEventListener("change", (e) => {
+    if (e.target.matches("[data-pst]")) {
+      const p = list.find((x) => x.id === e.target.closest(".pay-row").dataset.pid);
+      if (!p) return;
+      if (p.id === openId) collect();
+      setStatus(p, e.target.value);
+      render(true);
+      return;
+    }
+    if (!e.target.closest("#pay-ed")) return;
+    if (e.target.dataset.k === "via") {
+      const p = collect();
+      if (isAg(p)) {
+        const prev = list.filter((x) => isAg(x) && x.id !== p.id).sort((a, b) => (b.created || "").localeCompare(a.created || ""))[0];
+        if (prev) ["agency", "agPct", "mgPct"].forEach((k) => {
+          if (!filled(p[k]) && filled(prev[k])) p[k] = prev[k];
+        });
+        if (p.status === "sent") p.status = "todo";
+      }
+      clearTimeout(saveT);
+      pending = null;
+      save(p);
+      render(true);
+      const el = $("#pe-via");
+      if (el) el.focus();
+      return;
+    }
+    if (e.target.dataset.k === "cName") {
+      const p = cur(), c = clients().find((x) => x.id !== p.id && x.cName.toLowerCase() === e.target.value.trim().toLowerCase());
+      if (c) ["cCo", "cEmail", "cAddr"].forEach((k) => {
+        const el = $("#pe-" + k);
+        if (el && !el.value.trim() && c[k]) el.value = c[k];
+      });
+    }
+    if (e.target.dataset.k === "status") {
+      const p = collect();
+      if (p.status === "sent" && !p.issued) $("#pe-issued").value = todayISO();
+      if (p.status === "paid" && !p.paidOn) $("#pe-paidOn").value = todayISO();
+    }
+    queueSave();
+  });
+  sec.addEventListener("click", async (e) => {
+    const b = e.target.closest("[data-pa]");
+    const r = e.target.closest(".pay-row");
+    if (!b) {
+      if (r && !r.classList.contains("open") && !e.target.closest("select,a,input,textarea,.pay-ed")) {
+        closeEd();
+        openId = r.dataset.pid;
+        armed = null;
+        render(true);
+      }
+      return;
+    }
+    const a = b.dataset.pa, p = r && list.find((x) => x.id === r.dataset.pid);
+    if (a !== "del") armed = null;
+    if (a === "edit") {
+      const was = openId;
+      closeEd();
+      if (was !== p.id) openId = p.id;
+    }
+    if (a === "del") {
+      if (armed === p.id) {
+        armed = null;
+        if (openId === p.id) {
+          clearTimeout(saveT);
+          pending = null;
+          openId = null;
+        }
+        list = list.filter((x) => x.id !== p.id);
+        pcol && pcol.doc(p.id).delete().catch(err);
+      } else armed = p.id;
+    }
+    if (a === "done") closeEd();
+    if (a === "pdf") {
+      if (isAg(p)) return;
+      if (openId === p.id) {
+        collect();
+        flush();
+      }
+      makePDF(p);
+      return;
+    }
+    if (a === "addline" || a === "addadj" || a === "rmline" || a === "rmadj" || a === "preset") {
+      const q = collect();
+      if (a === "preset") {
+        const x = presets()[+b.dataset.i];
+        if (x) {
+          const blank = q.items.length === 1 && !q.items[0].role && !num(q.items[0].rate) ? q.items.pop() : null;
+          q.items.push({ role: x.label, date: blank && blank.date || todayISO(), qty: 1, unit: "session", rate: String(x.rate), un: /sag|aftra|union/i.test(x.label) });
+        }
+      }
+      if (a === "addline") q.items.push({ role: "", date: todayISO(), qty: 1, unit: (q.items[q.items.length - 1] || {}).unit || "hr", rate: (q.items[q.items.length - 1] || {}).rate || "", un: !!(q.items[q.items.length - 1] || {}).un });
+      if (a === "addadj") q.adj.push({ label: "", amt: "" });
+      if (a === "rmline") q.items.splice(+b.closest(".pay-line").dataset.li, 1);
+      if (a === "rmadj") q.adj.splice(+b.closest(".pay-line").dataset.ai, 1);
+      save(q);
+      render(true);
+      const ins = $(a === "addline" || a === "preset" ? "#pay-lines .pay-line:last-child input" : a === "addadj" ? "#pay-adjs .pay-line:last-child input" : "#pay-ed input");
+      if (ins && a.startsWith("add")) ins.focus();
+      return;
+    }
+    render(true);
+  });
+  $("#pay-new").onclick = async () => {
+    closeEd();
+    const id = await add({});
+    if (id) {
+      openId = id;
+      if (!list.some((p) => p.id === id)) list.push({ id, ...make({}) });
+      render(true);
+      const el = $("#pe-project");
+      if (el) el.focus();
+    }
+  };
+  $("#pay-csv").onclick = () => {
+    const rows = [["Project", "Billed by", "Agency", "Reference", "Invoice number", "Status", "Client", "Company", "Client email", "Billing address", "Currency", "Union", "Union amount", "Advertised pay", "Issued", "Payment due", "Work wrapped", "Paid on", "Days to get paid", "Work or sessions", "Subtotal", "Adjustments", "Tax %", "Total", "Gross pay", "Agent", "Manager", "Taxes withheld", "Take home", "Actually deposited", "Payment terms", "Usage", "Exclusivity", "Exclusivity length", "Notes", "From an audition"]];
+    list.forEach((p) => {
+      const s = sums(p), A = isAg(p), a = A ? ag(p) : null;
+      rows.push([p.project, A ? "agent" : "me", p.agency, p.ref, p.num, ((A ? AST : ST).find((x) => x[0] === (p.status || "todo")) || [])[1], p.cName, p.cCo, p.cEmail, p.cAddr, p.cur, unionLabel(p) || "non-union", unionSplit(p).u.toFixed(2), p.adv, p.issued, p.dueBy, A ? baseDate(p) : "", p.paidOn, daysToPay(p) ?? "", (p.items || []).map((it) => [it.role, it.date, it.qty && it.unit !== "flat" ? it.qty + " " + it.unit : "flat", it.rate ? "@ " + it.rate : ""].filter(Boolean).join(" ")).join("; "), s.sub.toFixed(2), s.adj.toFixed(2), p.tax, s.total.toFixed(2), a ? a.gross.toFixed(2) : "", a ? a.agent.toFixed(2) : "", a ? a.mgr.toFixed(2) : "", a ? a.tax.toFixed(2) : "", a ? a.net.toFixed(2) : "", a && a.got != null ? a.got.toFixed(2) : "", p.payTerms, p.usage, p.excl, p.exclLen, p.desc, p.from ? "yes" : ""]);
+    });
+    Trk.saveCSV("payments", rows, $("#pay-msg"));
+  };
+  let ringing = [];
+  function showRing() {
+    const box = $("#pay-ring");
+    if (!ringing.length) {
+      box.hidden = true;
+      return;
+    }
+    const { p, l } = ringing[0], A = isAg(p);
+    const msg = l === 45 ? `${age(p)} days since ${A ? "the work wrapped" : "you invoiced"} and no payment yet. A good time to check in${A ? " with your agent" : ""}.` : `${age(p)} days and still unpaid. ${l === 90 ? "Time to follow up in writing." : "Worth a firm nudge."}`;
+    box.innerHTML = `<span class="rt">Payment ${l === 45 ? "check-in" : l + "+ days overdue"}</span><span class="rl">${esc(p.project || "Untitled job")}</span><span class="rn">${esc(msg)}</span><span class="rb"><button type="button" data-pr="paid">Mark paid</button><button type="button" class="done" data-pr="ok">Got it</button></span>`;
+    box.hidden = false;
+  }
+  $("#pay-ring").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-pr]");
+    if (!b || !ringing.length) return;
+    const { p } = ringing.shift();
+    if (b.dataset.pr === "paid") {
+      setStatus(p, "paid");
+      render(true);
+    }
+    showRing();
+  });
+  function lateCheck() {
+    if (!pcol || !UI.get("payr")) return;
+    let rang = false;
+    list.forEach((p) => {
+      const l = lateLevel(p);
+      if (!l) return;
+      const done = p.late || [];
+      if (done.includes(l)) return;
+      p.late = [...new Set([...done, ...[45, 60, 90].filter((x) => x <= l)])];
+      save(p);
+      if (!ringing.some((x) => x.p.id === p.id)) ringing.push({ p, l });
+      rang = true;
+    });
+    if (rang) {
+      SFX.play("breakDone");
+      showRing();
+    }
+  }
+  setInterval(() => {
+    lateCheck();
+    if (!document.activeElement || !document.activeElement.closest || !document.activeElement.closest("#pay")) render();
+  }, 6e5);
+  addEventListener("pagehide", flush);
+  areaToggle("payments", "#pay-toggle", "#pay", false, () => {
+    renderMe();
+    render(true);
+  });
+  return {
+    fromAudition,
+    loadMe(v) {
+      me = v || {};
+      renderMe();
+    },
+    connect(db) {
+      pcol = db.collection("payments");
+      meDoc = db.collection("prefs").doc("payer");
+      let first = true;
+      pcol.onSnapshot((s) => {
+        list = s.docs.map((d) => ({ id: d.id, ...d.data() }));
+        if (pending) {
+          const i = list.findIndex((p) => p.id === pending.id);
+          if (i >= 0) list[i] = pending;
+        }
+        render();
+        if (first) {
+          first = false;
+          lateCheck();
+        }
+      }, () => {
+      });
+      render(true);
+    }
+  };
+})();
+const Aud = (() => {
+  let list = [], acol = null, editing = null, armed = null, ringing = [];
+  const PAID = { yes: "Paid", no: "Unpaid", deferred: "Deferred / Crowdfunded" };
+  const OPT = (a, pre) => {
+    const f = (k, l, o = {}) => Trk.field(k, l, a[k], { pre, ...o });
+    return f("roles", "Roles I'm interested in", { max: 200 }) + f("paid", "Paid?", { type: "select", opts: [["", "Not sure"], ["yes", "Paid"], ["no", "Unpaid"], ["deferred", "Deferred / Crowdfunded"]] }) + f("rate", "Pay rate", { ph: "Like: $300 flat or $150/hr", max: 80 }) + f("owner", "Project owner", { max: 120 }) + f("email", "Project owner's email", { type: "email", max: 160 }) + f("union", "Union or non-union", { type: "select", opts: [["", "Not set"], ["union", "Union"], ["nonunion", "Non-union"]] });
+  };
+  const fresh = (due) => {
+    if (!due) return [];
+    const d = Trk.dd(todayISO(), due);
+    return [7, 3, 1].filter((t) => d <= t);
+  };
+  const left = (d) => d === 0 ? "due today" : d === 1 ? "due tomorrow" : d < 7 ? `in ${d} days` : d < 14 ? "in 1 week" : d < 60 ? `in ${Math.floor(d / 7)} weeks` : `in ${Math.round(d / 30)} months`;
+  const urg = (a) => {
+    if (a.booked) return "booked";
+    if (!a.due) return "u-none";
+    const d = Trk.dd(todayISO(), a.due);
+    return d < 0 ? "u-past" : d <= 1 ? "u-now" : d <= 3 ? "u-near" : d <= 7 ? "u-week" : "u-far";
+  };
+  const save = (a) => acol && acol.doc(a.id).set(Trk.clean(a)).catch(err);
+  const bell = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.2a4 4 0 0 0-4 4v2.6L2.8 11h10.4L12 8.8V6.2a4 4 0 0 0-4-4zM6.5 12.6a1.5 1.5 0 0 0 3 0" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>';
+  const bellOff = '<svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 2.2a4 4 0 0 0-4 4v2.6L2.8 11h10.4L12 8.8V6.2a4 4 0 0 0-4-4zM6.5 12.6a1.5 1.5 0 0 0 3 0M2.5 2.5l11 11" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+  function row(a, past) {
+    const today = todayISO(), d = a.due ? Trk.dd(today, a.due) : null, dp = a.due ? Trk.dayParts(a.due) : null, u = Trk.href(a.link);
+    if (editing === a.id) {
+      const f = (k, l, o = {}) => Trk.field(k, l, a[k], { pre: "ae", ...o });
+      return `<div class="trk-row ${urg(a)}" role="listitem" data-aid="${a.id}"><div class="trk-ed aud-ed">${f("project", "Project", { max: 140 })}${f("link", "Link", { max: 600 })}${f("due", "Due date", { type: "date" })}${OPT(a, "ae")}${Trk.field("remind", "Due-date reminders", a.remind !== false, { pre: "ae", type: "tick" })}<div class="btns"><button type="button" class="sp-btn ghost" data-aa="cancel">Cancel</button><button type="button" class="sp-btn primary" data-aa="save">Save</button></div></div></div>`;
+    }
+    const sub = [];
+    if (a.roles) sub.push(`<span>Roles: <i>${esc(a.roles)}</i></span>`);
+    if (a.paid || a.rate) sub.push(`<span>${PAID[a.paid] || "Paid"}${a.rate ? ` <i>${esc(a.rate)}</i>` : ""}</span>`);
+    if (a.owner || a.email) sub.push(`<span>${a.email ? `<a href="mailto:${esc(a.email)}">${esc(a.owner || a.email)}</a>` : esc(a.owner)}</span>`);
+    if (a.union) sub.push(`<span>${a.union === "union" ? "Union" : "Non-union"}</span>`);
+    if (past && a.due) sub.push(`<span>${a.due < todayISO() ? "Was due" : "Due"} ${esc(dp.long)}</span>`);
+    const date = dp ? `<div class="trk-date" title="${esc(dp.long)}"><b>${dp.d}</b><span>${esc(dp.mon)}</span></div>` : '<div class="trk-date none"><b>–</b><span>TBD</span></div>';
+    const lft = !past && d != null ? `<span class="trk-left">${left(d)}</span>` : "";
+    const name = `<span class="aud-name">${esc(a.project || "Untitled")}</span>`;
+    let lt = "";
+    if (u) {
+      try {
+        const x = new URL(u), path = x.pathname === "/" ? "" : x.pathname + x.search;
+        lt = x.hostname.replace(/^www\./, "") + (path.length > 34 ? path.slice(0, 32) + "…" : path);
+      } catch (e) {
+        lt = u;
+      }
+    }
+    const linkHTML = u ? `<a class="aud-link" href="${esc(u)}" target="_blank" rel="noopener">${esc(lt)} <span aria-hidden="true">↗</span></a>` : "";
+    const remOn = a.remind !== false;
+    const acts = `<span class="trk-acts">${past ? "" : `<button type="button" class="trk-ib${remOn ? "" : " off"}" data-aa="bell" aria-pressed="${remOn}" title="${remOn ? "Reminders on. Tap to turn off for this one." : "Reminders off. Tap to turn on."}" aria-label="${remOn ? "Turn reminders off" : "Turn reminders on"}">${remOn ? bell : bellOff}</button>`}<button type="button" class="trk-ib" data-aa="edit" title="Edit" aria-label="Edit">✎</button><button type="button" class="trk-ib ${armed === a.id ? "danger" : ""}" data-aa="del" title="${armed === a.id ? "Tap again to delete" : "Delete"}" aria-label="Delete">${armed === a.id ? "Delete?" : "✕"}</button></span>`;
+    const checks = `<span class="trk-checks"><label class="trk-ck sub"><input type="checkbox" data-ac="submitted"${a.submitted ? " checked" : ""}><span class="bx" aria-hidden="true"></span>Submitted</label><label class="trk-ck bk"><input type="checkbox" data-ac="booked"${a.booked ? " checked" : ""}><span class="bx" aria-hidden="true"></span>Booked</label></span>`;
+    return `<div class="trk-row ${urg(a)}${past ? " past" : ""}" role="listitem" data-aid="${a.id}">${date}<div class="trk-main"><div class="trk-t">${name}${lft}</div>${linkHTML}${sub.length ? `<div class="trk-sub aud-meta">${sub.join("")}</div>` : ""}</div>${checks}${acts}</div>`;
+  }
+  function ring(r, pct) {
+    const c = 2 * Math.PI * 15, off = c * (1 - Math.max(0, Math.min(100, pct)) / 100);
+    return `<svg viewBox="0 0 38 38" aria-hidden="true"><circle class="trk-bg" cx="19" cy="19" r="15" fill="none" stroke-width="4"/><circle class="trk-fg" cx="19" cy="19" r="15" fill="none" stroke-width="4" stroke-linecap="round" stroke-dasharray="${c.toFixed(2)}" stroke-dashoffset="${off.toFixed(2)}"${pct ? "" : ' stroke-opacity="0"'}/></svg>`;
+  }
+  function metrics() {
+    const total = list.length, sub = list.filter((a) => a.submitted).length, bk = list.filter((a) => a.submitted && a.booked).length;
+    const sp = total ? Math.round(sub / total * 100) : 0, br = sub ? Math.round(bk / sub * 100) : 0;
+    $("#aud-mx-row").innerHTML = `<div class="mx"><div><b>${total}</b>entered</div></div><div class="mx">${ring(sub, sp)}<div><b>${sp}%</b>submitted (${sub} of ${total})</div></div><div class="mx bk">${ring(bk, br)}<div><b>${br}%</b>booking rate (${bk} of ${sub} submitted)</div></div>`;
+  }
+  function render(force) {
+    if ($("#aud").hidden) return;
+    if (!force && document.activeElement && document.activeElement.closest && document.activeElement.closest(".aud-ed")) return;
+    const today = todayISO(), act = [], past = [];
+    list.forEach((a) => (a.submitted || a.due && a.due < today ? past : act).push(a));
+    act.sort((x, y) => (x.due ? 0 : 1) - (y.due ? 0 : 1) || (x.due || "").localeCompare(y.due || "") || (x.created || "").localeCompare(y.created || ""));
+    past.sort((x, y) => (y.due || "").localeCompare(x.due || "") || (y.created || "").localeCompare(x.created || ""));
+    $("#aud-list").innerHTML = act.map((a) => row(a)).join("") || '<div class="trk-empty">Nothing coming up. Add an audition above.</div>';
+    const subs = past.filter((a) => a.submitted), s = $("#aud-arch-sub"), all = $("#aud-arch-all");
+    s.querySelector(".n").textContent = `(${subs.length})`;
+    s.querySelector(".trk-list").innerHTML = subs.map((a) => row(a, true)).join("") || '<div class="trk-empty">Check Submitted on an audition and it moves here.</div>';
+    all.querySelector(".n").textContent = `(${past.length})`;
+    all.querySelector(".trk-list").innerHTML = past.map((a) => row(a, true)).join("") || '<div class="trk-empty">Everything that leaves your list lands here: submitted auditions, and anything past its due date.</div>';
+    metrics();
+    const ed = $(".aud-ed input");
+    if (ed && !ed.dataset.f) {
+      ed.dataset.f = 1;
+      ed.focus();
+    }
+  }
+  function say(m) {
+    const s = $("#aud-msg");
+    s.textContent = m;
+    clearTimeout(say.t);
+    say.t = setTimeout(() => s.textContent = "", 5e3);
+  }
+  function add() {
+    const p = $("#aud-p").value.trim();
+    if (!p) {
+      $("#aud-p").focus();
+      return;
+    }
+    if (!acol) return;
+    const o = Trk.read($("#aud-more-f")), due = $("#aud-d").value;
+    acol.add(Trk.clean({ project: p, link: $("#aud-l").value.trim(), due, ...o, rem: fresh(due), created: (new Date()).toISOString() })).catch(err);
+    $("#aud-p").value = $("#aud-l").value = $("#aud-d").value = "";
+    $("#aud-more-f").querySelectorAll("[data-k]").forEach((el) => el.value = "");
+    $("#aud-more").open = false;
+    say(due ? "Added." : "Added. Give it a due date with ✎ to get reminders.");
+    $("#aud-p").focus();
+  }
+  $("#aud-more-f").innerHTML = OPT({}, "aa");
+  $("#aud-go").onclick = add;
+  $("#aud-add").addEventListener("keydown", (e) => {
+    if (e.key === "Enter" && e.target.matches("input")) {
+      e.preventDefault();
+      add();
+    }
+  });
+  async function book(a) {
+    SFX.play("planDone");
+    Party.shout("You booked it.");
+    if (a.payId) {
+      say("Booked. It's already in Payments.");
+      return;
+    }
+    const id = await Pay.fromAudition(a);
+    if (id) {
+      a.payId = id;
+      save(a);
+      say("Booked. Added to Payments, where you can fill in the invoice details.");
+    }
+  }
+  const sec = $("#aud");
+  sec.addEventListener("change", (e) => {
+    const c = e.target.closest("[data-ac]");
+    if (!c) return;
+    const a = list.find((x) => x.id === c.closest(".trk-row").dataset.aid);
+    if (!a) return;
+    SFX.unlock();
+    const k = c.dataset.ac, v = c.checked;
+    a[k] = v;
+    if (k === "booked" && v) a.submitted = true;
+    if (k === "submitted" && !v && a.booked) a.booked = false;
+    save(a);
+    if (k === "booked" && v) book(a);
+    else if (k === "submitted" && v) say("Submitted. It's in the Submitted archive at the bottom.");
+    render(true);
+  });
+  sec.addEventListener("click", (e) => {
+    const b = e.target.closest("[data-aa]");
+    if (!b) return;
+    const a = list.find((x) => x.id === b.closest(".trk-row").dataset.aid);
+    if (!a) return;
+    const k = b.dataset.aa;
+    if (k !== "del") armed = null;
+    if (k === "bell") {
+      a.remind = a.remind === false ? true : false;
+      if (a.remind) a.rem = fresh(a.due);
+      save(a);
+    }
+    if (k === "edit") editing = a.id;
+    if (k === "cancel") editing = null;
+    if (k === "save") {
+      const o = Trk.read(b.closest(".aud-ed"));
+      if (!o.project) {
+        $("#ae-project").focus();
+        return;
+      }
+      if (o.due !== (a.due || "")) a.rem = fresh(o.due);
+      Object.assign(a, o);
+      editing = null;
+      save(a);
+    }
+    if (k === "del") {
+      if (armed === a.id) {
+        armed = null;
+        list = list.filter((x) => x.id !== a.id);
+        ringing = ringing.filter((r) => r.a.id !== a.id);
+        showRing();
+        acol && acol.doc(a.id).delete().catch(err);
+      } else armed = a.id;
+    }
+    render(true);
+  });
+  sec.addEventListener("keydown", (e) => {
+    if (!editing) return;
+    if (e.key === "Escape") {
+      editing = null;
+      render(true);
+    }
+    if (e.key === "Enter" && e.target.matches(".aud-ed input")) sec.querySelector('[data-aa="save"]').click();
+  });
+  function showRing() {
+    const box = $("#aud-ring");
+    if (!ringing.length) {
+      box.hidden = true;
+      return;
+    }
+    const { a, d } = ringing[0];
+    box.innerHTML = `<span class="rt">Audition ${d === 0 ? "due today" : d === 1 ? "due tomorrow" : `due in ${d} days`}</span><span class="rl">${esc(a.project || "Untitled")}</span><span class="rb"><button type="button" data-ar="off">Stop reminders for this</button><button type="button" class="done" data-ar="ok">Got it</button></span>`;
+    box.hidden = false;
+  }
+  $("#aud-ring").addEventListener("click", (e) => {
+    const b = e.target.closest("[data-ar]");
+    if (!b || !ringing.length) return;
+    const { a } = ringing.shift();
+    if (b.dataset.ar === "off") {
+      a.remind = false;
+      save(a);
+      render();
+    }
+    showRing();
+  });
+  function check() {
+    if (!acol || !UI.get("audr")) return;
+    const today = todayISO();
+    let rang = false;
+    list.forEach((a) => {
+      if (!a.due || a.submitted || a.remind === false || a.due < today) return;
+      const hit = fresh(a.due), done = a.rem || [], fr = hit.filter((t) => !done.includes(t));
+      if (!fr.length) return;
+      a.rem = [...new Set([...done, ...hit])].sort((x, y) => y - x);
+      save(a);
+      if (!ringing.some((r) => r.a.id === a.id)) ringing.push({ a, d: Trk.dd(today, a.due) });
+      rang = true;
+    });
+    if (rang) {
+      SFX.play("breakDone");
+      showRing();
+    }
+  }
+  setInterval(() => {
+    check();
+    render();
+  }, 6e4);
+  $("#aud-csv").onclick = () => {
+    const rows = [["Project", "Link", "Due", "Roles", "Paid", "Pay rate", "Project owner", "Project owner's email", "Union", "Submitted", "Booked", "Reminders", "Added"]];
+    list.slice().sort((x, y) => (x.due || "").localeCompare(y.due || "")).forEach((a) => rows.push([a.project, a.link, a.due, a.roles, PAID[a.paid] || "", a.rate, a.owner, a.email, a.union === "union" ? "union" : a.union === "nonunion" ? "non-union" : "", a.submitted ? "yes" : "", a.booked ? "yes" : "", a.remind === false ? "off" : "on", (a.created || "").slice(0, 10)]));
+    Trk.saveCSV("auditions", rows, $("#aud-csv-msg"));
+  };
+  areaToggle("auditions", "#aud-toggle", "#aud", false, () => render(true));
+  return {
+    connect(db) {
+      acol = db.collection("auditions");
+      let first = true;
+      acol.onSnapshot((s) => {
+        list = s.docs.map((d) => ({ id: d.id, ...d.data() }));
+        render();
+        if (first) {
+          first = false;
+          check();
+        }
+      }, () => {
+      });
+    }
+  };
+})();
+(() => {
+  const pop = $("#info-pop");
+  const show = (k) => {
+    pop.querySelectorAll("[data-panel]").forEach((x) => x.hidden = x.dataset.panel !== k);
+    pop.hidden = false;
+    pop.querySelector(".info-in").scrollTop = 0;
+    $("#info-x").focus();
+  };
+  const hide = () => pop.hidden = true;
+  document.querySelectorAll("[data-info]").forEach((b) => b.onclick = () => show(b.dataset.info));
+  $("#info-x").onclick = hide;
+  pop.addEventListener("click", (e) => {
+    if (e.target === pop) hide();
+  });
+  addEventListener("keydown", (e) => {
+    if (e.key === "Escape" && !pop.hidden) hide();
+  });
 })();
 const EW_APA = "https://dictionary.apa.org/";
 const EW = [
@@ -9955,15 +11753,20 @@ fillAdd();
     $("#list").innerHTML = '<div class="empty">Sign in to see this list.</div>';
     return;
   }
+  backupDB = db;
   col = db.collection("tasks");
   secCol = db.collection("sections");
   host.use("assets").then((a) => SP.connect(db, a)).catch(() => SP.connect(db, null));
   Nudge.connect(db);
+  Pay.connect(db);
+  Aud.connect(db);
   toolsDB = db.collection("prefs").doc("tools");
   PageName.connect(db.collection("prefs").doc("page"));
   db.collection("prefs").onSnapshot((snap) => {
     const pg = snap.docs.find((x) => x.id === "page");
     if (pg) PageName.load(pg.data());
+    const py = snap.docs.find((x) => x.id === "payer");
+    if (py) Pay.loadMe(py.data());
     const d = snap.docs.find((x) => x.id === "tools");
     if (d) {
       const v = d.data();
