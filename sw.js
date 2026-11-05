@@ -1,4 +1,4 @@
-const VERSION = "brain-stuff-v3";
+const VERSION = "brain-stuff-v4";
 const CORE = ["./", "index.html", "sortable.min.js", "movies.json", "manifest.webmanifest", "icon-192.png", "icon-512.png", "icon-maskable-512.png", "apple-touch-icon.png"];
 
 self.addEventListener("install", e => {
