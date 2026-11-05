@@ -5761,16 +5761,6 @@ body.theme-paper .pay-flag.f45 {
   height: auto !important;
   accent-color: var(--accent);
 }
-.pay-add-row {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 6px 8px;
-}
-.pay-preset span {
-  font-weight: 400;
-  color: var(--muted);
-  margin-left: 4px;
-}
 .aud-name {
   font-size: 1.06rem;
 }
@@ -10296,12 +10286,7 @@ const Pay = (() => {
   };
   const save = (p) => pcol && pcol.doc(p.id).set(Trk.clean(p)).catch(err);
   const AST = [["todo", "Waiting on payment"], ["paid", "Paid"]];
-  const PRESET_DEF = "SAG-AFTRA game scale + 10: 1248.50\nSAG-AFTRA game scale: 1135";
-  const presets = () => String(me.presets ?? PRESET_DEF).split("\n").map((l) => {
-    const i = l.lastIndexOf(":");
-    return i > 0 ? { label: l.slice(0, i).trim(), rate: num(l.slice(i + 1)) } : null;
-  }).filter((x) => x && x.label && x.rate);
-  const presetBtns = () => presets().map((x, i) => `<button type="button" class="sp-btn ghost pay-add-line pay-preset" data-pa="preset" data-i="${i}" title="Add a session at this rate">+ ${esc(x.label)} <span>${money(x.rate)}</span></button>`).join("");
+  const SCALE = [["1248.50", "SAG-AFTRA game scale + 10"], ["1135", "SAG-AFTRA game scale"]];
   const UNION = [["", "Not set"], ["union", "Union"], ["nonunion", "Non-union"]];
   const grossAmt = (p) => isAg(p) ? ag(p).gross : sums(p).total;
   const unionSplit = (p) => {
@@ -10394,7 +10379,7 @@ const Pay = (() => {
     return `<div class="trk-row pay-row st-${st}${A ? " via-agent" : ""}${open ? " open" : ""}" role="listitem" data-pid="${p.id}"><div class="trk-main"><div class="trk-t">${esc(p.project || "Untitled job")}${A ? '<span class="pay-via">Agent billed</span>' : ""}${unionLabel(p) ? `<span class="pay-via pay-un">${unionLabel(p)}</span>` : ""}</div>${sub.length ? `<div class="trk-sub">${sub.join("")}</div>` : ""}</div><span class="pay-amt"${A ? ' title="What you take home"' : ""}>${money(amtOf(p), p.cur)}</span><select class="pay-st" data-pst aria-label="Payment status">${stl.map(([v, t]) => `<option value="${v}"${v === st ? " selected" : ""}>${t}</option>`).join("")}</select>${acts}${open ? editor(p) : ""}</div>`;
   }
   function lineHTML(it, i) {
-    return `<div class="pay-line" data-li="${i}"><label>Work or role<input data-lk="role" value="${esc(it.role || "")}" placeholder="Like: Lead VO"></label><label>Date<input data-lk="date" type="date" value="${esc(it.date || "")}"></label><label>Qty<input data-lk="qty" inputmode="decimal" value="${esc(it.qty ?? "")}"></label><label>Unit<select data-lk="unit">${UNITS.map(([v, t]) => `<option value="${v}"${(it.unit || "hr") === v ? " selected" : ""}>${t}</option>`).join("")}</select></label><label>Rate<input data-lk="rate" inputmode="decimal" value="${esc(it.rate ?? "")}"></label><label>Total<input data-lk="total" inputmode="decimal" value="${esc(it.total ?? "")}" placeholder="${lineTotal({ ...it, total: "" }).toFixed(2)}"></label><label class="un-ck"><input type="checkbox" data-lk="un"${it.un ? " checked" : ""}>Union</label><button type="button" class="trk-ib" data-pa="rmline" aria-label="Remove this line" title="Remove">✕</button></div>`;
+    return `<div class="pay-line" data-li="${i}"><label>Work or role<input data-lk="role" value="${esc(it.role || "")}" placeholder="Like: Lead VO"></label><label>Date<input data-lk="date" type="date" value="${esc(it.date || "")}"></label><label>Qty<input data-lk="qty" inputmode="decimal" value="${esc(it.qty ?? "")}"></label><label>Unit<select data-lk="unit">${UNITS.map(([v, t]) => `<option value="${v}"${(it.unit || "hr") === v ? " selected" : ""}>${t}</option>`).join("")}</select></label><label>Rate<input data-lk="rate" inputmode="decimal" list="pay-scale" value="${esc(it.rate ?? "")}" placeholder="Type or pick"></label><label>Total<input data-lk="total" inputmode="decimal" value="${esc(it.total ?? "")}" placeholder="${lineTotal({ ...it, total: "" }).toFixed(2)}"></label><label class="un-ck"><input type="checkbox" data-lk="un"${it.un ? " checked" : ""}>Union</label><button type="button" class="trk-ib" data-pa="rmline" aria-label="Remove this line" title="Remove">✕</button></div>`;
   }
   function adjHTML(a, i) {
     return `<div class="pay-line adj" data-ai="${i}"><label>Adjustment<input data-ak2="label" value="${esc(a.label || "")}" placeholder="Like: Rush fee or Deposit paid"></label><label>Amount<input data-ak2="amt" inputmode="decimal" value="${esc(a.amt ?? "")}" placeholder="50 or -50"></label><button type="button" class="trk-ib" data-pa="rmadj" aria-label="Remove this adjustment" title="Remove">✕</button></div>`;
@@ -10415,7 +10400,7 @@ const Pay = (() => {
     if (isAg(p)) syncCuts(p);
     if (isAg(p)) return `<div class="pay-ed" id="pay-ed">${via}
       <div class="pay-grp"><h4>Job</h4><div class="trk-ed">${f("project", "Project")}${f("agency", "Agency", { list: "pay-agencies" })}${f("ref", "Episode or reference")}${f("adv", "Advertised pay", { ph: "Like: $300 per session" })}${f("cur", "Currency", { type: "select", opts: CUR.map((c) => [c, c]) })}${f("desc", "Notes", { type: "area", wide: true })}</div></div>
-      <div class="pay-grp"><h4>Recording sessions</h4><div class="pay-lines" id="pay-lines">${(p.items || []).map(lineHTML).join("")}</div><div class="pay-add-row"><button type="button" class="sp-btn ghost pay-add-line" data-pa="addline">+ Add a session</button>${presetBtns()}</div></div>
+      <div class="pay-grp"><h4>Recording sessions</h4><div class="pay-lines" id="pay-lines">${(p.items || []).map(lineHTML).join("")}</div><button type="button" class="sp-btn ghost pay-add-line" data-pa="addline">+ Add a session</button></div>
       <div class="pay-grp"><h4>Pay and cuts</h4><p class="trk-note">Fill in the percent or the dollar amount for each cut, and the other one fills itself in. Add what actually hit your account and it checks the math.</p><div class="trk-ed">${f("gross", "Gross pay", { step: "any", ph: sums(p).sub ? sums(p).sub.toFixed(2) + " from sessions" : "Total booked" })}${f("agPct", "Agent %", { step: "any", ph: "Like: 10 or 20" })}${f("agAmt", "Agent took ($)", { step: "any" })}${f("mgPct", "Manager %", { step: "any", ph: "Like: 10" })}${f("mgAmt", "Manager took ($)", { step: "any" })}${f("whPct", "Tax %", { step: "any", ph: "If any" })}${f("wh", "Total tax deducted ($)", { step: "any", ph: "0" })}${f("netGot", "What actually hit your account", { step: "any", ph: "Optional" })}</div></div>
       <div class="pay-grp"><h4>Terms</h4><div class="trk-ed">${f("payTerms", "Payment terms", { ph: "Like: Net 30" })}${f("usage", "Usage and length", { ph: "Like: Online, 1 year" })}${f("excl", "Exclusivity", { type: "select", opts: [["", "Not sure"], ["yes", "Yes"], ["no", "No"]] })}${f("exclLen", "Exclusivity length", { ph: "Like: 6 months" })}</div></div>
       <div class="pay-grp"><h4>Status</h4><div class="trk-ed">${f("status", "Status", { type: "select", opts: AST })}${f("finished", "Work wrapped", { type: "date" })}${f("paidOn", "Paid on", { type: "date" })}</div><p class="trk-note">Leave Work wrapped blank to count from your last session date.</p></div>
@@ -10425,7 +10410,7 @@ const Pay = (() => {
     return `<div class="pay-ed" id="pay-ed">${via}
       <div class="pay-grp"><h4>Invoice</h4><div class="trk-ed">${f("project", "Project")}${f("ref", "Episode or reference")}${f("num", "Invoice number")}${f("cur", "Currency", { type: "select", opts: CUR.map((c) => [c, c]) })}${f("issued", "Issued", { type: "date" })}${f("dueBy", "Payment due", { type: "date" })}${f("adv", "Advertised pay", { ph: "Optional" })}${f("desc", "Description", { type: "area", wide: true })}</div></div>
       <div class="pay-grp"><h4>Client</h4><div class="trk-ed">${f("cName", "Contact name", { list: "pay-clients" })}${f("cCo", "Company")}${f("cEmail", "Email", { type: "email" })}${f("cAddr", "Billing address", { type: "area", wide: true })}</div></div>
-      <div class="pay-grp"><h4>Work</h4><div class="pay-lines" id="pay-lines">${(p.items || []).map(lineHTML).join("")}</div><div class="pay-add-row"><button type="button" class="sp-btn ghost pay-add-line" data-pa="addline">+ Add a line</button>${presetBtns()}</div></div>
+      <div class="pay-grp"><h4>Work</h4><div class="pay-lines" id="pay-lines">${(p.items || []).map(lineHTML).join("")}</div><button type="button" class="sp-btn ghost pay-add-line" data-pa="addline">+ Add a line</button></div>
       <div class="pay-grp"><h4>Adjustments and tax</h4><div class="pay-lines" id="pay-adjs">${(p.adj || []).map(adjHTML).join("")}</div><div class="trk-ed pay-narrow">${f("tax", "Tax %", { step: "any", ph: "0" })}</div><button type="button" class="sp-btn ghost pay-add-line" data-pa="addadj">+ Add an adjustment</button></div>
       <div class="pay-grp"><h4>Status</h4><div class="trk-ed pay-narrow">${f("status", "Status", { type: "select", opts: ST })}${f("paidOn", "Paid on", { type: "date" })}</div></div>
       <div class="pay-tot" id="pay-tot">${totalsHTML(p)}</div>
@@ -10450,6 +10435,12 @@ const Pay = (() => {
       document.body.append(dl);
     }
     dl.innerHTML = clients().map((c) => `<option value="${esc(c.cName)}"></option>`).join("");
+    if (!$("#pay-scale")) {
+      const ds = document.createElement("datalist");
+      ds.id = "pay-scale";
+      ds.innerHTML = SCALE.map(([v, l]) => `<option value="${v}" label="${l}">${l}</option>`).join("");
+      document.body.append(ds);
+    }
     let da = $("#pay-agencies");
     if (!da) {
       da = document.createElement("datalist");
@@ -10556,10 +10547,10 @@ const Pay = (() => {
     return r && r.id;
   }
   function fromAudition(a) {
-    const rt = String(a.rate || ""), unit = /hour|hr/i.test(rt) ? "hr" : /day/i.test(rt) ? "day" : /session/i.test(rt) ? "session" : /spot/i.test(rt) ? "spot" : "flat";
+    const rt = String(a.rate || ""), scale = /scale\s*\+\s*10/i.test(rt) ? "1248.50" : /sag|aftra/i.test(rt) && /scale/i.test(rt) ? "1135" : "", unit = scale ? "session" : /hour|hr/i.test(rt) ? "hr" : /day/i.test(rt) ? "day" : /session/i.test(rt) ? "session" : /spot/i.test(rt) ? "spot" : "flat";
     const cur2 = /£/.test(rt) ? "GBP" : /€/.test(rt) ? "EUR" : /CA\$|CAD/i.test(rt) ? "CAD" : /AU\$|AUD/i.test(rt) ? "AUD" : /¥|JPY/.test(rt) ? "JPY" : "USD";
     const known = a.owner && clients().find((c) => c.cName.toLowerCase() === a.owner.toLowerCase());
-    return add({ from: a.id, project: a.project, adv: rt, cur: cur2, cName: a.owner || "", cEmail: a.email || (known && known.cEmail) || "", cCo: known && known.cCo || "", cAddr: known && known.cAddr || "", desc: a.roles ? "Role: " + a.roles : "", items: [{ role: a.roles || a.project || "", date: "", qty: 1, unit, rate: rt ? String(num(rt) || "") : "", un: a.union === "union" }] });
+    return add({ from: a.id, project: a.project, adv: rt, cur: cur2, cName: a.owner || "", cEmail: a.email || (known && known.cEmail) || "", cCo: known && known.cCo || "", cAddr: known && known.cAddr || "", desc: a.roles ? "Role: " + a.roles : "", items: [{ role: a.roles || a.project || "", date: "", qty: 1, unit, rate: scale || (rt ? String(num(rt) || "") : ""), un: a.union === "union" || !!scale }] });
   }
   const IF = { "Bodoni Moda": "'Bodoni Moda', serif", "Fraunces": "Fraunces, serif", "Libre Caslon": "'Libre Caslon Text', serif", "Source Serif": "'Source Serif 4', serif", "Special Elite": "'Special Elite', monospace", "IBM Plex Mono": "'IBM Plex Mono', monospace", "Space Grotesk": "'Space Grotesk', sans-serif", "DM Sans": "'DM Sans', sans-serif", "Atkinson Hyperlegible": "'Atkinson Hyperlegible', sans-serif", "Lexend": "Lexend, sans-serif" };
   const LOOKS = [["folio", "Folio (classic)"], ["folioDeco", "Folio, dressed up"], ["sidebar", "Sidebar (modern)"], ["sidebarDeco", "Sidebar, dressed up"], ["slip", "Slip (typewriter)"], ["slipDeco", "Slip, dressed up"]];
@@ -10792,7 +10783,7 @@ ${D.rows.map((r) => `<div style="display:grid;${G};padding:7px 0;border-bottom:1
     const box = $("#pay-me-f");
     if (!box || !force && box.contains(document.activeElement)) return;
     const L = look(), d = LOOK_DEF[L.k], fonts = [["", "Style default"]].concat(Object.keys(IF).map((f) => [f, f]));
-    box.innerHTML = ME.map(([k, l, ph]) => Trk.field(k, l, me[k], { pre: "pm", ph })).join("") + Trk.field("pay", "Ways to pay you (one per line, like Venmo: @yourname). Venmo, Cash App, web addresses and emails become clickable links in the PDF.", me.pay, { pre: "pm", type: "area", wide: true, rows: 3 }) + Trk.field("presets", "Rate shortcuts (one per line, like SAG-AFTRA game scale: 1135). Each one becomes a button that adds a session at that rate.", me.presets ?? PRESET_DEF, { pre: "pm", type: "area", wide: true, rows: 2 }) + Trk.field("terms", "Terms", me.terms, { pre: "pm", type: "area", wide: true, ph: "Like: Payment due within 30 days." }) + `<div class="pay-look"><h4>Invoice look</h4><p class="trk-note">There's no preview yet (I couldn't crack that one). Tap PDF on any job to see your design. Change something here and save the PDF again to see the update.</p><div class="trk-fields">${Trk.field("look", "Style", L.k, { pre: "pm", type: "select", opts: LOOKS })}${Trk.field("c1", "Main color", L.c1, { pre: "pm", type: "color" })}${d.c2 ? Trk.field("c2", C2NAME[L.k], L.c2, { pre: "pm", type: "color" }) : ""}${Trk.field("fh", "Heading font", me.fh || "", { pre: "pm", type: "select", opts: fonts })}${Trk.field("fb", "Body font", me.fb || "", { pre: "pm", type: "select", opts: fonts })}</div><button type="button" class="trk-link" id="pm-reset">Reset colors and fonts to this style's defaults</button></div>`;
+    box.innerHTML = ME.map(([k, l, ph]) => Trk.field(k, l, me[k], { pre: "pm", ph })).join("") + Trk.field("pay", "Ways to pay you (one per line, like Venmo: @yourname). Venmo, Cash App, web addresses and emails become clickable links in the PDF.", me.pay, { pre: "pm", type: "area", wide: true, rows: 3 }) + Trk.field("terms", "Terms", me.terms, { pre: "pm", type: "area", wide: true, ph: "Like: Payment due within 30 days." }) + `<div class="pay-look"><h4>Invoice look</h4><p class="trk-note">There's no preview yet (I couldn't crack that one). Tap PDF on any job to see your design. Change something here and save the PDF again to see the update.</p><div class="trk-fields">${Trk.field("look", "Style", L.k, { pre: "pm", type: "select", opts: LOOKS })}${Trk.field("c1", "Main color", L.c1, { pre: "pm", type: "color" })}${d.c2 ? Trk.field("c2", C2NAME[L.k], L.c2, { pre: "pm", type: "color" }) : ""}${Trk.field("fh", "Heading font", me.fh || "", { pre: "pm", type: "select", opts: fonts })}${Trk.field("fb", "Body font", me.fb || "", { pre: "pm", type: "select", opts: fonts })}</div><button type="button" class="trk-link" id="pm-reset">Reset colors and fonts to this style's defaults</button></div>`;
   }
   let meT = 0;
   $("#pay-me-f").addEventListener("input", () => {
@@ -10903,22 +10894,15 @@ ${D.rows.map((r) => `<div style="display:grid;${G};padding:7px 0;border-bottom:1
       makePDF(p);
       return;
     }
-    if (a === "addline" || a === "addadj" || a === "rmline" || a === "rmadj" || a === "preset") {
+    if (a === "addline" || a === "addadj" || a === "rmline" || a === "rmadj") {
       const q = collect();
-      if (a === "preset") {
-        const x = presets()[+b.dataset.i];
-        if (x) {
-          const blank = q.items.length === 1 && !q.items[0].role && !num(q.items[0].rate) ? q.items.pop() : null;
-          q.items.push({ role: x.label, date: blank && blank.date || todayISO(), qty: 1, unit: "session", rate: String(x.rate), un: /sag|aftra|union/i.test(x.label) });
-        }
-      }
       if (a === "addline") q.items.push({ role: "", date: todayISO(), qty: 1, unit: (q.items[q.items.length - 1] || {}).unit || "hr", rate: (q.items[q.items.length - 1] || {}).rate || "", un: !!(q.items[q.items.length - 1] || {}).un });
       if (a === "addadj") q.adj.push({ label: "", amt: "" });
       if (a === "rmline") q.items.splice(+b.closest(".pay-line").dataset.li, 1);
       if (a === "rmadj") q.adj.splice(+b.closest(".pay-line").dataset.ai, 1);
       save(q);
       render(true);
-      const ins = $(a === "addline" || a === "preset" ? "#pay-lines .pay-line:last-child input" : a === "addadj" ? "#pay-adjs .pay-line:last-child input" : "#pay-ed input");
+      const ins = $(a === "addline" ? "#pay-lines .pay-line:last-child input" : a === "addadj" ? "#pay-adjs .pay-line:last-child input" : "#pay-ed input");
       if (ins && a.startsWith("add")) ins.focus();
       return;
     }
@@ -11024,7 +11008,7 @@ const Aud = (() => {
   const PAID = { yes: "Paid", no: "Unpaid", deferred: "Deferred / Crowdfunded" };
   const OPT = (a, pre) => {
     const f = (k, l, o = {}) => Trk.field(k, l, a[k], { pre, ...o });
-    return f("roles", "Roles I'm interested in", { max: 200 }) + f("paid", "Paid?", { type: "select", opts: [["", "Not sure"], ["yes", "Paid"], ["no", "Unpaid"], ["deferred", "Deferred / Crowdfunded"]] }) + f("rate", "Pay rate", { ph: "Like: $300 flat or $150/hr", max: 80 }) + f("owner", "Project owner", { max: 120 }) + f("email", "Project owner's email", { type: "email", max: 160 }) + f("union", "Union or non-union", { type: "select", opts: [["", "Not set"], ["union", "Union"], ["nonunion", "Non-union"]] });
+    return f("roles", "Roles I'm interested in", { max: 200 }) + f("paid", "Paid?", { type: "select", opts: [["", "Not sure"], ["yes", "Paid"], ["no", "Unpaid"], ["deferred", "Deferred / Crowdfunded"]] }) + f("rate", "Pay rate", { ph: "Type it, or pick SAG-AFTRA scale", max: 80, list: "aud-scale" }) + f("owner", "Project owner", { max: 120 }) + f("email", "Project owner's email", { type: "email", max: 160 }) + f("union", "Union or non-union", { type: "select", opts: [["", "Not set"], ["union", "Union"], ["nonunion", "Non-union"]] });
   };
   const fresh = (due) => {
     if (!due) return [];
@@ -11122,6 +11106,15 @@ const Aud = (() => {
     $("#aud-p").focus();
   }
   $("#aud-more-f").innerHTML = OPT({}, "aa");
+  const ds = document.createElement("datalist");
+  ds.id = "aud-scale";
+  ds.innerHTML = '<option value="SAG-AFTRA game scale + 10 ($1,248.50)"></option><option value="SAG-AFTRA game scale ($1,135)"></option>';
+  document.body.append(ds);
+  $("#aud").addEventListener("change", (e) => {
+    if (e.target.dataset.k !== "rate" || !/sag|aftra/i.test(e.target.value)) return;
+    const u = e.target.closest(".trk-fields, .aud-ed").querySelector('[data-k="union"]');
+    if (u && !u.value) u.value = "union";
+  });
   $("#aud-go").onclick = add;
   $("#aud-add").addEventListener("keydown", (e) => {
     if (e.key === "Enter" && e.target.matches("input")) {
